@@ -1,0 +1,9 @@
+original(batch102150_flatten_request.reqId)
+
+window_top1_ratio(batch102150_flatten_request.eventTime,batch102150_flatten_request.f_1,10:0,batch102150_flatten_request.f_0)
+
+combine(batch102150_flatten_request.f_48,batch102150_flatten_request.f_43,batch102150_flatten_request.f_0)
+window_min(batch102150_flatten_request.eventTime,batch102150_flatten_request.f_44,10:0,batch102150_flatten_request.f_3)
+window_avg(batch102150_flatten_request.eventTime,batch102150_flatten_request.f_45,10:0,batch102150_flatten_request.f_3)
+window_sum(batch102150_flatten_request.eventTime,batch102150_flatten_request.f_44,10:0,batch102150_flatten_request.f_3)
+window_sum(batch102150_flatten_request.eventTime,batch102150_flatten_request.f_45,10:0,batch102150_flatten_request.f_3)

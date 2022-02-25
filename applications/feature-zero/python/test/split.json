@@ -1,0 +1,557 @@
+{
+    "target_label": "batch100250_action.actionValue",
+    "target_entity": "batch100247_flatten_request",
+    "target_pivot_timestamp": "eventTime",
+    "target_entity_index": "instanceKey",
+    "target_label_code": "Label(batch100250_action.actionValue)",
+    "entity_names": [
+        "batch100247_flatten_request",
+        "batch100250_action",
+        "batch100251_bo_items"
+    ],
+    "relations": [
+        
+    ],
+    "entity_detail": {
+        "batch100251_bo_items": {
+            "features": [
+                {
+                    "skip": false,
+                    "id": "batch100251_bo_items.id",
+                    "data_type": "SingleString",
+                    "feature_type": "String"
+                },
+                {
+                    "skip": false,
+                    "id": "batch100251_bo_items.ingestionTime",
+                    "data_type": "Timestamp",
+                    "feature_type": "Timestamp"
+                },
+                {
+                    "skip": false,
+                    "id": "batch100251_bo_items.itemId",
+                    "data_type": "SingleString",
+                    "feature_type": "String"
+                },
+                {
+                    "skip": false,
+                    "id": "batch100251_bo_items.itemTime",
+                    "data_type": "ContinueNum",
+                    "feature_type": "BigInt"
+                },
+                {
+                    "skip": false,
+                    "id": "batch100251_bo_items.title",
+                    "data_type": "SingleString",
+                    "feature_type": "String"
+                },
+                {
+                    "skip": false,
+                    "id": "batch100251_bo_items.content",
+                    "data_type": "SingleString",
+                    "feature_type": "String"
+                },
+                {
+                    "skip": false,
+                    "id": "batch100251_bo_items.url",
+                    "data_type": "SingleString",
+                    "feature_type": "String"
+                },
+                {
+                    "skip": false,
+                    "id": "batch100251_bo_items.categoryLevel1",
+                    "data_type": "ArrayString(,)",
+                    "feature_type": "String"
+                },
+                {
+                    "skip": false,
+                    "id": "batch100251_bo_items.categoryLevel2",
+                    "data_type": "ArrayString(,)",
+                    "feature_type": "String"
+                },
+                {
+                    "skip": false,
+                    "id": "batch100251_bo_items.categoryLevel3",
+                    "data_type": "ArrayString(,)",
+                    "feature_type": "String"
+                },
+                {
+                    "skip": false,
+                    "id": "batch100251_bo_items.categoryLevel4",
+                    "data_type": "ArrayString(,)",
+                    "feature_type": "String"
+                },
+                {
+                    "skip": false,
+                    "id": "batch100251_bo_items.categoryLevel5",
+                    "data_type": "ArrayString(,)",
+                    "feature_type": "String"
+                },
+                {
+                    "skip": false,
+                    "id": "batch100251_bo_items.publishTime",
+                    "data_type": "ContinueNum",
+                    "feature_type": "BigInt"
+                },
+                {
+                    "skip": false,
+                    "id": "batch100251_bo_items.publisherId",
+                    "data_type": "ArrayString(,)",
+                    "feature_type": "String"
+                },
+                {
+                    "skip": false,
+                    "id": "batch100251_bo_items.tag",
+                    "data_type": "ArrayString(,)",
+                    "feature_type": "String"
+                },
+                {
+                    "skip": false,
+                    "id": "batch100251_bo_items.coverUrl",
+                    "data_type": "SingleString",
+                    "feature_type": "String"
+                },
+                {
+                    "skip": false,
+                    "id": "batch100251_bo_items.itemStatus",
+                    "data_type": "ContinueNum",
+                    "feature_type": "Int"
+                },
+                {
+                    "skip": false,
+                    "id": "batch100251_bo_items.s_itemCategoryKv",
+                    "data_type": "KVString(,)[:]",
+                    "feature_type": "String"
+                },
+                {
+                    "skip": false,
+                    "id": "batch100251_bo_items.s_itemTitleKwKv",
+                    "data_type": "KVString(,)[:]",
+                    "feature_type": "String"
+                },
+                {
+                    "skip": false,
+                    "id": "batch100251_bo_items.s_itemContentKwKv",
+                    "data_type": "KVString(,)[:]",
+                    "feature_type": "String"
+                },
+                {
+                    "skip": false,
+                    "id": "batch100251_bo_items.s_itemNerKv",
+                    "data_type": "KVString(,)[:]",
+                    "feature_type": "String"
+                }
+            ]
+        },
+        "batch100247_flatten_request": {
+            "features": [
+                {
+                    "skip": false,
+                    "id": "batch100247_flatten_request.itemId",
+                    "data_type": "SingleString",
+                    "feature_type": "String"
+                },
+                {
+                    "skip": false,
+                    "id": "batch100247_flatten_request.reqId",
+                    "data_type": "SingleString",
+                    "feature_type": "String"
+                },
+                {
+                    "skip": false,
+                    "id": "batch100247_flatten_request.tags",
+                    "data_type": "SingleString",
+                    "feature_type": "String"
+                },
+                {
+                    "skip": false,
+                    "id": "batch100247_flatten_request.instanceKey",
+                    "data_type": "SingleString",
+                    "feature_type": "String"
+                },
+                {
+                    "skip": false,
+                    "id": "batch100247_flatten_request.eventTime",
+                    "data_type": "Timestamp",
+                    "feature_type": "Timestamp"
+                },
+                {
+                    "skip": false,
+                    "id": "batch100247_flatten_request.userId",
+                    "data_type": "SingleString",
+                    "feature_type": "String"
+                },
+                {
+                    "skip": false,
+                    "id": "batch100247_flatten_request.userTime",
+                    "data_type": "Timestamp",
+                    "feature_type": "Timestamp"
+                },
+                {
+                    "skip": false,
+                    "id": "batch100247_flatten_request.name",
+                    "data_type": "SingleString",
+                    "feature_type": "String"
+                },
+                {
+                    "skip": false,
+                    "id": "batch100247_flatten_request.age",
+                    "data_type": "ContinueNum",
+                    "feature_type": "Int"
+                },
+                {
+                    "skip": false,
+                    "id": "batch100247_flatten_request.gender",
+                    "data_type": "SingleString",
+                    "feature_type": "String"
+                },
+                {
+                    "skip": false,
+                    "id": "batch100247_flatten_request.province",
+                    "data_type": "SingleString",
+                    "feature_type": "String"
+                },
+                {
+                    "skip": false,
+                    "id": "batch100247_flatten_request.city",
+                    "data_type": "SingleString",
+                    "feature_type": "String"
+                },
+                {
+                    "skip": false,
+                    "id": "batch100247_flatten_request.maritalStatus",
+                    "data_type": "SingleString",
+                    "feature_type": "String"
+                },
+                {
+                    "skip": false,
+                    "id": "batch100247_flatten_request.education",
+                    "data_type": "SingleString",
+                    "feature_type": "String"
+                },
+                {
+                    "skip": false,
+                    "id": "batch100247_flatten_request.occupation",
+                    "data_type": "SingleString",
+                    "feature_type": "String"
+                },
+                {
+                    "skip": false,
+                    "id": "batch100247_flatten_request.registerTime",
+                    "data_type": "ContinueNum",
+                    "feature_type": "BigInt"
+                },
+                {
+                    "skip": false,
+                    "id": "batch100247_flatten_request.membershipLevel",
+                    "data_type": "SingleString",
+                    "feature_type": "String"
+                },
+                {
+                    "skip": false,
+                    "id": "batch100247_flatten_request.interest",
+                    "data_type": "SingleString",
+                    "feature_type": "String"
+                },
+                {
+                    "skip": false,
+                    "id": "batch100247_flatten_request.subscribe",
+                    "data_type": "SingleString",
+                    "feature_type": "String"
+                },
+                {
+                    "skip": false,
+                    "id": "batch100247_flatten_request.channel",
+                    "data_type": "SingleString",
+                    "feature_type": "String"
+                },
+                {
+                    "skip": false,
+                    "id": "batch100247_flatten_request.height",
+                    "data_type": "ContinueNum",
+                    "feature_type": "Double"
+                },
+                {
+                    "skip": false,
+                    "id": "batch100247_flatten_request.Income",
+                    "data_type": "ContinueNum",
+                    "feature_type": "Float"
+                },
+                {
+                    "skip": false,
+                    "id": "batch100247_flatten_request.address",
+                    "data_type": "ContinueNum",
+                    "feature_type": "BigInt"
+                },
+                {
+                    "skip": false,
+                    "id": "batch100247_flatten_request.extraProperty7",
+                    "data_type": "SingleString",
+                    "feature_type": "String"
+                },
+                {
+                    "skip": false,
+                    "id": "batch100247_flatten_request.extraProperty8",
+                    "data_type": "SingleString",
+                    "feature_type": "String"
+                },
+                {
+                    "skip": false,
+                    "id": "batch100247_flatten_request.extraProperty9",
+                    "data_type": "SingleString",
+                    "feature_type": "String"
+                },
+                {
+                    "skip": false,
+                    "id": "batch100247_flatten_request.title1m",
+                    "data_type": "KVString(,)[:]",
+                    "feature_type": "String"
+                },
+                {
+                    "skip": false,
+                    "id": "batch100247_flatten_request.titleKw1m",
+                    "data_type": "KVString(,)[:]",
+                    "feature_type": "String"
+                },
+                {
+                    "skip": false,
+                    "id": "batch100247_flatten_request.contentKw1m",
+                    "data_type": "KVString(,)[:]",
+                    "feature_type": "String"
+                },
+                {
+                    "skip": false,
+                    "id": "batch100247_flatten_request.ner1m",
+                    "data_type": "KVString(,)[:]",
+                    "feature_type": "String"
+                },
+                {
+                    "skip": false,
+                    "id": "batch100247_flatten_request.tag1m",
+                    "data_type": "KVString(,)[:]",
+                    "feature_type": "String"
+                },
+                {
+                    "skip": false,
+                    "id": "batch100247_flatten_request.category1m",
+                    "data_type": "KVString(,)[:]",
+                    "feature_type": "String"
+                },
+                {
+                    "skip": false,
+                    "id": "batch100247_flatten_request.categoryLevel11m",
+                    "data_type": "KVString(,)[:]",
+                    "feature_type": "String"
+                },
+                {
+                    "skip": false,
+                    "id": "batch100247_flatten_request.categoryLevel21m",
+                    "data_type": "KVString(,)[:]",
+                    "feature_type": "String"
+                },
+                {
+                    "skip": false,
+                    "id": "batch100247_flatten_request.categoryLevel31m",
+                    "data_type": "KVString(,)[:]",
+                    "feature_type": "String"
+                },
+                {
+                    "skip": false,
+                    "id": "batch100247_flatten_request.categoryLevel41m",
+                    "data_type": "KVString(,)[:]",
+                    "feature_type": "String"
+                },
+                {
+                    "skip": false,
+                    "id": "batch100247_flatten_request.categoryLevel51m",
+                    "data_type": "KVString(,)[:]",
+                    "feature_type": "String"
+                },
+                {
+                    "skip": false,
+                    "id": "batch100247_flatten_request.publisherId1m",
+                    "data_type": "KVString(,)[:]",
+                    "feature_type": "String"
+                },
+                {
+                    "skip": false,
+                    "id": "batch100247_flatten_request.itemId1m",
+                    "data_type": "KVString(,)[:]",
+                    "feature_type": "String"
+                },
+                {
+                    "skip": false,
+                    "id": "batch100247_flatten_request.title50",
+                    "data_type": "KVString(,)[:]",
+                    "feature_type": "String"
+                },
+                {
+                    "skip": false,
+                    "id": "batch100247_flatten_request.titleKw50",
+                    "data_type": "KVString(,)[:]",
+                    "feature_type": "String"
+                },
+                {
+                    "skip": false,
+                    "id": "batch100247_flatten_request.contentKw50",
+                    "data_type": "KVString(,)[:]",
+                    "feature_type": "String"
+                },
+                {
+                    "skip": false,
+                    "id": "batch100247_flatten_request.ner50",
+                    "data_type": "KVString(,)[:]",
+                    "feature_type": "String"
+                },
+                {
+                    "skip": false,
+                    "id": "batch100247_flatten_request.tag50",
+                    "data_type": "KVString(,)[:]",
+                    "feature_type": "String"
+                },
+                {
+                    "skip": false,
+                    "id": "batch100247_flatten_request.category50",
+                    "data_type": "KVString(,)[:]",
+                    "feature_type": "String"
+                },
+                {
+                    "skip": false,
+                    "id": "batch100247_flatten_request.categoryLevel150",
+                    "data_type": "KVString(,)[:]",
+                    "feature_type": "String"
+                },
+                {
+                    "skip": false,
+                    "id": "batch100247_flatten_request.categoryLevel250",
+                    "data_type": "KVString(,)[:]",
+                    "feature_type": "String"
+                },
+                {
+                    "skip": false,
+                    "id": "batch100247_flatten_request.categoryLevel350",
+                    "data_type": "KVString(,)[:]",
+                    "feature_type": "String"
+                },
+                {
+                    "skip": false,
+                    "id": "batch100247_flatten_request.categoryLevel450",
+                    "data_type": "KVString(,)[:]",
+                    "feature_type": "String"
+                },
+                {
+                    "skip": false,
+                    "id": "batch100247_flatten_request.categoryLevel550",
+                    "data_type": "KVString(,)[:]",
+                    "feature_type": "String"
+                },
+                {
+                    "skip": false,
+                    "id": "batch100247_flatten_request.publisherId50",
+                    "data_type": "KVString(,)[:]",
+                    "feature_type": "String"
+                },
+                {
+                    "skip": false,
+                    "id": "batch100247_flatten_request.itemId50",
+                    "data_type": "KVString(,)[:]",
+                    "feature_type": "String"
+                },
+                {
+                    "skip": false,
+                    "id": "batch100247_flatten_request.reqCntSession",
+                    "data_type": "ContinueNum",
+                    "feature_type": "Int"
+                },
+                {
+                    "skip": false,
+                    "id": "batch100247_flatten_request.reqDurationSession",
+                    "data_type": "ContinueNum",
+                    "feature_type": "Int"
+                },
+                {
+                    "skip": false,
+                    "id": "batch100247_flatten_request.clickCount1h",
+                    "data_type": "ContinueNum",
+                    "feature_type": "Int"
+                },
+                {
+                    "skip": false,
+                    "id": "batch100247_flatten_request.clickCount1d",
+                    "data_type": "ContinueNum",
+                    "feature_type": "Int"
+                },
+                {
+                    "skip": false,
+                    "id": "batch100247_flatten_request.clickCount1w",
+                    "data_type": "ContinueNum",
+                    "feature_type": "Int"
+                },
+                {
+                    "skip": false,
+                    "id": "batch100247_flatten_request.ctr1h",
+                    "data_type": "ContinueNum",
+                    "feature_type": "Double"
+                },
+                {
+                    "skip": false,
+                    "id": "batch100247_flatten_request.ctr1d",
+                    "data_type": "ContinueNum",
+                    "feature_type": "Double"
+                },
+                {
+                    "skip": false,
+                    "id": "batch100247_flatten_request.ctr1w",
+                    "data_type": "ContinueNum",
+                    "feature_type": "Double"
+                },
+                {
+                    "skip": true,
+                    "id": "batch100247_flatten_request.i_position",
+                    "data_type": "SingleString",
+                    "feature_type": "String"
+                }
+            ]
+        },
+        "batch100250_action": {
+            "features": [
+                {
+                    "skip": false,
+                    "id": "batch100250_action.itemId",
+                    "data_type": "SingleString",
+                    "feature_type": "String"
+                },
+                {
+                    "skip": false,
+                    "id": "batch100250_action.reqId",
+                    "data_type": "SingleString",
+                    "feature_type": "String"
+                },
+                {
+                    "skip": false,
+                    "id": "batch100250_action.instanceKey",
+                    "data_type": "SingleString",
+                    "feature_type": "String"
+                },
+                {
+                    "skip": false,
+                    "id": "batch100250_action.eventTime",
+                    "data_type": "Timestamp",
+                    "feature_type": "Timestamp"
+                },
+                {
+                    "skip": false,
+                    "id": "batch100250_action.ingestionTime",
+                    "data_type": "Timestamp",
+                    "feature_type": "Timestamp"
+                },
+                {
+                    "skip": false,
+                    "id": "batch100250_action.actionValue",
+                    "data_type": "DiscreteLabel",
+                    "feature_type": "Int"
+                }
+            ]
+        }
+    }
+}

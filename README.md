@@ -1,2 +1,2 @@
-# pico-app-fix-redundant_feature
+# pico-app
 

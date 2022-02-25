@@ -1,0 +1,234 @@
+#!/usr/bin/python
+# -*- coding: UTF-8 -*-
+
+
+
+from distutils.command.config import config
+from tkinter import N
+import yaml
+
+# fmt:off
+
+# fmt:off
+import sys
+import os
+sys.path.append(os.path.dirname(__file__) + "/..")
+from fesql import convert
+from feql import convert as feqlconvert
+
+import unittest
+import json
+
+
+resource_path = os.path.dirname(__file__)
+
+
+def abs_path(param):
+    return resource_path + "/" + param
+
+# fmt:on
+
+# TODO: add test case easier, maybe yaml case?
+
+
+def case():
+    # 获取当前脚本所在文件夹路径
+    curPath = os.path.dirname(os.path.realpath(__file__))
+    print(curPath)
+    # 获取yaml文件路径
+    yamlPath = os.path.join(curPath, "data.yaml")
+ 
+    # open方法打开直接读出来
+    f = open(yamlPath, 'r', encoding='utf-8')
+    cfg = f.read()
+    data = yaml.load(cfg,Loader=yaml.FullLoader)  # 用load方法转字典
+    return data
+
+
+def conv(d):
+    article_info = {}
+    data = json.loads(json.dumps(article_info))
+
+    app = {'feature_info': {}}
+    data['app'] = app
+    
+    feature_info = {'target_entity': d['config']['table_name'], 'target_entity_index': d['config']['index'], 'target_label': '' , 'entity_detail':{}, 'relations': []}
+    data['app']['feature_info'] = feature_info
+
+    relations = [{'type':'type', 'time_windows': ['10:0','100:0','1d,1000:0s'],'window_delay':''
+        ,'from_entity':'','from_entity_keys':[],'from_entity_time_col':'','to_entity':'',
+        'to_entity_keys':[],'to_entity_time_col':''}]
+    data['app']['feature_info']['relations'] = relations
+    
+    # relations = []
+    # data['app']['feature_info']['relations'] = relations
+
+    entity_detail = {'t1':{} }
+    data['app']['feature_info']['entity_detail'] = entity_detail
+
+    t1 = {'features':[]}
+    data['app']['feature_info']['entity_detail']['t1'] = t1
+    
+    lists = list()
+    for x in d['config']['column']:
+        if(x['datatype']=='String'):
+            dict = {'id': d['config']['table_name']+'.'+x['name'],'data_type':'SingleString','skip':'false', 'feature_type':x['datatype']}
+        elif(x['datatype']=='Timestamp'):
+            dict = {'id': d['config']['table_name']+'.'+x['name'],'data_type':'Timestamp','skip':'false', 'feature_type':x['datatype']}
+        elif(x['datatype']=='Int' or x['datatype']=='Double'):
+            dict = {'id': d['config']['table_name']+'.'+x['name'],'data_type':'ContinueNum','skip':'false', 'feature_type':x['datatype']}
+        lists.append(dict)
+    features = tuple(lists)
+    # features = {'id':a+'.'+c, 'data_type':'SingleString', 'skip':'false', 'feature_type':'String'},{'id':a+'.'+'eventTime', 'data_type':'Timestamp', 'skip':'false', 'feature_type':'Timestamp'},{'id':a+'.'+'f_index', 'data_type':'SingleString', 'skip':'false', 'feature_type':'String'}
+    data['app']['feature_info']['entity_detail']['t1']['features']= features
+
+    article = json.dumps(data)
+    return article
+
+def save_file(path, item):
+        # 先将字典对象转化为可写入文本的字符串
+        item = yaml.dump(item,default_flow_style=False,sort_keys=False)
+        print(item)
+        try:
+            if not os.path.exists(path):
+                with open(path, "w", encoding='utf-8') as f:
+                    f.write(item + "\n")
+                    print("^_^ write success")
+                    
+            else:
+                with open(path, "a", encoding='utf-8') as f:
+                    f.write(item + "\n")
+                    print("^_^ write success")
+        except Exception as e:
+            print("write error==>", e)
+
+
+
+def fesql(op_file, config_file, cfg_is_info=False, debug=False):
+    config_all = json.loads(config_file)   #加载配置文件
+    if debug:
+        print(config_all)
+    real_config = config_all if cfg_is_info else config_all['app']['feature_info']
+        
+    ok, sql, sql_config, fe = convert.to_sql(op_file, real_config)   #true sql语句  sql结构  sql特征
+    assert ok   #断言
+    # sign(fe) has 2 more lines:
+    # # start fe code
+    # w_feature_output = window(table=sql_table, output="w_output_feature_table")
+    filtered, _, _ = feqlconvert.remove_op(op_file, real_config)
+    _, _, good = convert.remove_op(filtered, real_config)
+    result_cnt = len(fe.splitlines())
+    print("convert ", good, " ops to fesql sign, result ",
+            result_cnt, " line(if !=0, include 2 more lines)")
+    assert result_cnt - 2 == good or (result_cnt == 0 and good == 0)
+    print("--------------------sql sql sql sql sql sql sql sql--------------------")
+    print(sql)
+    print("--------------------sql sql sql sql sql sql sql sql--------------------")
+    print("--------------------fe fe fe fe fe fe fe fe fe fe fe --------------------")
+    print(fe)
+    print("--------------------fe fe fe fe fe fe fe fe fe fe fe --------------------")
+    return sql, fe
+
+
+def feql(op_file, config_file, cfg_is_info=False, debug=False):
+    config_all = json.loads(config_file)
+    real_config = config_all if cfg_is_info else config_all['app']['feature_info']
+    if debug:
+        print(real_config)
+        
+    ok, feql, column, sign, _ = feqlconvert.get_feql(
+        op_file, real_config)
+    assert ok
+        # sign has 1 more line:
+        # w_feature_output = window(table=xxx, output="w_output_feature_table")
+    _, _, good = feqlconvert.remove_op(op_file, real_config)
+    result_cnt = len(sign.splitlines())
+    print("convert ", good, " ops to feql sign, result ",
+            result_cnt, " line(if !=0, include 1 more lines)")
+    print(sign+'^^^^^^^^^^^^^^^')
+    assert result_cnt - 1 == good or (result_cnt == 0 and good == 0)
+    print("--------------------column column column column column column column column--------------------")
+    print(column)
+    print("--------------------column column column column column column column column--------------------")
+    print("--------------------sign sign sign sign sign sign sign sign sign sign --------------------")
+    print(sign)
+    print("--------------------sign sign sign sign sign sign sign sign sign sign--------------------")
+    return column, sign
+
+
+class TestConvert(unittest.TestCase):
+    def test_window_union_new_key(self):
+        data=case()
+        article=conv(data)
+        print(article)
+        str='\n'.join(data['fz'])
+        # s = data['fz']
+        # s.replace("\n","ccccccc")
+        print(str)
+        # print(type(data['fz']))
+        print("读取原数据")
+        sql, fe = fesql(str,article)
+        column, sign = feql(str,article)
+        print("Here"+"Start"+"\n\n\n\n\n")
+        print(sql.split('sql_table')[1])
+        print("Here"+"Start"+"\n\n\n\n\n")
+        print(column)
+        print("Here"+"End")
+        out=sql.split("\n")
+        str="\n".join(out)
+        print(out)
+
+        data['sql']=str.split('sql_table')[1]
+ 
+      
+        data['column']=column
+        print('*********************************')
+        print(data['sql'])
+
+        save_file(abs_path('result.yaml'),data)
+     
+    #     # union_selected_ops has ops like `dayofweek(multi_direct())`, convert(fesql convert use feql convert too) can't handle this, so remove it
+    #     fesql("union_selected_ops.bk", "union_pyconf.json")
+    #     feql("union_selected_ops.bk", "union_pyconf.json")
+    #     print("test_window_union_new_keytest_window_union_new_keytest_window_union_new_key")
+
+
+
+    # def test_split_key(self):
+    #     fesql("split.ops", "split.json", cfg_is_info=True)
+    #     feql("split.ops", "split.json", cfg_is_info=True)
+    #     print("test_split_key test_split_keyt est_split_key")
+
+    # def test_myhug_sql_window_count(self):
+    #     sql, _ = fesql("myhug_selected_ops_window_count.bk",
+    #                    "myhug_pyconf.json")
+    #     assert sql.find("count_where") != -1
+        # feql("myhug_selected_ops_window_count.bk", "myhug_pyconf.json")
+    #     print("test_myhug_sql_window_count test_myhug_sql_window_count test_myhug_sql_window_count")
+
+    # def test_myhug_total(self):
+    #     fesql("myhug_selected_ops copy.bk", "myhug_pyconf.json")
+    #     feql("myhug_selected_ops copy.bk", "myhug_pyconf.json")
+
+    # def test_last_value(self):
+    #     feql("last_value_selected_ops.bk", "last_value_pyconf.json")
+    #     fesql("last_value_selected_ops.bk", "last_value_pyconf.json")
+
+    # def test_join_condition(self):
+    #     feql("join_selected_ops_one.bk", "join_pyconf.json")
+    #     fesql("join_selected_ops_one.bk", "join_pyconf.json")
+        # assert sql == """# start sql code
+# # output table name: sql_table
+
+# select
+#     `batch110174_flatten_request`.`reqId` as reqId_1,
+#     `batch110062_gf_bianjieceshi_biaozhun_sag_f5_PRD_CODE__eventTime_0_2147483645`.`amt2` as batch110062_gf_bianjieceshi_biaozhun_sag_f5_amt2_multi_last_value_0
+# from
+#     `batch110174_flatten_request`
+#     last join `batch110062_gf_bianjieceshi_biaozhun_sag_f5` as `batch110062_gf_bianjieceshi_biaozhun_sag_f5_PRD_CODE__eventTime_0_2147483645` order by batch110062_gf_bianjieceshi_biaozhun_sag_f5_PRD_CODE__eventTime_0_2147483645.`ingestionTime` on `batch110174_flatten_request`.`PRD_CODE` = `batch110062_gf_bianjieceshi_biaozhun_sag_f5_PRD_CODE__eventTime_0_2147483645`.`PRD_CODE` and `batch110062_gf_bianjieceshi_biaozhun_sag_f5_PRD_CODE__eventTime_0_2147483645`.`ingestionTime` < `batch110174_flatten_request`.`eventTime`;"""
+
+#         sql, _ = fesql("join_selected_ops.bk", "join_pyconf.json")
+
+
+if __name__ == '__main__':
+    unittest.main()

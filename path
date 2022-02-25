@@ -1,0 +1,25 @@
+column: 't1_window = window(table=t1, output="t1_output")
+
+  f_original_c2_0 = column(t1_window.c2[0])'
+config:
+  column:
+  - datatype: String
+    name: c1
+  - datatype: Timestamp
+    name: c2
+  - datatype: String
+    name: c3
+  index: c1
+  table_name: t1
+desc: original op
+expected:
+- 1
+- 11
+- 111
+fz: original(t1.c2)
+input:
+- 1, 2, 3
+- 11, 22, 33
+- 111, 222, 333
+sql: "# start sql code\n# output table name: sql_table\n\nselect\n    `c1` as c1_1,\n\
+  \    `c2` as t1_c2_original_0\nfrom\n    `t1`\n    ;"

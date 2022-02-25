@@ -1,0 +1,1982 @@
+{
+    "app": {
+        "lr": {
+            "link_function_for_label": "identity"
+        },
+        "feature_info": {
+            "target_label": "batch110177_action.actionValue",
+            "target_entity": "batch110174_flatten_request",
+            "target_pivot_timestamp": "eventTime",
+            "target_entity_index": "reqId",
+            "target_label_code": "Label(batch110177_action.actionValue)",
+            "entity_names": [
+                "batch110174_flatten_request",
+                "batch110177_action",
+                "batch110062_gf_bianjieceshi_biaozhun_sag_f5",
+                "batch110063_gf_bianjieceshi_biaozhun_cust_f4",
+                "batch110064_gf_bianjieceshi_biaozhun_open_f3",
+                "batch110065_gf_bianjieceshi_biaozhun_aum_f2",
+                "batch110066_gf_bianjieceshi_biaozhun_debit_f1"
+            ],
+            "relations": [
+                {
+                    "to_entity": "batch110066_gf_bianjieceshi_biaozhun_debit_f1",
+                    "from_entity": "batch110174_flatten_request",
+                    "to_entity_keys": [
+                        "CUST_NUM"
+                    ],
+                    "from_entity_keys": [
+                        "CUST_NUM"
+                    ],
+                    "to_entity_time_col": "ingestionTime",
+                    "from_entity_time_col": "eventTime",
+                    "time_windows": [
+                        "2147483645:0"
+                    ],
+                    "window_delay": "0s",
+                    "type": "SLICE"
+                },
+                {
+                    "to_entity": "batch110065_gf_bianjieceshi_biaozhun_aum_f2",
+                    "from_entity": "batch110174_flatten_request",
+                    "to_entity_keys": [
+                        "CUST_NUM"
+                    ],
+                    "from_entity_keys": [
+                        "CUST_NUM"
+                    ],
+                    "to_entity_time_col": "ingestionTime",
+                    "from_entity_time_col": "eventTime",
+                    "time_windows": [
+                        "2147483645:0"
+                    ],
+                    "window_delay": "0s",
+                    "type": "SLICE"
+                },
+                {
+                    "to_entity": "batch110064_gf_bianjieceshi_biaozhun_open_f3",
+                    "from_entity": "batch110174_flatten_request",
+                    "to_entity_keys": [
+                        "CUST_NUM"
+                    ],
+                    "from_entity_keys": [
+                        "CUST_NUM"
+                    ],
+                    "to_entity_time_col": "ingestionTime",
+                    "from_entity_time_col": "eventTime",
+                    "time_windows": [
+                        "2147483645:0"
+                    ],
+                    "window_delay": "0s",
+                    "type": "SLICE"
+                },
+                {
+                    "to_entity": "batch110063_gf_bianjieceshi_biaozhun_cust_f4",
+                    "from_entity": "batch110174_flatten_request",
+                    "to_entity_keys": [
+                        "CUST_NUM"
+                    ],
+                    "from_entity_keys": [
+                        "CUST_NUM"
+                    ],
+                    "to_entity_time_col": "",
+                    "from_entity_time_col": "",
+                    "time_windows": [],
+                    "window_delay": "0s",
+                    "type": "1-1"
+                },
+                {
+                    "to_entity": "batch110062_gf_bianjieceshi_biaozhun_sag_f5",
+                    "from_entity": "batch110174_flatten_request",
+                    "to_entity_keys": [
+                        "PRD_CODE"
+                    ],
+                    "from_entity_keys": [
+                        "PRD_CODE"
+                    ],
+                    "to_entity_time_col": "ingestionTime",
+                    "from_entity_time_col": "eventTime",
+                    "time_windows": [
+                        "2147483645:0"
+                    ],
+                    "window_delay": "0s",
+                    "type": "SLICE"
+                },
+                {
+                    "to_entity": "batch110177_action",
+                    "from_entity": "batch110174_flatten_request",
+                    "to_entity_keys": [
+                        "reqId"
+                    ],
+                    "from_entity_keys": [
+                        "reqId"
+                    ],
+                    "to_entity_time_col": "",
+                    "from_entity_time_col": "",
+                    "time_windows": [
+                        "10:0",
+                        "100:0",
+                        "1d,1000:0s"
+                    ],
+                    "window_delay": "0s",
+                    "type": "1-1"
+                }
+            ],
+            "entity_detail": {
+                "batch110065_gf_bianjieceshi_biaozhun_aum_f2": {
+                    "entity_name": "batch110065_gf_bianjieceshi_biaozhun_aum_f2",
+                    "features": [
+                        {
+                            "skip": false,
+                            "id": "batch110065_gf_bianjieceshi_biaozhun_aum_f2.ingestionTime",
+                            "data_type": "Timestamp",
+                            "feature_type": "Timestamp"
+                        },
+                        {
+                            "skip": false,
+                            "id": "batch110065_gf_bianjieceshi_biaozhun_aum_f2.CUST_NUM",
+                            "data_type": "SingleString",
+                            "feature_type": "String"
+                        },
+                        {
+                            "skip": false,
+                            "id": "batch110065_gf_bianjieceshi_biaozhun_aum_f2.SAVING_AUM",
+                            "data_type": "ContinueNum",
+                            "feature_type": "Double"
+                        },
+                        {
+                            "skip": false,
+                            "id": "batch110065_gf_bianjieceshi_biaozhun_aum_f2.CHREM_AUM",
+                            "data_type": "ContinueNum",
+                            "feature_type": "Double"
+                        },
+                        {
+                            "skip": false,
+                            "id": "batch110065_gf_bianjieceshi_biaozhun_aum_f2.TSM_AUM",
+                            "data_type": "ContinueNum",
+                            "feature_type": "Double"
+                        },
+                        {
+                            "skip": false,
+                            "id": "batch110065_gf_bianjieceshi_biaozhun_aum_f2.TBOND_AUM",
+                            "data_type": "ContinueNum",
+                            "feature_type": "Double"
+                        },
+                        {
+                            "skip": false,
+                            "id": "batch110065_gf_bianjieceshi_biaozhun_aum_f2.TRUST_AUM",
+                            "data_type": "ContinueNum",
+                            "feature_type": "Double"
+                        },
+                        {
+                            "skip": false,
+                            "id": "batch110065_gf_bianjieceshi_biaozhun_aum_f2.SECU_AUM",
+                            "data_type": "ContinueNum",
+                            "feature_type": "Double"
+                        },
+                        {
+                            "skip": false,
+                            "id": "batch110065_gf_bianjieceshi_biaozhun_aum_f2.FUND_AUM",
+                            "data_type": "ContinueNum",
+                            "feature_type": "Double"
+                        },
+                        {
+                            "skip": false,
+                            "id": "batch110065_gf_bianjieceshi_biaozhun_aum_f2.INSURE_AUM",
+                            "data_type": "ContinueNum",
+                            "feature_type": "Double"
+                        },
+                        {
+                            "skip": false,
+                            "id": "batch110065_gf_bianjieceshi_biaozhun_aum_f2.GJS_AUM",
+                            "data_type": "ContinueNum",
+                            "feature_type": "Double"
+                        },
+                        {
+                            "skip": false,
+                            "id": "batch110065_gf_bianjieceshi_biaozhun_aum_f2.TOT_AUM",
+                            "data_type": "ContinueNum",
+                            "feature_type": "Double"
+                        },
+                        {
+                            "skip": false,
+                            "id": "batch110065_gf_bianjieceshi_biaozhun_aum_f2.CM_AVG_SAVING_AUM",
+                            "data_type": "ContinueNum",
+                            "feature_type": "Double"
+                        },
+                        {
+                            "skip": false,
+                            "id": "batch110065_gf_bianjieceshi_biaozhun_aum_f2.CM_AVG_CHREM_AUM",
+                            "data_type": "ContinueNum",
+                            "feature_type": "Double"
+                        },
+                        {
+                            "skip": false,
+                            "id": "batch110065_gf_bianjieceshi_biaozhun_aum_f2.CM_AVG_TSM_AUM",
+                            "data_type": "ContinueNum",
+                            "feature_type": "Double"
+                        },
+                        {
+                            "skip": false,
+                            "id": "batch110065_gf_bianjieceshi_biaozhun_aum_f2.CM_AVG_TBOND_AUM",
+                            "data_type": "ContinueNum",
+                            "feature_type": "Double"
+                        },
+                        {
+                            "skip": false,
+                            "id": "batch110065_gf_bianjieceshi_biaozhun_aum_f2.CM_AVG_TRUST_AUM",
+                            "data_type": "ContinueNum",
+                            "feature_type": "Double"
+                        },
+                        {
+                            "skip": false,
+                            "id": "batch110065_gf_bianjieceshi_biaozhun_aum_f2.CM_AVG_SECU_AUM",
+                            "data_type": "ContinueNum",
+                            "feature_type": "Double"
+                        },
+                        {
+                            "skip": false,
+                            "id": "batch110065_gf_bianjieceshi_biaozhun_aum_f2.CM_AVG_FUND_AUM",
+                            "data_type": "ContinueNum",
+                            "feature_type": "Double"
+                        },
+                        {
+                            "skip": false,
+                            "id": "batch110065_gf_bianjieceshi_biaozhun_aum_f2.CM_AVG_INSURE_AUM",
+                            "data_type": "ContinueNum",
+                            "feature_type": "Double"
+                        },
+                        {
+                            "skip": false,
+                            "id": "batch110065_gf_bianjieceshi_biaozhun_aum_f2.CM_AVG_GJS_AUM",
+                            "data_type": "ContinueNum",
+                            "feature_type": "Double"
+                        },
+                        {
+                            "skip": false,
+                            "id": "batch110065_gf_bianjieceshi_biaozhun_aum_f2.CM_AVG_TOT_AUM",
+                            "data_type": "ContinueNum",
+                            "feature_type": "Double"
+                        },
+                        {
+                            "skip": false,
+                            "id": "batch110065_gf_bianjieceshi_biaozhun_aum_f2.CY_AVG_SAVING_AUM",
+                            "data_type": "ContinueNum",
+                            "feature_type": "Double"
+                        },
+                        {
+                            "skip": false,
+                            "id": "batch110065_gf_bianjieceshi_biaozhun_aum_f2.CY_AVG_CHREM_AUM",
+                            "data_type": "ContinueNum",
+                            "feature_type": "Double"
+                        },
+                        {
+                            "skip": false,
+                            "id": "batch110065_gf_bianjieceshi_biaozhun_aum_f2.CY_AVG_TSM_AUM",
+                            "data_type": "ContinueNum",
+                            "feature_type": "Double"
+                        },
+                        {
+                            "skip": false,
+                            "id": "batch110065_gf_bianjieceshi_biaozhun_aum_f2.CY_AVG_TBOND_AUM",
+                            "data_type": "ContinueNum",
+                            "feature_type": "Double"
+                        },
+                        {
+                            "skip": false,
+                            "id": "batch110065_gf_bianjieceshi_biaozhun_aum_f2.CY_AVG_TRUST_AUM",
+                            "data_type": "ContinueNum",
+                            "feature_type": "Double"
+                        },
+                        {
+                            "skip": false,
+                            "id": "batch110065_gf_bianjieceshi_biaozhun_aum_f2.CY_AVG_SECU_AUM",
+                            "data_type": "ContinueNum",
+                            "feature_type": "Double"
+                        },
+                        {
+                            "skip": false,
+                            "id": "batch110065_gf_bianjieceshi_biaozhun_aum_f2.CY_AVG_FUND_AUM",
+                            "data_type": "ContinueNum",
+                            "feature_type": "Double"
+                        },
+                        {
+                            "skip": false,
+                            "id": "batch110065_gf_bianjieceshi_biaozhun_aum_f2.CY_AVG_INSURE_AUM",
+                            "data_type": "ContinueNum",
+                            "feature_type": "Double"
+                        },
+                        {
+                            "skip": false,
+                            "id": "batch110065_gf_bianjieceshi_biaozhun_aum_f2.CY_AVG_GJS_AUM",
+                            "data_type": "ContinueNum",
+                            "feature_type": "Double"
+                        },
+                        {
+                            "skip": false,
+                            "id": "batch110065_gf_bianjieceshi_biaozhun_aum_f2.CY_AVG_TOT_AUM",
+                            "data_type": "ContinueNum",
+                            "feature_type": "Double"
+                        },
+                        {
+                            "skip": false,
+                            "id": "batch110065_gf_bianjieceshi_biaozhun_aum_f2.MEND_AVG_SAVING_AUM",
+                            "data_type": "ContinueNum",
+                            "feature_type": "Double"
+                        },
+                        {
+                            "skip": false,
+                            "id": "batch110065_gf_bianjieceshi_biaozhun_aum_f2.MEND_AVG_CHREM_AUM",
+                            "data_type": "ContinueNum",
+                            "feature_type": "Double"
+                        },
+                        {
+                            "skip": false,
+                            "id": "batch110065_gf_bianjieceshi_biaozhun_aum_f2.MEND_AVG_TSM_AUM",
+                            "data_type": "ContinueNum",
+                            "feature_type": "Double"
+                        },
+                        {
+                            "skip": false,
+                            "id": "batch110065_gf_bianjieceshi_biaozhun_aum_f2.MEND_AVG_TBOND_AUM",
+                            "data_type": "ContinueNum",
+                            "feature_type": "Double"
+                        },
+                        {
+                            "skip": false,
+                            "id": "batch110065_gf_bianjieceshi_biaozhun_aum_f2.MEND_AVG_TRUST_AUM",
+                            "data_type": "ContinueNum",
+                            "feature_type": "Double"
+                        },
+                        {
+                            "skip": false,
+                            "id": "batch110065_gf_bianjieceshi_biaozhun_aum_f2.MEND_AVG_SECU_AUM",
+                            "data_type": "ContinueNum",
+                            "feature_type": "Double"
+                        },
+                        {
+                            "skip": false,
+                            "id": "batch110065_gf_bianjieceshi_biaozhun_aum_f2.MEND_AVG_FUND_AUM",
+                            "data_type": "ContinueNum",
+                            "feature_type": "Double"
+                        },
+                        {
+                            "skip": false,
+                            "id": "batch110065_gf_bianjieceshi_biaozhun_aum_f2.MEND_AVG_INSURE_AUM",
+                            "data_type": "ContinueNum",
+                            "feature_type": "Double"
+                        },
+                        {
+                            "skip": false,
+                            "id": "batch110065_gf_bianjieceshi_biaozhun_aum_f2.MEND_AVG_GJS_AUM",
+                            "data_type": "ContinueNum",
+                            "feature_type": "Double"
+                        },
+                        {
+                            "skip": false,
+                            "id": "batch110065_gf_bianjieceshi_biaozhun_aum_f2.MEND_AVG_TOT_AUM",
+                            "data_type": "ContinueNum",
+                            "feature_type": "Double"
+                        },
+                        {
+                            "skip": false,
+                            "id": "batch110065_gf_bianjieceshi_biaozhun_aum_f2.DATA_BELONG_ORG",
+                            "data_type": "ContinueNum",
+                            "feature_type": "Double"
+                        },
+                        {
+                            "skip": false,
+                            "id": "batch110065_gf_bianjieceshi_biaozhun_aum_f2.CURR_FX_AUM",
+                            "data_type": "ContinueNum",
+                            "feature_type": "Double"
+                        },
+                        {
+                            "skip": false,
+                            "id": "batch110065_gf_bianjieceshi_biaozhun_aum_f2.CURR_MONTH_DAY_AVG_FX_AUM",
+                            "data_type": "ContinueNum",
+                            "feature_type": "Double"
+                        },
+                        {
+                            "skip": false,
+                            "id": "batch110065_gf_bianjieceshi_biaozhun_aum_f2.CURR_YEAR_DAY_AVG_FX_AUM",
+                            "data_type": "ContinueNum",
+                            "feature_type": "Double"
+                        },
+                        {
+                            "skip": false,
+                            "id": "batch110065_gf_bianjieceshi_biaozhun_aum_f2.MEND_AVG_FX_AUM",
+                            "data_type": "ContinueNum",
+                            "feature_type": "Double"
+                        }
+                    ]
+                },
+                "batch110177_action": {
+                    "entity_name": "batch110177_action",
+                    "features": [
+                        {
+                            "skip": false,
+                            "id": "batch110177_action.reqId",
+                            "data_type": "SingleString",
+                            "feature_type": "String"
+                        },
+                        {
+                            "skip": false,
+                            "id": "batch110177_action.eventTime",
+                            "data_type": "Timestamp",
+                            "feature_type": "Timestamp"
+                        },
+                        {
+                            "skip": false,
+                            "id": "batch110177_action.ingestionTime",
+                            "data_type": "Timestamp",
+                            "feature_type": "Timestamp"
+                        },
+                        {
+                            "skip": false,
+                            "id": "batch110177_action.actionValue",
+                            "data_type": "DiscreteLabel",
+                            "feature_type": "Int"
+                        }
+                    ]
+                },
+                "batch110062_gf_bianjieceshi_biaozhun_sag_f5": {
+                    "entity_name": "batch110062_gf_bianjieceshi_biaozhun_sag_f5",
+                    "features": [
+                        {
+                            "skip": false,
+                            "id": "batch110062_gf_bianjieceshi_biaozhun_sag_f5.ingestionTime",
+                            "data_type": "Timestamp",
+                            "feature_type": "Timestamp"
+                        },
+                        {
+                            "skip": false,
+                            "id": "batch110062_gf_bianjieceshi_biaozhun_sag_f5.PRD_CODE",
+                            "data_type": "SingleString",
+                            "feature_type": "String"
+                        },
+                        {
+                            "skip": false,
+                            "id": "batch110062_gf_bianjieceshi_biaozhun_sag_f5.model_flag",
+                            "data_type": "SingleString",
+                            "feature_type": "String"
+                        },
+                        {
+                            "skip": false,
+                            "id": "batch110062_gf_bianjieceshi_biaozhun_sag_f5.model_comment",
+                            "data_type": "SingleString",
+                            "feature_type": "String"
+                        },
+                        {
+                            "skip": false,
+                            "id": "batch110062_gf_bianjieceshi_biaozhun_sag_f5.prd_type",
+                            "data_type": "SingleString",
+                            "feature_type": "String"
+                        },
+                        {
+                            "skip": false,
+                            "id": "batch110062_gf_bianjieceshi_biaozhun_sag_f5.ta_code",
+                            "data_type": "SingleString",
+                            "feature_type": "String"
+                        },
+                        {
+                            "skip": false,
+                            "id": "batch110062_gf_bianjieceshi_biaozhun_sag_f5.prd_name",
+                            "data_type": "SingleString",
+                            "feature_type": "String"
+                        },
+                        {
+                            "skip": false,
+                            "id": "batch110062_gf_bianjieceshi_biaozhun_sag_f5.prd_name2",
+                            "data_type": "SingleString",
+                            "feature_type": "String"
+                        },
+                        {
+                            "skip": false,
+                            "id": "batch110062_gf_bianjieceshi_biaozhun_sag_f5.vol_digit",
+                            "data_type": "SingleString",
+                            "feature_type": "String"
+                        },
+                        {
+                            "skip": false,
+                            "id": "batch110062_gf_bianjieceshi_biaozhun_sag_f5.amt_digit",
+                            "data_type": "SingleString",
+                            "feature_type": "String"
+                        },
+                        {
+                            "skip": false,
+                            "id": "batch110062_gf_bianjieceshi_biaozhun_sag_f5.nav_digit",
+                            "data_type": "SingleString",
+                            "feature_type": "String"
+                        },
+                        {
+                            "skip": false,
+                            "id": "batch110062_gf_bianjieceshi_biaozhun_sag_f5.nav_date",
+                            "data_type": "SingleString",
+                            "feature_type": "String"
+                        },
+                        {
+                            "skip": false,
+                            "id": "batch110062_gf_bianjieceshi_biaozhun_sag_f5.nav_days",
+                            "data_type": "SingleString",
+                            "feature_type": "String"
+                        },
+                        {
+                            "skip": false,
+                            "id": "batch110062_gf_bianjieceshi_biaozhun_sag_f5.asso_code",
+                            "data_type": "SingleString",
+                            "feature_type": "String"
+                        },
+                        {
+                            "skip": false,
+                            "id": "batch110062_gf_bianjieceshi_biaozhun_sag_f5.prd_sponsor",
+                            "data_type": "SingleString",
+                            "feature_type": "String"
+                        },
+                        {
+                            "skip": false,
+                            "id": "batch110062_gf_bianjieceshi_biaozhun_sag_f5.prd_trustee",
+                            "data_type": "SingleString",
+                            "feature_type": "String"
+                        },
+                        {
+                            "skip": false,
+                            "id": "batch110062_gf_bianjieceshi_biaozhun_sag_f5.prd_manager",
+                            "data_type": "SingleString",
+                            "feature_type": "String"
+                        },
+                        {
+                            "skip": false,
+                            "id": "batch110062_gf_bianjieceshi_biaozhun_sag_f5.dep_id",
+                            "data_type": "SingleString",
+                            "feature_type": "String"
+                        },
+                        {
+                            "skip": false,
+                            "id": "batch110062_gf_bianjieceshi_biaozhun_sag_f5.branch_no",
+                            "data_type": "SingleString",
+                            "feature_type": "String"
+                        },
+                        {
+                            "skip": false,
+                            "id": "batch110062_gf_bianjieceshi_biaozhun_sag_f5.ipo_start_date",
+                            "data_type": "Timestamp",
+                            "feature_type": "Timestamp"
+                        },
+                        {
+                            "skip": false,
+                            "id": "batch110062_gf_bianjieceshi_biaozhun_sag_f5.ipo_end_date",
+                            "data_type": "Timestamp",
+                            "feature_type": "Timestamp"
+                        },
+                        {
+                            "skip": false,
+                            "id": "batch110062_gf_bianjieceshi_biaozhun_sag_f5.estab_date",
+                            "data_type": "Timestamp",
+                            "feature_type": "Timestamp"
+                        },
+                        {
+                            "skip": false,
+                            "id": "batch110062_gf_bianjieceshi_biaozhun_sag_f5.income_date",
+                            "data_type": "Timestamp",
+                            "feature_type": "Timestamp"
+                        },
+                        {
+                            "skip": false,
+                            "id": "batch110062_gf_bianjieceshi_biaozhun_sag_f5.end_date",
+                            "data_type": "Timestamp",
+                            "feature_type": "Timestamp"
+                        },
+                        {
+                            "skip": false,
+                            "id": "batch110062_gf_bianjieceshi_biaozhun_sag_f5.interest_end_date",
+                            "data_type": "Timestamp",
+                            "feature_type": "Timestamp"
+                        },
+                        {
+                            "skip": false,
+                            "id": "batch110062_gf_bianjieceshi_biaozhun_sag_f5.income_end_date",
+                            "data_type": "Timestamp",
+                            "feature_type": "Timestamp"
+                        },
+                        {
+                            "skip": false,
+                            "id": "batch110062_gf_bianjieceshi_biaozhun_sag_f5.issue_fail_date",
+                            "data_type": "Timestamp",
+                            "feature_type": "Timestamp"
+                        },
+                        {
+                            "skip": false,
+                            "id": "batch110062_gf_bianjieceshi_biaozhun_sag_f5.alimit_end_date",
+                            "data_type": "Timestamp",
+                            "feature_type": "Timestamp"
+                        },
+                        {
+                            "skip": false,
+                            "id": "batch110062_gf_bianjieceshi_biaozhun_sag_f5.real_estab_date",
+                            "data_type": "Timestamp",
+                            "feature_type": "Timestamp"
+                        },
+                        {
+                            "skip": false,
+                            "id": "batch110062_gf_bianjieceshi_biaozhun_sag_f5.order_date",
+                            "data_type": "Timestamp",
+                            "feature_type": "Timestamp"
+                        },
+                        {
+                            "skip": false,
+                            "id": "batch110062_gf_bianjieceshi_biaozhun_sag_f5.book_buy_date",
+                            "data_type": "Timestamp",
+                            "feature_type": "Timestamp"
+                        },
+                        {
+                            "skip": false,
+                            "id": "batch110062_gf_bianjieceshi_biaozhun_sag_f5.book_sell_date",
+                            "data_type": "Timestamp",
+                            "feature_type": "Timestamp"
+                        },
+                        {
+                            "skip": false,
+                            "id": "batch110062_gf_bianjieceshi_biaozhun_sag_f5.dir_free_date",
+                            "data_type": "Timestamp",
+                            "feature_type": "Timestamp"
+                        },
+                        {
+                            "skip": false,
+                            "id": "batch110062_gf_bianjieceshi_biaozhun_sag_f5.dir_start_date",
+                            "data_type": "Timestamp",
+                            "feature_type": "Timestamp"
+                        },
+                        {
+                            "skip": false,
+                            "id": "batch110062_gf_bianjieceshi_biaozhun_sag_f5.red_arr_date",
+                            "data_type": "Timestamp",
+                            "feature_type": "Timestamp"
+                        },
+                        {
+                            "skip": false,
+                            "id": "batch110062_gf_bianjieceshi_biaozhun_sag_f5.div_arr_date",
+                            "data_type": "Timestamp",
+                            "feature_type": "Timestamp"
+                        },
+                        {
+                            "skip": false,
+                            "id": "batch110062_gf_bianjieceshi_biaozhun_sag_f5.fail_arr_date",
+                            "data_type": "Timestamp",
+                            "feature_type": "Timestamp"
+                        },
+                        {
+                            "skip": false,
+                            "id": "batch110062_gf_bianjieceshi_biaozhun_sag_f5.open_arr_date",
+                            "data_type": "Timestamp",
+                            "feature_type": "Timestamp"
+                        },
+                        {
+                            "skip": false,
+                            "id": "batch110062_gf_bianjieceshi_biaozhun_sag_f5.money_date",
+                            "data_type": "Timestamp",
+                            "feature_type": "Timestamp"
+                        },
+                        {
+                            "skip": false,
+                            "id": "batch110062_gf_bianjieceshi_biaozhun_sag_f5.evend_date",
+                            "data_type": "Timestamp",
+                            "feature_type": "Timestamp"
+                        },
+                        {
+                            "skip": false,
+                            "id": "batch110062_gf_bianjieceshi_biaozhun_sag_f5.refund_arr_date",
+                            "data_type": "Timestamp",
+                            "feature_type": "Timestamp"
+                        },
+                        {
+                            "skip": false,
+                            "id": "batch110062_gf_bianjieceshi_biaozhun_sag_f5.div_modes",
+                            "data_type": "SingleString",
+                            "feature_type": "String"
+                        },
+                        {
+                            "skip": false,
+                            "id": "batch110062_gf_bianjieceshi_biaozhun_sag_f5.div_mode",
+                            "data_type": "SingleString",
+                            "feature_type": "String"
+                        },
+                        {
+                            "skip": false,
+                            "id": "batch110062_gf_bianjieceshi_biaozhun_sag_f5.inst_flag",
+                            "data_type": "SingleString",
+                            "feature_type": "String"
+                        },
+                        {
+                            "skip": false,
+                            "id": "batch110062_gf_bianjieceshi_biaozhun_sag_f5.limit_flag",
+                            "data_type": "SingleString",
+                            "feature_type": "String"
+                        },
+                        {
+                            "skip": false,
+                            "id": "batch110062_gf_bianjieceshi_biaozhun_sag_f5.liqu_mode",
+                            "data_type": "SingleString",
+                            "feature_type": "String"
+                        },
+                        {
+                            "skip": false,
+                            "id": "batch110062_gf_bianjieceshi_biaozhun_sag_f5.liqu_mode2",
+                            "data_type": "SingleString",
+                            "feature_type": "String"
+                        },
+                        {
+                            "skip": false,
+                            "id": "batch110062_gf_bianjieceshi_biaozhun_sag_f5.channels",
+                            "data_type": "SingleString",
+                            "feature_type": "String"
+                        },
+                        {
+                            "skip": false,
+                            "id": "batch110062_gf_bianjieceshi_biaozhun_sag_f5.client_groups",
+                            "data_type": "SingleString",
+                            "feature_type": "String"
+                        },
+                        {
+                            "skip": false,
+                            "id": "batch110062_gf_bianjieceshi_biaozhun_sag_f5.temp_flag",
+                            "data_type": "SingleString",
+                            "feature_type": "String"
+                        },
+                        {
+                            "skip": false,
+                            "id": "batch110062_gf_bianjieceshi_biaozhun_sag_f5.control_flag",
+                            "data_type": "SingleString",
+                            "feature_type": "String"
+                        },
+                        {
+                            "skip": false,
+                            "id": "batch110062_gf_bianjieceshi_biaozhun_sag_f5.control_flag2",
+                            "data_type": "SingleString",
+                            "feature_type": "String"
+                        },
+                        {
+                            "skip": false,
+                            "id": "batch110062_gf_bianjieceshi_biaozhun_sag_f5.share_class",
+                            "data_type": "SingleString",
+                            "feature_type": "String"
+                        },
+                        {
+                            "skip": false,
+                            "id": "batch110062_gf_bianjieceshi_biaozhun_sag_f5.sub_mode",
+                            "data_type": "SingleString",
+                            "feature_type": "String"
+                        },
+                        {
+                            "skip": false,
+                            "id": "batch110062_gf_bianjieceshi_biaozhun_sag_f5.sub_exp",
+                            "data_type": "SingleString",
+                            "feature_type": "String"
+                        },
+                        {
+                            "skip": false,
+                            "id": "batch110062_gf_bianjieceshi_biaozhun_sag_f5.interest_way",
+                            "data_type": "SingleString",
+                            "feature_type": "String"
+                        },
+                        {
+                            "skip": false,
+                            "id": "batch110062_gf_bianjieceshi_biaozhun_sag_f5.prd_attr",
+                            "data_type": "SingleString",
+                            "feature_type": "String"
+                        },
+                        {
+                            "skip": false,
+                            "id": "batch110062_gf_bianjieceshi_biaozhun_sag_f5.risk_level",
+                            "data_type": "SingleString",
+                            "feature_type": "String"
+                        },
+                        {
+                            "skip": false,
+                            "id": "batch110062_gf_bianjieceshi_biaozhun_sag_f5.grade",
+                            "data_type": "SingleString",
+                            "feature_type": "String"
+                        },
+                        {
+                            "skip": false,
+                            "id": "batch110062_gf_bianjieceshi_biaozhun_sag_f5.status",
+                            "data_type": "SingleString",
+                            "feature_type": "String"
+                        },
+                        {
+                            "skip": false,
+                            "id": "batch110062_gf_bianjieceshi_biaozhun_sag_f5.conv_flag",
+                            "data_type": "SingleString",
+                            "feature_type": "String"
+                        },
+                        {
+                            "skip": false,
+                            "id": "batch110062_gf_bianjieceshi_biaozhun_sag_f5.curr_type",
+                            "data_type": "SingleString",
+                            "feature_type": "String"
+                        },
+                        {
+                            "skip": false,
+                            "id": "batch110062_gf_bianjieceshi_biaozhun_sag_f5.cost_curr_type",
+                            "data_type": "SingleString",
+                            "feature_type": "String"
+                        },
+                        {
+                            "skip": false,
+                            "id": "batch110062_gf_bianjieceshi_biaozhun_sag_f5.income_curr_type",
+                            "data_type": "SingleString",
+                            "feature_type": "String"
+                        },
+                        {
+                            "skip": false,
+                            "id": "batch110062_gf_bianjieceshi_biaozhun_sag_f5.cash_flag",
+                            "data_type": "SingleString",
+                            "feature_type": "String"
+                        },
+                        {
+                            "skip": false,
+                            "id": "batch110062_gf_bianjieceshi_biaozhun_sag_f5.agio_type",
+                            "data_type": "SingleString",
+                            "feature_type": "String"
+                        },
+                        {
+                            "skip": false,
+                            "id": "batch110062_gf_bianjieceshi_biaozhun_sag_f5.open_time",
+                            "data_type": "SingleString",
+                            "feature_type": "String"
+                        },
+                        {
+                            "skip": false,
+                            "id": "batch110062_gf_bianjieceshi_biaozhun_sag_f5.close_time",
+                            "data_type": "SingleString",
+                            "feature_type": "String"
+                        },
+                        {
+                            "skip": false,
+                            "id": "batch110062_gf_bianjieceshi_biaozhun_sag_f5.paper_no",
+                            "data_type": "SingleString",
+                            "feature_type": "String"
+                        },
+                        {
+                            "skip": false,
+                            "id": "batch110062_gf_bianjieceshi_biaozhun_sag_f5.paper_name",
+                            "data_type": "SingleString",
+                            "feature_type": "String"
+                        },
+                        {
+                            "skip": false,
+                            "id": "batch110062_gf_bianjieceshi_biaozhun_sag_f5.protocol_name",
+                            "data_type": "SingleString",
+                            "feature_type": "String"
+                        },
+                        {
+                            "skip": false,
+                            "id": "batch110062_gf_bianjieceshi_biaozhun_sag_f5.psub_unit",
+                            "data_type": "SingleString",
+                            "feature_type": "String"
+                        },
+                        {
+                            "skip": false,
+                            "id": "batch110062_gf_bianjieceshi_biaozhun_sag_f5.osub_unit",
+                            "data_type": "SingleString",
+                            "feature_type": "String"
+                        },
+                        {
+                            "skip": false,
+                            "id": "batch110062_gf_bianjieceshi_biaozhun_sag_f5.tot_client",
+                            "data_type": "SingleString",
+                            "feature_type": "String"
+                        },
+                        {
+                            "skip": false,
+                            "id": "batch110062_gf_bianjieceshi_biaozhun_sag_f5.ipo_time",
+                            "data_type": "SingleString",
+                            "feature_type": "String"
+                        },
+                        {
+                            "skip": false,
+                            "id": "batch110062_gf_bianjieceshi_biaozhun_sag_f5.order_time",
+                            "data_type": "SingleString",
+                            "feature_type": "String"
+                        },
+                        {
+                            "skip": false,
+                            "id": "batch110062_gf_bianjieceshi_biaozhun_sag_f5.book_buy_days",
+                            "data_type": "SingleString",
+                            "feature_type": "String"
+                        },
+                        {
+                            "skip": false,
+                            "id": "batch110062_gf_bianjieceshi_biaozhun_sag_f5.book_sell_days",
+                            "data_type": "SingleString",
+                            "feature_type": "String"
+                        },
+                        {
+                            "skip": false,
+                            "id": "batch110062_gf_bianjieceshi_biaozhun_sag_f5.dir_order_type",
+                            "data_type": "SingleString",
+                            "feature_type": "String"
+                        },
+                        {
+                            "skip": false,
+                            "id": "batch110062_gf_bianjieceshi_biaozhun_sag_f5.dir_hold_day",
+                            "data_type": "SingleString",
+                            "feature_type": "String"
+                        },
+                        {
+                            "skip": false,
+                            "id": "batch110062_gf_bianjieceshi_biaozhun_sag_f5.dir_start_time",
+                            "data_type": "SingleString",
+                            "feature_type": "String"
+                        },
+                        {
+                            "skip": false,
+                            "id": "batch110062_gf_bianjieceshi_biaozhun_sag_f5.invest_fail_times",
+                            "data_type": "SingleString",
+                            "feature_type": "String"
+                        },
+                        {
+                            "skip": false,
+                            "id": "batch110062_gf_bianjieceshi_biaozhun_sag_f5.debit_account",
+                            "data_type": "SingleString",
+                            "feature_type": "String"
+                        },
+                        {
+                            "skip": false,
+                            "id": "batch110062_gf_bianjieceshi_biaozhun_sag_f5.credit_account",
+                            "data_type": "SingleString",
+                            "feature_type": "String"
+                        },
+                        {
+                            "skip": false,
+                            "id": "batch110062_gf_bianjieceshi_biaozhun_sag_f5.red_draw_account",
+                            "data_type": "SingleString",
+                            "feature_type": "String"
+                        },
+                        {
+                            "skip": false,
+                            "id": "batch110062_gf_bianjieceshi_biaozhun_sag_f5.charge_account",
+                            "data_type": "SingleString",
+                            "feature_type": "String"
+                        },
+                        {
+                            "skip": false,
+                            "id": "batch110062_gf_bianjieceshi_biaozhun_sag_f5.manage_account",
+                            "data_type": "SingleString",
+                            "feature_type": "String"
+                        },
+                        {
+                            "skip": false,
+                            "id": "batch110062_gf_bianjieceshi_biaozhun_sag_f5.red_days",
+                            "data_type": "SingleString",
+                            "feature_type": "String"
+                        },
+                        {
+                            "skip": false,
+                            "id": "batch110062_gf_bianjieceshi_biaozhun_sag_f5.div_days",
+                            "data_type": "SingleString",
+                            "feature_type": "String"
+                        },
+                        {
+                            "skip": false,
+                            "id": "batch110062_gf_bianjieceshi_biaozhun_sag_f5.refund_days",
+                            "data_type": "SingleString",
+                            "feature_type": "String"
+                        },
+                        {
+                            "skip": false,
+                            "id": "batch110062_gf_bianjieceshi_biaozhun_sag_f5.fail_days",
+                            "data_type": "SingleString",
+                            "feature_type": "String"
+                        },
+                        {
+                            "skip": false,
+                            "id": "batch110062_gf_bianjieceshi_biaozhun_sag_f5.open_buy_days",
+                            "data_type": "SingleString",
+                            "feature_type": "String"
+                        },
+                        {
+                            "skip": false,
+                            "id": "batch110062_gf_bianjieceshi_biaozhun_sag_f5.base_days",
+                            "data_type": "SingleString",
+                            "feature_type": "String"
+                        },
+                        {
+                            "skip": false,
+                            "id": "batch110062_gf_bianjieceshi_biaozhun_sag_f5.interest_days",
+                            "data_type": "SingleString",
+                            "feature_type": "String"
+                        },
+                        {
+                            "skip": false,
+                            "id": "batch110062_gf_bianjieceshi_biaozhun_sag_f5.manage_days",
+                            "data_type": "SingleString",
+                            "feature_type": "String"
+                        },
+                        {
+                            "skip": false,
+                            "id": "batch110062_gf_bianjieceshi_biaozhun_sag_f5.cash_rate",
+                            "data_type": "SingleString",
+                            "feature_type": "String"
+                        },
+                        {
+                            "skip": false,
+                            "id": "batch110062_gf_bianjieceshi_biaozhun_sag_f5.tn_confirm",
+                            "data_type": "SingleString",
+                            "feature_type": "String"
+                        },
+                        {
+                            "skip": false,
+                            "id": "batch110062_gf_bianjieceshi_biaozhun_sag_f5.guest_rate",
+                            "data_type": "SingleString",
+                            "feature_type": "String"
+                        },
+                        {
+                            "skip": false,
+                            "id": "batch110062_gf_bianjieceshi_biaozhun_sag_f5.cycle_days",
+                            "data_type": "SingleString",
+                            "feature_type": "String"
+                        },
+                        {
+                            "skip": false,
+                            "id": "batch110062_gf_bianjieceshi_biaozhun_sag_f5.trans_way",
+                            "data_type": "SingleString",
+                            "feature_type": "String"
+                        },
+                        {
+                            "skip": false,
+                            "id": "batch110062_gf_bianjieceshi_biaozhun_sag_f5.int1",
+                            "data_type": "SingleString",
+                            "feature_type": "String"
+                        },
+                        {
+                            "skip": false,
+                            "id": "batch110062_gf_bianjieceshi_biaozhun_sag_f5.int2",
+                            "data_type": "SingleString",
+                            "feature_type": "String"
+                        },
+                        {
+                            "skip": false,
+                            "id": "batch110062_gf_bianjieceshi_biaozhun_sag_f5.reserve1",
+                            "data_type": "SingleString",
+                            "feature_type": "String"
+                        },
+                        {
+                            "skip": false,
+                            "id": "batch110062_gf_bianjieceshi_biaozhun_sag_f5.reserve2",
+                            "data_type": "SingleString",
+                            "feature_type": "String"
+                        },
+                        {
+                            "skip": false,
+                            "id": "batch110062_gf_bianjieceshi_biaozhun_sag_f5.reserve3",
+                            "data_type": "SingleString",
+                            "feature_type": "String"
+                        },
+                        {
+                            "skip": false,
+                            "id": "batch110062_gf_bianjieceshi_biaozhun_sag_f5.reserve4",
+                            "data_type": "SingleString",
+                            "feature_type": "String"
+                        },
+                        {
+                            "skip": false,
+                            "id": "batch110062_gf_bianjieceshi_biaozhun_sag_f5.reserve5",
+                            "data_type": "SingleString",
+                            "feature_type": "String"
+                        },
+                        {
+                            "skip": false,
+                            "id": "batch110062_gf_bianjieceshi_biaozhun_sag_f5.flag1",
+                            "data_type": "SingleString",
+                            "feature_type": "String"
+                        },
+                        {
+                            "skip": false,
+                            "id": "batch110062_gf_bianjieceshi_biaozhun_sag_f5.nav",
+                            "data_type": "ContinueNum",
+                            "feature_type": "Double"
+                        },
+                        {
+                            "skip": false,
+                            "id": "batch110062_gf_bianjieceshi_biaozhun_sag_f5.face_value",
+                            "data_type": "ContinueNum",
+                            "feature_type": "Double"
+                        },
+                        {
+                            "skip": false,
+                            "id": "batch110062_gf_bianjieceshi_biaozhun_sag_f5.iss_price",
+                            "data_type": "ContinueNum",
+                            "feature_type": "Double"
+                        },
+                        {
+                            "skip": false,
+                            "id": "batch110062_gf_bianjieceshi_biaozhun_sag_f5.prd_min_bala",
+                            "data_type": "ContinueNum",
+                            "feature_type": "Double"
+                        },
+                        {
+                            "skip": false,
+                            "id": "batch110062_gf_bianjieceshi_biaozhun_sag_f5.prd_max_bala",
+                            "data_type": "ContinueNum",
+                            "feature_type": "Double"
+                        },
+                        {
+                            "skip": false,
+                            "id": "batch110062_gf_bianjieceshi_biaozhun_sag_f5.prd_min_shares",
+                            "data_type": "ContinueNum",
+                            "feature_type": "Double"
+                        },
+                        {
+                            "skip": false,
+                            "id": "batch110062_gf_bianjieceshi_biaozhun_sag_f5.prd_max_shares",
+                            "data_type": "ContinueNum",
+                            "feature_type": "Double"
+                        },
+                        {
+                            "skip": false,
+                            "id": "batch110062_gf_bianjieceshi_biaozhun_sag_f5.prd_issue_real_bala",
+                            "data_type": "ContinueNum",
+                            "feature_type": "Double"
+                        },
+                        {
+                            "skip": false,
+                            "id": "batch110062_gf_bianjieceshi_biaozhun_sag_f5.curr_scale",
+                            "data_type": "ContinueNum",
+                            "feature_type": "Double"
+                        },
+                        {
+                            "skip": false,
+                            "id": "batch110062_gf_bianjieceshi_biaozhun_sag_f5.issue_cfm_rate",
+                            "data_type": "ContinueNum",
+                            "feature_type": "Double"
+                        },
+                        {
+                            "skip": false,
+                            "id": "batch110062_gf_bianjieceshi_biaozhun_sag_f5.prd_totvol",
+                            "data_type": "ContinueNum",
+                            "feature_type": "Double"
+                        },
+                        {
+                            "skip": false,
+                            "id": "batch110062_gf_bianjieceshi_biaozhun_sag_f5.tot_nav",
+                            "data_type": "ContinueNum",
+                            "feature_type": "Double"
+                        },
+                        {
+                            "skip": false,
+                            "id": "batch110062_gf_bianjieceshi_biaozhun_sag_f5.pfirst_amt",
+                            "data_type": "ContinueNum",
+                            "feature_type": "Double"
+                        },
+                        {
+                            "skip": false,
+                            "id": "batch110062_gf_bianjieceshi_biaozhun_sag_f5.papp_amt",
+                            "data_type": "ContinueNum",
+                            "feature_type": "Double"
+                        },
+                        {
+                            "skip": false,
+                            "id": "batch110062_gf_bianjieceshi_biaozhun_sag_f5.pmin_invest_amt",
+                            "data_type": "ContinueNum",
+                            "feature_type": "Double"
+                        },
+                        {
+                            "skip": false,
+                            "id": "batch110062_gf_bianjieceshi_biaozhun_sag_f5.pmin_hold",
+                            "data_type": "ContinueNum",
+                            "feature_type": "Double"
+                        },
+                        {
+                            "skip": false,
+                            "id": "batch110062_gf_bianjieceshi_biaozhun_sag_f5.pmin_red",
+                            "data_type": "ContinueNum",
+                            "feature_type": "Double"
+                        },
+                        {
+                            "skip": false,
+                            "id": "batch110062_gf_bianjieceshi_biaozhun_sag_f5.pmax_red",
+                            "data_type": "ContinueNum",
+                            "feature_type": "Double"
+                        },
+                        {
+                            "skip": false,
+                            "id": "batch110062_gf_bianjieceshi_biaozhun_sag_f5.pred_unit",
+                            "data_type": "ContinueNum",
+                            "feature_type": "Double"
+                        },
+                        {
+                            "skip": false,
+                            "id": "batch110062_gf_bianjieceshi_biaozhun_sag_f5.pmin_conv_vol",
+                            "data_type": "ContinueNum",
+                            "feature_type": "Double"
+                        },
+                        {
+                            "skip": false,
+                            "id": "batch110062_gf_bianjieceshi_biaozhun_sag_f5.pmin_red_vol",
+                            "data_type": "ContinueNum",
+                            "feature_type": "Double"
+                        },
+                        {
+                            "skip": false,
+                            "id": "batch110062_gf_bianjieceshi_biaozhun_sag_f5.pmax_amt",
+                            "data_type": "ContinueNum",
+                            "feature_type": "Double"
+                        },
+                        {
+                            "skip": false,
+                            "id": "batch110062_gf_bianjieceshi_biaozhun_sag_f5.pmax_accu_amt",
+                            "data_type": "ContinueNum",
+                            "feature_type": "Double"
+                        },
+                        {
+                            "skip": false,
+                            "id": "batch110062_gf_bianjieceshi_biaozhun_sag_f5.ofirst_amt",
+                            "data_type": "ContinueNum",
+                            "feature_type": "Double"
+                        },
+                        {
+                            "skip": false,
+                            "id": "batch110062_gf_bianjieceshi_biaozhun_sag_f5.oapp_amt",
+                            "data_type": "ContinueNum",
+                            "feature_type": "Double"
+                        },
+                        {
+                            "skip": false,
+                            "id": "batch110062_gf_bianjieceshi_biaozhun_sag_f5.omin_invest_amt",
+                            "data_type": "ContinueNum",
+                            "feature_type": "Double"
+                        },
+                        {
+                            "skip": false,
+                            "id": "batch110062_gf_bianjieceshi_biaozhun_sag_f5.omin_hold",
+                            "data_type": "ContinueNum",
+                            "feature_type": "Double"
+                        },
+                        {
+                            "skip": false,
+                            "id": "batch110062_gf_bianjieceshi_biaozhun_sag_f5.omin_red",
+                            "data_type": "ContinueNum",
+                            "feature_type": "Double"
+                        },
+                        {
+                            "skip": false,
+                            "id": "batch110062_gf_bianjieceshi_biaozhun_sag_f5.omax_red",
+                            "data_type": "ContinueNum",
+                            "feature_type": "Double"
+                        },
+                        {
+                            "skip": false,
+                            "id": "batch110062_gf_bianjieceshi_biaozhun_sag_f5.ored_unit",
+                            "data_type": "ContinueNum",
+                            "feature_type": "Double"
+                        },
+                        {
+                            "skip": false,
+                            "id": "batch110062_gf_bianjieceshi_biaozhun_sag_f5.omin_conv_vol",
+                            "data_type": "ContinueNum",
+                            "feature_type": "Double"
+                        },
+                        {
+                            "skip": false,
+                            "id": "batch110062_gf_bianjieceshi_biaozhun_sag_f5.omin_red_vol",
+                            "data_type": "ContinueNum",
+                            "feature_type": "Double"
+                        },
+                        {
+                            "skip": false,
+                            "id": "batch110062_gf_bianjieceshi_biaozhun_sag_f5.omax_amt",
+                            "data_type": "ContinueNum",
+                            "feature_type": "Double"
+                        },
+                        {
+                            "skip": false,
+                            "id": "batch110062_gf_bianjieceshi_biaozhun_sag_f5.omax_accu_amt",
+                            "data_type": "ContinueNum",
+                            "feature_type": "Double"
+                        },
+                        {
+                            "skip": false,
+                            "id": "batch110062_gf_bianjieceshi_biaozhun_sag_f5.large_buy_rate",
+                            "data_type": "ContinueNum",
+                            "feature_type": "Double"
+                        },
+                        {
+                            "skip": false,
+                            "id": "batch110062_gf_bianjieceshi_biaozhun_sag_f5.large_red_rate",
+                            "data_type": "ContinueNum",
+                            "feature_type": "Double"
+                        },
+                        {
+                            "skip": false,
+                            "id": "batch110062_gf_bianjieceshi_biaozhun_sag_f5.real_red_amt_rate",
+                            "data_type": "ContinueNum",
+                            "feature_type": "Double"
+                        },
+                        {
+                            "skip": false,
+                            "id": "batch110062_gf_bianjieceshi_biaozhun_sag_f5.real_red_vol_rate",
+                            "data_type": "ContinueNum",
+                            "feature_type": "Double"
+                        },
+                        {
+                            "skip": false,
+                            "id": "batch110062_gf_bianjieceshi_biaozhun_sag_f5.real_red_max_vol",
+                            "data_type": "ContinueNum",
+                            "feature_type": "Double"
+                        },
+                        {
+                            "skip": false,
+                            "id": "batch110062_gf_bianjieceshi_biaozhun_sag_f5.red_fare_rate",
+                            "data_type": "ContinueNum",
+                            "feature_type": "Double"
+                        },
+                        {
+                            "skip": false,
+                            "id": "batch110062_gf_bianjieceshi_biaozhun_sag_f5.conv_fare_rate",
+                            "data_type": "ContinueNum",
+                            "feature_type": "Double"
+                        },
+                        {
+                            "skip": false,
+                            "id": "batch110062_gf_bianjieceshi_biaozhun_sag_f5.manage_rate",
+                            "data_type": "ContinueNum",
+                            "feature_type": "Double"
+                        },
+                        {
+                            "skip": false,
+                            "id": "batch110062_gf_bianjieceshi_biaozhun_sag_f5.total_bonus",
+                            "data_type": "ContinueNum",
+                            "feature_type": "Double"
+                        },
+                        {
+                            "skip": false,
+                            "id": "batch110062_gf_bianjieceshi_biaozhun_sag_f5.corpus_rate",
+                            "data_type": "ContinueNum",
+                            "feature_type": "Double"
+                        },
+                        {
+                            "skip": false,
+                            "id": "batch110062_gf_bianjieceshi_biaozhun_sag_f5.amt1",
+                            "data_type": "ContinueNum",
+                            "feature_type": "Double"
+                        },
+                        {
+                            "skip": false,
+                            "id": "batch110062_gf_bianjieceshi_biaozhun_sag_f5.amt2",
+                            "data_type": "ContinueNum",
+                            "feature_type": "Double"
+                        },
+                        {
+                            "skip": false,
+                            "id": "batch110062_gf_bianjieceshi_biaozhun_sag_f5.amt3",
+                            "data_type": "ContinueNum",
+                            "feature_type": "Double"
+                        }
+                    ]
+                },
+                "batch110063_gf_bianjieceshi_biaozhun_cust_f4": {
+                    "entity_name": "batch110063_gf_bianjieceshi_biaozhun_cust_f4",
+                    "features": [
+                        {
+                            "skip": false,
+                            "id": "batch110063_gf_bianjieceshi_biaozhun_cust_f4.CUST_NUM",
+                            "data_type": "SingleString",
+                            "feature_type": "String"
+                        },
+                        {
+                            "skip": false,
+                            "id": "batch110063_gf_bianjieceshi_biaozhun_cust_f4.ingestionTime",
+                            "data_type": "Timestamp",
+                            "feature_type": "Timestamp"
+                        },
+                        {
+                            "skip": false,
+                            "id": "batch110063_gf_bianjieceshi_biaozhun_cust_f4.AGE",
+                            "data_type": "ContinueNum",
+                            "feature_type": "Int"
+                        },
+                        {
+                            "skip": false,
+                            "id": "batch110063_gf_bianjieceshi_biaozhun_cust_f4.SEX1",
+                            "data_type": "SingleString",
+                            "feature_type": "String"
+                        },
+                        {
+                            "skip": false,
+                            "id": "batch110063_gf_bianjieceshi_biaozhun_cust_f4.PROFESSION",
+                            "data_type": "SingleString",
+                            "feature_type": "String"
+                        },
+                        {
+                            "skip": false,
+                            "id": "batch110063_gf_bianjieceshi_biaozhun_cust_f4.EDW_EDU_DEGREE",
+                            "data_type": "SingleString",
+                            "feature_type": "String"
+                        },
+                        {
+                            "skip": false,
+                            "id": "batch110063_gf_bianjieceshi_biaozhun_cust_f4.marry",
+                            "data_type": "SingleString",
+                            "feature_type": "String"
+                        },
+                        {
+                            "skip": false,
+                            "id": "batch110063_gf_bianjieceshi_biaozhun_cust_f4.EDW_CTY_CD_FOREIGN_SIGN_IND",
+                            "data_type": "SingleString",
+                            "feature_type": "String"
+                        },
+                        {
+                            "skip": false,
+                            "id": "batch110063_gf_bianjieceshi_biaozhun_cust_f4.CREDIT_RISK_LEVEL",
+                            "data_type": "SingleString",
+                            "feature_type": "String"
+                        },
+                        {
+                            "skip": false,
+                            "id": "batch110063_gf_bianjieceshi_biaozhun_cust_f4.CERT_NUM",
+                            "data_type": "SingleString",
+                            "feature_type": "String"
+                        }
+                    ]
+                },
+                "batch110064_gf_bianjieceshi_biaozhun_open_f3": {
+                    "entity_name": "batch110064_gf_bianjieceshi_biaozhun_open_f3",
+                    "features": [
+                        {
+                            "skip": false,
+                            "id": "batch110064_gf_bianjieceshi_biaozhun_open_f3.CUST_NUM",
+                            "data_type": "SingleString",
+                            "feature_type": "String"
+                        },
+                        {
+                            "skip": false,
+                            "id": "batch110064_gf_bianjieceshi_biaozhun_open_f3.ingestionTime",
+                            "data_type": "Timestamp",
+                            "feature_type": "Timestamp"
+                        },
+                        {
+                            "skip": false,
+                            "id": "batch110064_gf_bianjieceshi_biaozhun_open_f3.RAISE_INT_WIN_IND",
+                            "data_type": "SingleString",
+                            "feature_type": "String"
+                        },
+                        {
+                            "skip": false,
+                            "id": "batch110064_gf_bianjieceshi_biaozhun_open_f3.DAILY_INT_IND",
+                            "data_type": "SingleString",
+                            "feature_type": "String"
+                        },
+                        {
+                            "skip": false,
+                            "id": "batch110064_gf_bianjieceshi_biaozhun_open_f3.WIN_HOLIDAY_IND",
+                            "data_type": "SingleString",
+                            "feature_type": "String"
+                        },
+                        {
+                            "skip": false,
+                            "id": "batch110064_gf_bianjieceshi_biaozhun_open_f3.SST_IND",
+                            "data_type": "SingleString",
+                            "feature_type": "String"
+                        },
+                        {
+                            "skip": false,
+                            "id": "batch110064_gf_bianjieceshi_biaozhun_open_f3.CYT_IND",
+                            "data_type": "SingleString",
+                            "feature_type": "String"
+                        },
+                        {
+                            "skip": false,
+                            "id": "batch110064_gf_bianjieceshi_biaozhun_open_f3.TBOND_IND",
+                            "data_type": "SingleString",
+                            "feature_type": "String"
+                        },
+                        {
+                            "skip": false,
+                            "id": "batch110064_gf_bianjieceshi_biaozhun_open_f3.FUND_IND",
+                            "data_type": "SingleString",
+                            "feature_type": "String"
+                        },
+                        {
+                            "skip": false,
+                            "id": "batch110064_gf_bianjieceshi_biaozhun_open_f3.FUND_FIX_IND",
+                            "data_type": "SingleString",
+                            "feature_type": "String"
+                        },
+                        {
+                            "skip": false,
+                            "id": "batch110064_gf_bianjieceshi_biaozhun_open_f3.BROKER_CHREM_IND",
+                            "data_type": "SingleString",
+                            "feature_type": "String"
+                        },
+                        {
+                            "skip": false,
+                            "id": "batch110064_gf_bianjieceshi_biaozhun_open_f3.TRUST_PLAN_IND",
+                            "data_type": "SingleString",
+                            "feature_type": "String"
+                        },
+                        {
+                            "skip": false,
+                            "id": "batch110064_gf_bianjieceshi_biaozhun_open_f3.INSURE_IND",
+                            "data_type": "SingleString",
+                            "feature_type": "String"
+                        },
+                        {
+                            "skip": false,
+                            "id": "batch110064_gf_bianjieceshi_biaozhun_open_f3.GFJ_IND",
+                            "data_type": "SingleString",
+                            "feature_type": "String"
+                        },
+                        {
+                            "skip": false,
+                            "id": "batch110064_gf_bianjieceshi_biaozhun_open_f3.GOLD_FIX_IND",
+                            "data_type": "SingleString",
+                            "feature_type": "String"
+                        },
+                        {
+                            "skip": false,
+                            "id": "batch110064_gf_bianjieceshi_biaozhun_open_f3.SAVING_IND",
+                            "data_type": "SingleString",
+                            "feature_type": "String"
+                        },
+                        {
+                            "skip": false,
+                            "id": "batch110064_gf_bianjieceshi_biaozhun_open_f3.TIME_SAVING_IND",
+                            "data_type": "SingleString",
+                            "feature_type": "String"
+                        },
+                        {
+                            "skip": false,
+                            "id": "batch110064_gf_bianjieceshi_biaozhun_open_f3.CRDT_CARD_IND",
+                            "data_type": "SingleString",
+                            "feature_type": "String"
+                        },
+                        {
+                            "skip": false,
+                            "id": "batch110064_gf_bianjieceshi_biaozhun_open_f3.SECU_CARD_IND",
+                            "data_type": "SingleString",
+                            "feature_type": "String"
+                        },
+                        {
+                            "skip": false,
+                            "id": "batch110064_gf_bianjieceshi_biaozhun_open_f3.AGENT_TRUST_IND",
+                            "data_type": "SingleString",
+                            "feature_type": "String"
+                        },
+                        {
+                            "skip": false,
+                            "id": "batch110064_gf_bianjieceshi_biaozhun_open_f3.CO_SIGN_ACCT_IND",
+                            "data_type": "SingleString",
+                            "feature_type": "String"
+                        },
+                        {
+                            "skip": false,
+                            "id": "batch110064_gf_bianjieceshi_biaozhun_open_f3.M3_ACTIVE_IND",
+                            "data_type": "SingleString",
+                            "feature_type": "String"
+                        },
+                        {
+                            "skip": false,
+                            "id": "batch110064_gf_bianjieceshi_biaozhun_open_f3.M6_ACTIVE_IND",
+                            "data_type": "SingleString",
+                            "feature_type": "String"
+                        },
+                        {
+                            "skip": false,
+                            "id": "batch110064_gf_bianjieceshi_biaozhun_open_f3.M3_SILENT_IND",
+                            "data_type": "SingleString",
+                            "feature_type": "String"
+                        },
+                        {
+                            "skip": false,
+                            "id": "batch110064_gf_bianjieceshi_biaozhun_open_f3.M6_SILENT_IND",
+                            "data_type": "SingleString",
+                            "feature_type": "String"
+                        },
+                        {
+                            "skip": false,
+                            "id": "batch110064_gf_bianjieceshi_biaozhun_open_f3.SLEEP_IND",
+                            "data_type": "SingleString",
+                            "feature_type": "String"
+                        },
+                        {
+                            "skip": false,
+                            "id": "batch110064_gf_bianjieceshi_biaozhun_open_f3.EFGZ_IND",
+                            "data_type": "SingleString",
+                            "feature_type": "String"
+                        },
+                        {
+                            "skip": false,
+                            "id": "batch110064_gf_bianjieceshi_biaozhun_open_f3.IBANK_IND",
+                            "data_type": "SingleString",
+                            "feature_type": "String"
+                        },
+                        {
+                            "skip": false,
+                            "id": "batch110064_gf_bianjieceshi_biaozhun_open_f3.CERT_IBANK_IND",
+                            "data_type": "SingleString",
+                            "feature_type": "String"
+                        },
+                        {
+                            "skip": false,
+                            "id": "batch110064_gf_bianjieceshi_biaozhun_open_f3.MOBILE_BANK_IND",
+                            "data_type": "SingleString",
+                            "feature_type": "String"
+                        },
+                        {
+                            "skip": false,
+                            "id": "batch110064_gf_bianjieceshi_biaozhun_open_f3.TRDPTY_KEEP_IND",
+                            "data_type": "SingleString",
+                            "feature_type": "String"
+                        },
+                        {
+                            "skip": false,
+                            "id": "batch110064_gf_bianjieceshi_biaozhun_open_f3.TEL_BANK_IND",
+                            "data_type": "SingleString",
+                            "feature_type": "String"
+                        },
+                        {
+                            "skip": false,
+                            "id": "batch110064_gf_bianjieceshi_biaozhun_open_f3.INDV_LOAD_IND",
+                            "data_type": "SingleString",
+                            "feature_type": "String"
+                        },
+                        {
+                            "skip": false,
+                            "id": "batch110064_gf_bianjieceshi_biaozhun_open_f3.BUSINESS_LOAN_IND",
+                            "data_type": "SingleString",
+                            "feature_type": "String"
+                        },
+                        {
+                            "skip": false,
+                            "id": "batch110064_gf_bianjieceshi_biaozhun_open_f3.CONSUME_LOAN_IND",
+                            "data_type": "SingleString",
+                            "feature_type": "String"
+                        },
+                        {
+                            "skip": false,
+                            "id": "batch110064_gf_bianjieceshi_biaozhun_open_f3.FUND_SIGN_IND",
+                            "data_type": "SingleString",
+                            "feature_type": "String"
+                        },
+                        {
+                            "skip": false,
+                            "id": "batch110064_gf_bianjieceshi_biaozhun_open_f3.BIZMAN_CARD_IND",
+                            "data_type": "SingleString",
+                            "feature_type": "String"
+                        },
+                        {
+                            "skip": false,
+                            "id": "batch110064_gf_bianjieceshi_biaozhun_open_f3.FLEXI_INT_IND",
+                            "data_type": "SingleString",
+                            "feature_type": "String"
+                        },
+                        {
+                            "skip": false,
+                            "id": "batch110064_gf_bianjieceshi_biaozhun_open_f3.PMBY_RRY_IND",
+                            "data_type": "SingleString",
+                            "feature_type": "String"
+                        },
+                        {
+                            "skip": false,
+                            "id": "batch110064_gf_bianjieceshi_biaozhun_open_f3.SMART_AMT_ACCT_IND",
+                            "data_type": "SingleString",
+                            "feature_type": "String"
+                        },
+                        {
+                            "skip": false,
+                            "id": "batch110064_gf_bianjieceshi_biaozhun_open_f3.GF_SALARY_MG_IND",
+                            "data_type": "SingleString",
+                            "feature_type": "String"
+                        },
+                        {
+                            "skip": false,
+                            "id": "batch110064_gf_bianjieceshi_biaozhun_open_f3.ZXK_CUST_IND",
+                            "data_type": "SingleString",
+                            "feature_type": "String"
+                        },
+                        {
+                            "skip": false,
+                            "id": "batch110064_gf_bianjieceshi_biaozhun_open_f3.CLOSE_IND",
+                            "data_type": "SingleString",
+                            "feature_type": "String"
+                        },
+                        {
+                            "skip": false,
+                            "id": "batch110064_gf_bianjieceshi_biaozhun_open_f3.WX_BANK_CUST_IND",
+                            "data_type": "SingleString",
+                            "feature_type": "String"
+                        },
+                        {
+                            "skip": false,
+                            "id": "batch110064_gf_bianjieceshi_biaozhun_open_f3.SUPRE_REC_ACCT_IND",
+                            "data_type": "SingleString",
+                            "feature_type": "String"
+                        },
+                        {
+                            "skip": false,
+                            "id": "batch110064_gf_bianjieceshi_biaozhun_open_f3.TIME_CURR_ZNT_IND",
+                            "data_type": "SingleString",
+                            "feature_type": "String"
+                        },
+                        {
+                            "skip": false,
+                            "id": "batch110064_gf_bianjieceshi_biaozhun_open_f3.POS_DIR_ONLINE_IND",
+                            "data_type": "SingleString",
+                            "feature_type": "String"
+                        },
+                        {
+                            "skip": false,
+                            "id": "batch110064_gf_bianjieceshi_biaozhun_open_f3.POS_INDIR_ONLINE_IND",
+                            "data_type": "SingleString",
+                            "feature_type": "String"
+                        },
+                        {
+                            "skip": false,
+                            "id": "batch110064_gf_bianjieceshi_biaozhun_open_f3.flag1",
+                            "data_type": "SingleString",
+                            "feature_type": "String"
+                        },
+                        {
+                            "skip": false,
+                            "id": "batch110064_gf_bianjieceshi_biaozhun_open_f3.flag2",
+                            "data_type": "SingleString",
+                            "feature_type": "String"
+                        }
+                    ]
+                },
+                "batch110174_flatten_request": {
+                    "entity_name": "batch110174_flatten_request",
+                    "features": [
+                        {
+                            "skip": false,
+                            "id": "batch110174_flatten_request.reqId",
+                            "data_type": "SingleString",
+                            "feature_type": "String"
+                        },
+                        {
+                            "skip": false,
+                            "id": "batch110174_flatten_request.eventTime",
+                            "data_type": "Timestamp",
+                            "feature_type": "Timestamp"
+                        },
+                        {
+                            "skip": false,
+                            "id": "batch110174_flatten_request.CUST_NUM",
+                            "data_type": "SingleString",
+                            "feature_type": "String"
+                        },
+                        {
+                            "skip": false,
+                            "id": "batch110174_flatten_request.PRD_CODE",
+                            "data_type": "SingleString",
+                            "feature_type": "String"
+                        }
+                    ]
+                },
+                "batch110066_gf_bianjieceshi_biaozhun_debit_f1": {
+                    "entity_name": "batch110066_gf_bianjieceshi_biaozhun_debit_f1",
+                    "features": [
+                        {
+                            "skip": false,
+                            "id": "batch110066_gf_bianjieceshi_biaozhun_debit_f1.CUST_NUM",
+                            "data_type": "SingleString",
+                            "feature_type": "String"
+                        },
+                        {
+                            "skip": false,
+                            "id": "batch110066_gf_bianjieceshi_biaozhun_debit_f1.ingestionTime",
+                            "data_type": "Timestamp",
+                            "feature_type": "Timestamp"
+                        },
+                        {
+                            "skip": false,
+                            "id": "batch110066_gf_bianjieceshi_biaozhun_debit_f1.AGT_NUM",
+                            "data_type": "SingleString",
+                            "feature_type": "String"
+                        },
+                        {
+                            "skip": false,
+                            "id": "batch110066_gf_bianjieceshi_biaozhun_debit_f1.AGT_MODIF_NUM",
+                            "data_type": "SingleString",
+                            "feature_type": "String"
+                        },
+                        {
+                            "skip": false,
+                            "id": "batch110066_gf_bianjieceshi_biaozhun_debit_f1.PROD_ID",
+                            "data_type": "SingleString",
+                            "feature_type": "String"
+                        },
+                        {
+                            "skip": false,
+                            "id": "batch110066_gf_bianjieceshi_biaozhun_debit_f1.CRSPD_ACCT_NUM",
+                            "data_type": "SingleString",
+                            "feature_type": "String"
+                        },
+                        {
+                            "skip": false,
+                            "id": "batch110066_gf_bianjieceshi_biaozhun_debit_f1.ACCT_ORG_NUM",
+                            "data_type": "SingleString",
+                            "feature_type": "String"
+                        },
+                        {
+                            "skip": false,
+                            "id": "batch110066_gf_bianjieceshi_biaozhun_debit_f1.ACCT_ORG_BELONG_ZONE_CD",
+                            "data_type": "SingleString",
+                            "feature_type": "String"
+                        },
+                        {
+                            "skip": false,
+                            "id": "batch110066_gf_bianjieceshi_biaozhun_debit_f1.CARD_TYPE_CD",
+                            "data_type": "SingleString",
+                            "feature_type": "String"
+                        },
+                        {
+                            "skip": false,
+                            "id": "batch110066_gf_bianjieceshi_biaozhun_debit_f1.CARD_CATE_CD",
+                            "data_type": "SingleString",
+                            "feature_type": "String"
+                        },
+                        {
+                            "skip": false,
+                            "id": "batch110066_gf_bianjieceshi_biaozhun_debit_f1.PRI_CARD_TYPE_D",
+                            "data_type": "SingleString",
+                            "feature_type": "String"
+                        },
+                        {
+                            "skip": false,
+                            "id": "batch110066_gf_bianjieceshi_biaozhun_debit_f1.SCD_CARD_TYPE_CD",
+                            "data_type": "SingleString",
+                            "feature_type": "String"
+                        },
+                        {
+                            "skip": false,
+                            "id": "batch110066_gf_bianjieceshi_biaozhun_debit_f1.CARD_STATUS_CD",
+                            "data_type": "SingleString",
+                            "feature_type": "String"
+                        },
+                        {
+                            "skip": false,
+                            "id": "batch110066_gf_bianjieceshi_biaozhun_debit_f1.OPEN_CARD_DT",
+                            "data_type": "Timestamp",
+                            "feature_type": "Timestamp"
+                        },
+                        {
+                            "skip": false,
+                            "id": "batch110066_gf_bianjieceshi_biaozhun_debit_f1.CLOSE_CARD_DT",
+                            "data_type": "Timestamp",
+                            "feature_type": "Timestamp"
+                        },
+                        {
+                            "skip": false,
+                            "id": "batch110066_gf_bianjieceshi_biaozhun_debit_f1.REPL_ARD_DT",
+                            "data_type": "Timestamp",
+                            "feature_type": "Timestamp"
+                        },
+                        {
+                            "skip": false,
+                            "id": "batch110066_gf_bianjieceshi_biaozhun_debit_f1.CO_SIGN_IND",
+                            "data_type": "SingleString",
+                            "feature_type": "String"
+                        },
+                        {
+                            "skip": false,
+                            "id": "batch110066_gf_bianjieceshi_biaozhun_debit_f1.MAIN_CARD_IND",
+                            "data_type": "SingleString",
+                            "feature_type": "String"
+                        },
+                        {
+                            "skip": false,
+                            "id": "batch110066_gf_bianjieceshi_biaozhun_debit_f1.REPL_NEW_CARD_IND",
+                            "data_type": "SingleString",
+                            "feature_type": "String"
+                        },
+                        {
+                            "skip": false,
+                            "id": "batch110066_gf_bianjieceshi_biaozhun_debit_f1.REPL_OLD_CARD_IND",
+                            "data_type": "SingleString",
+                            "feature_type": "String"
+                        },
+                        {
+                            "skip": false,
+                            "id": "batch110066_gf_bianjieceshi_biaozhun_debit_f1.MONTH3_ACTIVE_CARD_IND",
+                            "data_type": "SingleString",
+                            "feature_type": "String"
+                        },
+                        {
+                            "skip": false,
+                            "id": "batch110066_gf_bianjieceshi_biaozhun_debit_f1.ATM_MONTH3_ACTIVE_CARD_IND",
+                            "data_type": "SingleString",
+                            "feature_type": "String"
+                        },
+                        {
+                            "skip": false,
+                            "id": "batch110066_gf_bianjieceshi_biaozhun_debit_f1.POS_MONTH3_ACTIVE_CARD_IND",
+                            "data_type": "SingleString",
+                            "feature_type": "String"
+                        },
+                        {
+                            "skip": false,
+                            "id": "batch110066_gf_bianjieceshi_biaozhun_debit_f1.MONTH6_ACTIVE_CARD_IND",
+                            "data_type": "SingleString",
+                            "feature_type": "String"
+                        },
+                        {
+                            "skip": false,
+                            "id": "batch110066_gf_bianjieceshi_biaozhun_debit_f1.ATM_MONTH6_ACTIVE_CARD_IND",
+                            "data_type": "SingleString",
+                            "feature_type": "String"
+                        },
+                        {
+                            "skip": false,
+                            "id": "batch110066_gf_bianjieceshi_biaozhun_debit_f1.POS_MONTH6_ACTIVE_CARD_IND",
+                            "data_type": "SingleString",
+                            "feature_type": "String"
+                        },
+                        {
+                            "skip": false,
+                            "id": "batch110066_gf_bianjieceshi_biaozhun_debit_f1.SLEEP_CARD_IND",
+                            "data_type": "SingleString",
+                            "feature_type": "String"
+                        },
+                        {
+                            "skip": false,
+                            "id": "batch110066_gf_bianjieceshi_biaozhun_debit_f1.CO_ACCT_IND",
+                            "data_type": "SingleString",
+                            "feature_type": "String"
+                        },
+                        {
+                            "skip": false,
+                            "id": "batch110066_gf_bianjieceshi_biaozhun_debit_f1.CURR_ACCT_BAL",
+                            "data_type": "ContinueNum",
+                            "feature_type": "Double"
+                        },
+                        {
+                            "skip": false,
+                            "id": "batch110066_gf_bianjieceshi_biaozhun_debit_f1.TIME_ACCT_BAL",
+                            "data_type": "ContinueNum",
+                            "feature_type": "Double"
+                        },
+                        {
+                            "skip": false,
+                            "id": "batch110066_gf_bianjieceshi_biaozhun_debit_f1.DATA_BELONG_ORG",
+                            "data_type": "SingleString",
+                            "feature_type": "String"
+                        },
+                        {
+                            "skip": false,
+                            "id": "batch110066_gf_bianjieceshi_biaozhun_debit_f1.ACTV_DT",
+                            "data_type": "Timestamp",
+                            "feature_type": "Timestamp"
+                        },
+                        {
+                            "skip": false,
+                            "id": "batch110066_gf_bianjieceshi_biaozhun_debit_f1.SRC_ACCT_ORG_NUM",
+                            "data_type": "SingleString",
+                            "feature_type": "String"
+                        }
+                    ]
+                }
+            }
+        }
+    }
+}

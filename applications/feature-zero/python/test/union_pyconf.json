@@ -1,0 +1,379 @@
+{
+    "app": {
+        "input_path": [
+            {
+                "name": "batch100016_flatten_request",
+                "uri": [
+                    "hdfs://wcc-hc-node16.leap.com:8020/user/prophet_10.100.121.17_4.1.0/cyc100908_explore_74_1639726200745/790/Sampling-behaviour/stages/10001647/0/result/SLOT_0-PySpark/*.parquet"
+                ],
+                "data_type": "parquet",
+                "block_size": 100,
+                "is_use_global_shuffle": false,
+                "index": "$index"
+            },
+            {
+                "name": "batch100019_action",
+                "uri": [
+                    "hdfs://wcc-hc-node16.leap.com:8020/user/prophet_10.100.121.17_4.1.0/cyc100908_explore_74_1639726200745/790/FilterData-batch100019_action/stages/10001650/0/result/data/*.parquet"
+                ],
+                "data_type": "parquet",
+                "block_size": 100,
+                "is_use_global_shuffle": false,
+                "index": "$index"
+            },
+            {
+                "name": "batch100018_impression",
+                "uri": [
+                    "hdfs://wcc-hc-node16.leap.com:8020/user/prophet_10.100.121.17_4.1.0/cyc100908_explore_74_1639726200745/790/FilterData-batch100018_impression/stages/10001651/0/result/data/*.parquet"
+                ],
+                "data_type": "parquet",
+                "block_size": 100,
+                "is_use_global_shuffle": false,
+                "index": "$index"
+            }
+        ],
+        "cache_uri": "mem://.?format=mem&block_size=4",
+        "model_output_path": "hdfs:///user/prophet_10.100.121.17_4.1.0/cyc100908_explore_74_1639726200745/4988/FeatureZero/stages/10002300/0/result",
+        "training_pass_num": 3,
+        "debug_level": 0,
+        "feature_info": {
+            "target_entity": "batch100016_flatten_request",
+            "target_entity_index": "hypcId",
+            "target_label": "batch100019_action.label",
+            "target_pivot_timestamp": "eveTime",
+            "entity_detail": {
+                "batch100018_impression": {
+                    "features": [
+                        {
+                            "id": "batch100018_impression.rank",
+                            "data_type": "SingleString",
+                            "skip": false,
+                            "feature_type": "String"
+                        },
+                        {
+                            "id": "batch100018_impression.hypcId",
+                            "data_type": "SingleString",
+                            "skip": false,
+                            "feature_type": "String"
+                        },
+                        {
+                            "id": "batch100018_impression.eveTime",
+                            "data_type": "Timestamp",
+                            "skip": false,
+                            "feature_type": "Timestamp"
+                        },
+                        {
+                            "id": "batch100018_impression.ingTime",
+                            "data_type": "Timestamp",
+                            "skip": false,
+                            "feature_type": "Timestamp"
+                        }
+                    ],
+                    "entity_name": "batch100018_impression"
+                },
+                "batch100019_action": {
+                    "features": [
+                        {
+                            "id": "batch100019_action.rank",
+                            "data_type": "SingleString",
+                            "skip": false,
+                            "feature_type": "String"
+                        },
+                        {
+                            "id": "batch100019_action.hypcId",
+                            "data_type": "SingleString",
+                            "skip": false,
+                            "feature_type": "String"
+                        },
+                        {
+                            "id": "batch100019_action.eveTime",
+                            "data_type": "Timestamp",
+                            "skip": false,
+                            "feature_type": "Timestamp"
+                        },
+                        {
+                            "id": "batch100019_action.ingTime",
+                            "data_type": "Timestamp",
+                            "skip": false,
+                            "feature_type": "Timestamp"
+                        },
+                        {
+                            "id": "batch100019_action.label",
+                            "data_type": "ContinueNum",
+                            "skip": false,
+                            "feature_type": "Int"
+                        }
+                    ],
+                    "entity_name": "batch100019_action"
+                },
+                "batch100016_flatten_request": {
+                    "features": [
+                        {
+                            "id": "batch100016_flatten_request.rank",
+                            "data_type": "SingleString",
+                            "skip": false,
+                            "feature_type": "String"
+                        },
+                        {
+                            "id": "batch100016_flatten_request.mcuid",
+                            "data_type": "SingleString",
+                            "skip": false,
+                            "feature_type": "String"
+                        },
+                        {
+                            "id": "batch100016_flatten_request.ip",
+                            "data_type": "SingleString",
+                            "skip": false,
+                            "feature_type": "String"
+                        },
+                        {
+                            "id": "batch100016_flatten_request.browser",
+                            "data_type": "SingleString",
+                            "skip": false,
+                            "feature_type": "String"
+                        },
+                        {
+                            "id": "batch100016_flatten_request.browser_version",
+                            "data_type": "SingleString",
+                            "skip": false,
+                            "feature_type": "String"
+                        },
+                        {
+                            "id": "batch100016_flatten_request.platform",
+                            "data_type": "SingleString",
+                            "skip": false,
+                            "feature_type": "String"
+                        },
+                        {
+                            "id": "batch100016_flatten_request.query",
+                            "data_type": "SingleString",
+                            "skip": false,
+                            "feature_type": "String"
+                        },
+                        {
+                            "id": "batch100016_flatten_request.sort_rule",
+                            "data_type": "SingleString",
+                            "skip": false,
+                            "feature_type": "String"
+                        },
+                        {
+                            "id": "batch100016_flatten_request.itemId",
+                            "data_type": "ContinueNum",
+                            "skip": false,
+                            "feature_type": "Int"
+                        },
+                        {
+                            "id": "batch100016_flatten_request.hypcId",
+                            "data_type": "SingleString",
+                            "skip": false,
+                            "feature_type": "String"
+                        },
+                        {
+                            "id": "batch100016_flatten_request.eveTime",
+                            "data_type": "Timestamp",
+                            "skip": false,
+                            "feature_type": "Timestamp"
+                        },
+                        {
+                            "id": "batch100016_flatten_request._i_rank",
+                            "data_type": "SingleString",
+                            "skip": false,
+                            "feature_type": "String"
+                        }
+                    ],
+                    "entity_name": "batch100016_flatten_request"
+                }
+            },
+            "relations": [
+                {
+                    "type": "1-M",
+                    "time_windows": [
+                        "10:0",
+                        "112:0",
+                        "1d,100:0s",
+                        "32d,100:0s"
+                    ],
+                    "window_delay": "2s",
+                    "from_entity": "batch100016_flatten_request",
+                    "from_entity_keys": [
+                        "rank"
+                    ],
+                    "from_entity_time_col": "eveTime",
+                    "to_entity": "batch100018_impression",
+                    "to_entity_keys": [
+                        "rank"
+                    ],
+                    "to_entity_time_col": "eveTime"
+                },
+                {
+                    "type": "1-1",
+                    "time_windows": [
+                        "10:0",
+                        "100:0",
+                        "1d,1000:0s"
+                    ],
+                    "window_delay": null,
+                    "from_entity": "batch100016_flatten_request",
+                    "from_entity_keys": [
+                        "hypcId"
+                    ],
+                    "from_entity_time_col": "",
+                    "to_entity": "batch100019_action",
+                    "to_entity_keys": [
+                        "hypcId"
+                    ],
+                    "to_entity_time_col": ""
+                }
+            ],
+            "entity_names": [
+                "batch100016_flatten_request",
+                "batch100019_action",
+                "batch100018_impression"
+            ],
+            "target_label_code": "Label(batch100019_action.label)"
+        },
+        "feature_info_str": "{\"target_entity\":\"batch100016_flatten_request\",\"target_entity_index\":\"hypcId\",\"target_label\":\"batch100019_action.label\",\"target_pivot_timestamp\":\"eveTime\",\"entity_detail\":{\"batch100018_impression\":{\"features\":[{\"id\":\"batch100018_impression.rank\",\"data_type\":\"SingleString\",\"skip\":false,\"feature_type\":\"String\"},{\"id\":\"batch100018_impression.hypcId\",\"data_type\":\"SingleString\",\"skip\":false,\"feature_type\":\"String\"},{\"id\":\"batch100018_impression.eveTime\",\"data_type\":\"Timestamp\",\"skip\":false,\"feature_type\":\"Timestamp\"},{\"id\":\"batch100018_impression.ingTime\",\"data_type\":\"Timestamp\",\"skip\":false,\"feature_type\":\"Timestamp\"}],\"entity_name\":\"batch100018_impression\"},\"batch100019_action\":{\"features\":[{\"id\":\"batch100019_action.rank\",\"data_type\":\"SingleString\",\"skip\":false,\"feature_type\":\"String\"},{\"id\":\"batch100019_action.hypcId\",\"data_type\":\"SingleString\",\"skip\":false,\"feature_type\":\"String\"},{\"id\":\"batch100019_action.eveTime\",\"data_type\":\"Timestamp\",\"skip\":false,\"feature_type\":\"Timestamp\"},{\"id\":\"batch100019_action.ingTime\",\"data_type\":\"Timestamp\",\"skip\":false,\"feature_type\":\"Timestamp\"},{\"id\":\"batch100019_action.label\",\"data_type\":\"ContinueNum\",\"skip\":false,\"feature_type\":\"Int\"}],\"entity_name\":\"batch100019_action\"},\"batch100016_flatten_request\":{\"features\":[{\"id\":\"batch100016_flatten_request.rank\",\"data_type\":\"SingleString\",\"skip\":false,\"feature_type\":\"String\"},{\"id\":\"batch100016_flatten_request.mcuid\",\"data_type\":\"SingleString\",\"skip\":false,\"feature_type\":\"String\"},{\"id\":\"batch100016_flatten_request.ip\",\"data_type\":\"SingleString\",\"skip\":false,\"feature_type\":\"String\"},{\"id\":\"batch100016_flatten_request.browser\",\"data_type\":\"SingleString\",\"skip\":false,\"feature_type\":\"String\"},{\"id\":\"batch100016_flatten_request.browser_version\",\"data_type\":\"SingleString\",\"skip\":false,\"feature_type\":\"String\"},{\"id\":\"batch100016_flatten_request.platform\",\"data_type\":\"SingleString\",\"skip\":false,\"feature_type\":\"String\"},{\"id\":\"batch100016_flatten_request.query\",\"data_type\":\"SingleString\",\"skip\":false,\"feature_type\":\"String\"},{\"id\":\"batch100016_flatten_request.sort_rule\",\"data_type\":\"SingleString\",\"skip\":false,\"feature_type\":\"String\"},{\"id\":\"batch100016_flatten_request.itemId\",\"data_type\":\"ContinueNum\",\"skip\":false,\"feature_type\":\"Int\"},{\"id\":\"batch100016_flatten_request.hypcId\",\"data_type\":\"SingleString\",\"skip\":false,\"feature_type\":\"String\"},{\"id\":\"batch100016_flatten_request.eveTime\",\"data_type\":\"Timestamp\",\"skip\":false,\"feature_type\":\"Timestamp\"},{\"id\":\"batch100016_flatten_request._i_rank\",\"data_type\":\"SingleString\",\"skip\":false,\"feature_type\":\"String\"}],\"entity_name\":\"batch100016_flatten_request\"}},\"relations\":[{\"type\":\"1-M\",\"time_windows\":[\"10:0\",\"112:0\",\"1d,100:0s\",\"32d,100:0s\"],\"window_delay\":\"2s\",\"from_entity\":\"batch100016_flatten_request\",\"from_entity_keys\":[\"rank\"],\"from_entity_time_col\":\"eveTime\",\"to_entity\":\"batch100018_impression\",\"to_entity_keys\":[\"rank\"],\"to_entity_time_col\":\"eveTime\"},{\"type\":\"1-1\",\"time_windows\":[\"10:0\",\"100:0\",\"1d,1000:0s\"],\"window_delay\":null,\"from_entity\":\"batch100016_flatten_request\",\"from_entity_keys\":[\"hypcId\"],\"from_entity_time_col\":\"\",\"to_entity\":\"batch100019_action\",\"to_entity_keys\":[\"hypcId\"],\"to_entity_time_col\":\"\"}],\"entity_names\":[\"batch100016_flatten_request\",\"batch100019_action\",\"batch100018_impression\"],\"target_label_code\":\"Label(batch100019_action.label)\"}",
+        "lr": {
+            "table_key_type": "feature_bucket",
+            "training_mode": "sync",
+            "model_output_format": "archiveline",
+            "model_output_dir": "weights",
+            "mini_batch_size": 500,
+            "max_iter": 5,
+            "tol": 0.0001,
+            "loss_func": "sigmoid_logloss",
+            "fit_intercept": true,
+            "warm_start": false,
+            "label_cnt": 1,
+            "feature_creation_ratio": 1.0,
+            "beta": 0.0001,
+            "alpha": 0.05,
+            "penalty": "l1",
+            "C": 1.0,
+            "enable_show_adjust": false,
+            "enable_scale_free": false,
+            "link_function_for_label": "identity"
+        },
+        "lfc": {
+            "binning_bucket_list": "10 100",
+            "binning_diff_tolerance": 1e-08,
+            "binning_shrinkage": 0.0,
+            "inner_bin_value_type": "same"
+        },
+        "slotwise": {
+            "metric_method": "auc",
+            "model_output_dir": "",
+            "training_mode": "sync",
+            "mini_batch_size": 500,
+            "table_key_type": "feature_bucket",
+            "beta": 0.0001,
+            "alpha": 0.05,
+            "enable_show_adjust": false,
+            "enable_scale_free": false,
+            "penalty": "l1",
+            "C": 1.0,
+            "fit_intercept": false,
+            "max_iter": 5,
+            "link_function_for_label": "identity"
+        },
+        "n_job": 32,
+        "test_ratio_accuracy": 5000,
+        "test_ratio": 0.2,
+        "selected_op_num": [
+            2,
+            10
+        ],
+        "multi_table_select_ratio": 2,
+        "sample_rows": [
+            500000.0,
+            500000.0,
+            500000.0
+        ],
+        "hotkey_threshold_ratio": 1.0,
+        "enable_group_side_feature": false,
+        "enable_m_to_m_in_middle": false,
+        "task_type": "binary",
+        "temporal_side_sample_ratio": 1.0,
+        "disable_calculate": false,
+        "max_iter": 8,
+        "min_iter": 4,
+        "auto": {
+            "enable": false,
+            "window_limit": 100,
+            "window_candidates": [
+                36001,
+                172801,
+                432001,
+                604801,
+                1209601,
+                2764801,
+                5529601
+            ],
+            "default_window": [
+                "10:0"
+            ],
+            "window_delay": "0s",
+            "partition_target": []
+        },
+        "GroupByCatAll": {
+            "enable": true,
+            "gen_list": [
+                1500,
+                1000,
+                400
+            ],
+            "windows": [
+                [
+                    "10:0",
+                    "2d,100:0s"
+                ]
+            ]
+        },
+        "GroupByNumAll": {
+            "enable": true,
+            "gen_list": [
+                1500,
+                1000,
+                400
+            ],
+            "windows": [
+                [
+                    "10:0",
+                    "2d,100:0s"
+                ]
+            ]
+        },
+        "NumericAll": {
+            "enable": true,
+            "gen_list": [
+                100,
+                100,
+                100
+            ]
+        },
+        "CategoryDim2": {
+            "enable": true,
+            "gen_list": [
+                1000,
+                1000,
+                200
+            ]
+        },
+        "CategoryDim3": {
+            "enable": true,
+            "gen_list": [
+                100,
+                100,
+                100
+            ]
+        },
+        "TimeOpAll": {
+            "enable": true,
+            "gen_list": [
+                100,
+                100,
+                100
+            ]
+        }
+    }
+}

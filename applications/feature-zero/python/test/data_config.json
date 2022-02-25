@@ -1,0 +1,103 @@
+{
+    "app": {
+        "feature_info": {
+            "target_entity": "t1",
+            "target_entity_index": "reqId",
+            "target_label": "",
+            "entity_detail": {
+                "t1": {
+                    "features": [
+                        {
+                            "id": "t1.reqId",
+                            "data_type": "SingleString",
+                            "skip": false,
+                            "feature_type": "String"
+                        },
+                        {
+                            "id": "t1.eventTime",
+                            "data_type": "Timestamp",
+                            "skip": false,
+                            "feature_type": "Timestamp"
+                        },
+                        {
+                            "id": "t1.f_index",
+                            "data_type": "SingleString",
+                            "skip": true,
+                            "feature_type": "String"
+                        },
+                        {
+                            "id": "t1.f_0",
+                            "data_type": "SingleString",
+                            "skip": false,
+                            "feature_type": "String"
+                        },
+                        {
+                            "id": "t1.f_1",
+                            "data_type": "SingleString",
+                            "skip": false,
+                            "feature_type": "String"
+                        },
+                        {
+                            "id": "t1.f_2",
+                            "data_type": "SingleString",
+                            "skip": false,
+                            "feature_type": "String"
+                        },
+                        {
+                            "id": "t1.f_3",
+                            "data_type": "ContinueNum",
+                            "skip": false,
+                            "feature_type": "Double"
+                        },
+                        {
+                            "id": "t1.f_4",
+                            "data_type": "SingleString",
+                            "skip": false,
+                            "feature_type": "String"
+                        },
+                        {
+                            "id": "t1.f_5",
+                            "data_type": "ContinueNum",
+                            "skip": false,
+                            "feature_type": "Double"
+                        },
+                        {
+                            "id": "t1.f_6",
+                            "data_type": "ContinueNum",
+                            "skip": false,
+                            "feature_type": "Double"
+                        },
+                        {
+                            "id": "t1.f_7",
+                            "data_type": "ContinueNum",
+                            "skip": true,
+                            "feature_type": "Double"
+                        },
+                        {
+                            "id": "t1.f_8",
+                            "data_type": "SingleString",
+                            "skip": true,
+                            "feature_type": "String"
+                        },
+                        {
+                            "id": "t1.f_9",
+                            "data_type": "SingleString",
+                            "skip": false,
+                            "feature_type": "String"
+                        },
+                        {
+                            "id": "t1.f_10",
+                            "data_type": "SingleString",
+                            "skip": false,
+                            "feature_type": "String"
+                        }
+                    ]
+                    
+                }
+            },
+            "relations": [
+                
+            ]
+        }
+    }
+}

@@ -1,0 +1,79 @@
+config:
+  table_name: t1
+  column:
+  - name: c1
+    datatype: String
+  - name: c2
+    datatype: Timestamp
+  - name: c3
+    datatype: Double
+  index: c1
+desc: original op
+fz:
+- original(t1.c1)
+- combine(t1.c1,t1.c2,t1.c3)
+- combine(t1.c2,t1.c3)
+input:
+- 1, 2, 3
+- 11, 22, 33
+- 111, 222, 333
+expected:
+- 1
+- 11
+- 111
+sql: "\n\nselect\n    `c1` as c1_1,\n    `c1` as t1_c1_original_0,\n    `c1` as t1_c1_combine_1,\n\
+  \    `c2` as t1_c2_combine_1,\n    `c3` as t1_c3_combine_1,\n    `c2` as t1_c2_combine_2,\n\
+  \    `c3` as t1_c3_combine_2\nfrom\n    `t1`\n    ;"
+column: 'key_t1_c1_1 = window(table=t1, output="t1_output")
+
+  t1_outputkey_t1_c1 = output(key_t1_c1_1.c1[0])
+
+  f_original_c1_0 = column(key_t1_c1_1.c1[0])
+
+  f_combine_1_3 = column(key_t1_c1_1.c1[0])
+
+  f_combine_1_4 = column(key_t1_c1_1.c2[0])
+
+  f_combine_1_5 = column(key_t1_c1_1.c3[0])
+
+  f_combine_2_6 = column(key_t1_c1_1.c2[0])
+
+  f_combine_2_7 = column(key_t1_c1_1.c3[0])'
+
+config:
+  table_name: t1
+  column:
+  - name: c1
+    datatype: String
+  - name: c2
+    datatype: Timestamp
+  - name: c3
+    datatype: Double
+  index: c1
+desc: original op
+fz:
+- original(t1.c1)
+- combine(t1.c1,t1.c2,t1.c3)
+input:
+- 1, 2, 3
+- 11, 22, 33
+- 111, 222, 333
+expected:
+- 1
+- 11
+- 111
+sql: "\n\nselect\n    `c1` as c1_1,\n    `c1` as t1_c1_original_0,\n    `c1` as t1_c1_combine_1,\n\
+  \    `c2` as t1_c2_combine_1,\n    `c3` as t1_c3_combine_1\nfrom\n    `t1`\n   \
+  \ ;"
+column: 'key_t1_c1_1 = window(table=t1, output="t1_output")
+
+  t1_outputkey_t1_c1 = output(key_t1_c1_1.c1[0])
+
+  f_original_c1_0 = column(key_t1_c1_1.c1[0])
+
+  f_combine_1_3 = column(key_t1_c1_1.c1[0])
+
+  f_combine_1_4 = column(key_t1_c1_1.c2[0])
+
+  f_combine_1_5 = column(key_t1_c1_1.c3[0])'
+

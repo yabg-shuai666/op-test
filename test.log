@@ -1,0 +1,70 @@
+convert  1  ops to feql sign, result  2  line(if !=0, include 1 more lines)
+--------------------column column column column column column column column--------------------
+key_batch110174_flatten_request_reqId_1 = window(table=batch110174_flatten_request, output="batch110174_flatten_request_output")
+batch110174_flatten_request_outputkey_batch110174_flatten_request_reqId = output(key_batch110174_flatten_request_reqId_1.reqId[0])
+join_batch110174_flatten_request = select(batch110174_flatten_request, reqId as batch110174_flatten_request_reqId, eventTime as batch110174_flatten_request_eventTime, CUST_NUM as batch110174_flatten_request_CUST_NUM, PRD_CODE as batch110174_flatten_request_PRD_CODE)
+join_batch110177_action = select(batch110177_action, reqId as batch110177_action_reqId, eventTime as batch110177_action_eventTime, ingestionTime as batch110177_action_ingestionTime, actionValue as batch110177_action_actionValue)
+join_batch110174_flatten_request_join_batch110177_action_left = leftjoin(join_batch110174_flatten_request, join_batch110177_action, "join_batch110174_flatten_request.batch110174_flatten_request_reqId = join_batch110177_action.batch110177_action_reqId")
+join_batch110174_flatten_request_join_batch110177_action_left_window = window(join_batch110174_flatten_request_join_batch110177_action_left, "join_batch110174_flatten_request_join_batch110177_action_left_join_output")
+f_batch110174_flatten_request_batch110177_action_actionValue_direct_0 = column(join_batch110174_flatten_request_join_batch110177_action_left_window.batch110177_action_actionValue[0])
+leftjoinkey_batch110174_flatten_request_reqId = output(join_batch110174_flatten_request_join_batch110177_action_left_window.batch110174_flatten_request_reqId[0])
+join_batch110174_flatten_request_join_batch110177_action_left_join_output_batch110174_flatten_request_output = leftjoin(join_batch110174_flatten_request_join_batch110177_action_left_join_output, batch110174_flatten_request_output, "join_batch110174_flatten_request_join_batch110177_action_left_join_output.leftjoinkey_batch110174_flatten_request_reqId = batch110174_flatten_request_output.batch110174_flatten_request_outputkey_batch110174_flatten_request_reqId")
+--------------------column column column column column column column column--------------------
+--------------------sign sign sign sign sign sign sign sign sign sign --------------------
+w_feature_output = window(table=join_batch110174_flatten_request_join_batch110177_action_left_join_output_batch110174_flatten_request_output, output="w_output_feature_table")
+f_batch110174_flatten_request_batch110177_action_actionValue_direct_0_3 = discrete(w_feature_output.f_batch110174_flatten_request_batch110177_action_actionValue_direct_0[0])
+--------------------sign sign sign sign sign sign sign sign sign sign--------------------
+convert  1  ops to fesql sign, result  3  line(if !=0, include 2 more lines)
+--------------------sql sql sql sql sql sql sql sql--------------------
+# start sql code
+# output table name: sql_table
+
+select
+    `batch110174_flatten_request`.`reqId` as reqId_1,
+    `batch110177_action_reqId`.`actionValue` as batch110177_action_actionValue_multi_direct_0
+from
+    `batch110174_flatten_request`
+    last join `batch110177_action` as `batch110177_action_reqId` on `batch110174_flatten_request`.`reqId` = `batch110177_action_reqId`.`reqId`;
+--------------------sql sql sql sql sql sql sql sql--------------------
+--------------------fe fe fe fe fe fe fe fe fe fe fe --------------------
+# start fe code
+w_feature_output = window(table=sql_table, output="w_output_feature_table")
+discrete_batch110177_action_actionValue_multi_direct_0 = discrete(w_feature_output.batch110177_action_actionValue_multi_direct_0[0])
+--------------------fe fe fe fe fe fe fe fe fe fe fe --------------------
+HERE
+# start sql code
+# output table name: sql_table
+
+select
+    `batch110174_flatten_request`.`reqId` as reqId_1,
+    `batch110177_action_reqId`.`actionValue` as batch110177_action_actionValue_multi_direct_0
+from
+    `batch110174_flatten_request`
+    last join `batch110177_action` as `batch110177_action_reqId` on `batch110174_flatten_request`.`reqId` = `batch110177_action_reqId`.`reqId`; 
+
+ # start fe code
+w_feature_output = window(table=sql_table, output="w_output_feature_table")
+discrete_batch110177_action_actionValue_multi_direct_0 = discrete(w_feature_output.batch110177_action_actionValue_multi_direct_0[0])
+convert  0  ops to fesql sign, result  2  line(if !=0, include 2 more lines)
+--------------------sql sql sql sql sql sql sql sql--------------------
+;
+--------------------sql sql sql sql sql sql sql sql--------------------
+--------------------fe fe fe fe fe fe fe fe fe fe fe --------------------
+# start fe code
+w_feature_output = window(table=sql_table, output="w_output_feature_table")
+
+--------------------fe fe fe fe fe fe fe fe fe fe fe --------------------
+convert  0  ops to feql sign, result  0  line(if !=0, include 1 more lines)
+--------------------column column column column column column column column--------------------
+key_batch100016_flatten_request_hypcId_1 = window(table=batch100016_flatten_request, output="batch100016_flatten_request_output")
+batch100016_flatten_request_outputkey_batch100016_flatten_request_hypcId = output(key_batch100016_flatten_request_hypcId_1.hypcId[0])
+--------------------column column column column column column column column--------------------
+--------------------sign sign sign sign sign sign sign sign sign sign --------------------
+
+--------------------sign sign sign sign sign sign sign sign sign sign--------------------
+HERE
+; 
+
+ # start fe code
+w_feature_output = window(table=sql_table, output="w_output_feature_table")
+
