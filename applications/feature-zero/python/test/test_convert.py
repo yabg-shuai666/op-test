@@ -78,13 +78,13 @@ def feql(op_file, config_file, cfg_is_info=False, debug=False):
 
 
 class TestConvert(unittest.TestCase):
-    def test_window_union_new_key(self):
+    # def test_window_union_new_key(self):
         # union_selected_ops has ops like `dayofweek(multi_direct())`, convert(fesql convert use feql convert too) can't handle this, so remove it
-        sql, sign = fesql("union_selected_ops.bk", "union_pyconf.json")
-        feql("union_selected_ops.bk", "union_pyconf.json")
-        print("HERE")
-        print(sql, "\n\n", sign)
-        print("test_window_union_new_keytest_window_union_new_keytest_window_union_new_key")
+        # sql, sign = fesql("union_selected_ops.bk", "union_pyconf.json")
+        # feql("union_selected_ops.bk", "union_pyconf.json")
+        # print("HERE")
+        # print(sql, "\n\n", sign)
+        # print("test_window_union_new_keytest_window_union_new_keytest_window_union_new_key")
 
     # def test_split_key(self):
     #     fesql("split.ops", "split.json", cfg_is_info=True)
@@ -102,9 +102,9 @@ class TestConvert(unittest.TestCase):
     #     fesql("myhug_selected_ops.bk", "myhug_pyconf.json")
     #     feql("myhug_selected_ops.bk", "myhug_pyconf.json")
 
-    # def test_last_value(self):
-    #     feql("last_value_selected_ops.bk", "last_value_pyconf.json")
-    #     fesql("last_value_selected_ops.bk", "last_value_pyconf.json")
+    def test_last_value(self):
+        feql("last_value_selected_ops.bk", "last_value_pyconf.json")
+        fesql("last_value_selected_ops.bk", "last_value_pyconf.json")
 
     # def test_join_condition(self):
     #     feql("join_selected_ops_one.bk", "join_pyconf.json")

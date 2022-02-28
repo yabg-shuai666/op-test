@@ -7,10 +7,12 @@ config:
           datatype: Timestamp
         - name: c3
           datatype: Double
-     index: c1
+        - name: c4
+          datatype: String
+     index: c1  
 
    - table_name : t2
-     column :   #  列名、类型、主键为必须
+     column :   #  列名、类型、主键为必须，可以增加任意列
         - name: c1
           datatype: String
         - name: c2 
@@ -21,16 +23,14 @@ config:
 
 desc: original op
 fz:   
-    # - original(t1.c1)
-    # - combine(t1.c1,t1.c2,t1.c3)
+    - original(t1.c1)
+    - combine(t1.c1,t1.c2,t1.c3)
+    - combine(t1.c2,t1.c3,t1.c4)
     - multi_direct(t1,t2.c2)
+    - multi_last_value(t1,t2.c3,2147483645:0)
 input:
-  - 1, 2, 3
-  - 11, 22, 33
-  - 111, 222, 333
+ 
 expected:
-  - 1
-  - 11
-  - 111
+
 
 

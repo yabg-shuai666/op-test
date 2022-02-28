@@ -56,8 +56,11 @@ def conv(d):
     data['app']['feature_info'] = feature_info
 
     relations = [{'type':'1-1', 'time_windows': ['10:0','100:0','1d,1000:0s'],'window_delay':''
-        ,'from_entity':d['config'][0]['table_name'],'from_entity_keys':[''],'from_entity_time_col':'','to_entity':d['config'][1]['table_name'],
-        'to_entity_keys':[''],'to_entity_time_col':''}]
+        ,'from_entity':d['config'][0]['table_name'],'from_entity_keys':[d['config'][0]['index']],'from_entity_time_col':'','to_entity':d['config'][1]['table_name'],
+        'to_entity_keys':[d['config'][1]['index']],'to_entity_time_col':''},
+        {'type':'SLICE','to_entity':d['config'][1]['table_name'], 'from_entity':d['config'][0]['table_name'],'from_entity_keys':[d['config'][0]['index']],'to_entity_keys':[d['config'][1]['index']],
+        'from_entity_time_col':'','to_entity_time_col':'','time_windows':['2147483645:0']}
+        ]
     data['app']['feature_info']['relations'] = relations
     
     # relations = []
