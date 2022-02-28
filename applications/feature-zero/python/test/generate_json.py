@@ -19,7 +19,7 @@ def conv(d):
     app = {'feature_info': {}}
     data['app'] = app
     
-    feature_info = {'target_entity': d['config']['table_name'], 'target_entity_index': d['config']['index'], 'target_label': '' , 'entity_detail':{}, 'relations': []}
+    feature_info = {'target_entity': d['config'][0]['table_name'], 'target_entity_index': d['config'][0]['index'], 'target_label': '' , 'entity_detail':{}, 'relations': []}
     data['app']['feature_info'] = feature_info
     
     relations = []
@@ -34,11 +34,11 @@ def conv(d):
     lists = list()
     for x in d['config']['column']:
         if(x['datatype']=='String'):
-            dict = {'id': d['config']['table_name']+'.'+x['name'],'data_type':'SingleString','skip':'false', 'feature_type':x['datatype']}
+            dict = {'id': d['config'][0]['table_name']+'.'+x['name'],'data_type':'SingleString','skip':'false', 'feature_type':x['datatype']}
         elif(x['datatype']=='Timestamp'):
-            dict = {'id': d['config']['table_name']+'.'+x['name'],'data_type':'Timestamp','skip':'false', 'feature_type':x['datatype']}
+            dict = {'id': d['config'][0]['table_name']+'.'+x['name'],'data_type':'Timestamp','skip':'false', 'feature_type':x['datatype']}
         elif(x['datatype']=='Int' or x['datatype']=='Double'):
-            dict = {'id': d['config']['table_name']+'.'+x['name'],'data_type':'ContinueNum','skip':'false', 'feature_type':x['datatype']}
+            dict = {'id': d['config'][0]['table_name']+'.'+x['name'],'data_type':'ContinueNum','skip':'false', 'feature_type':x['datatype']}
         lists.append(dict)
     features = tuple(lists)
     # features = {'id':a+'.'+c, 'data_type':'SingleString', 'skip':'false', 'feature_type':'String'},{'id':a+'.'+'eventTime', 'data_type':'Timestamp', 'skip':'false', 'feature_type':'Timestamp'},{'id':a+'.'+'f_index', 'data_type':'SingleString', 'skip':'false', 'feature_type':'String'}

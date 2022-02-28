@@ -1,17 +1,29 @@
 config:
-   table_name : t1
-   column :   #  列名、类型、主键为必须
-      - name: c1
-        datatype: String
-      - name: c2 
-        datatype: Timestamp
-      - name: c3
-        datatype: Double
-   index: c1
+   - table_name : t1
+     column :   #  列名、类型、主键为必须
+        - name: c1
+          datatype: String
+        - name: c2 
+          datatype: Timestamp
+        - name: c3
+          datatype: Double
+     index: c1
+
+   - table_name : t2
+     column :   #  列名、类型、主键为必须
+        - name: c1
+          datatype: String
+        - name: c2 
+          datatype: Timestamp
+        - name: c3
+          datatype: Double
+     index: c3
+
 desc: original op
 fz:   
-    - original(t1.c1)
-    - combine(t1.c1,t1.c2,t1.c3)
+    # - original(t1.c1)
+    # - combine(t1.c1,t1.c2,t1.c3)
+    - multi_direct(t1,t2.c2)
 input:
   - 1, 2, 3
   - 11, 22, 33

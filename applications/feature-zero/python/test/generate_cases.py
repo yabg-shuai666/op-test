@@ -4,7 +4,7 @@
 
 
 from distutils.command.config import config
-from tkinter import N
+from tkinter import N, Y
 import yaml
 
 # fmt:off
@@ -52,35 +52,56 @@ def conv(d):
     app = {'feature_info': {}}
     data['app'] = app
     
-    feature_info = {'target_entity': d['config']['table_name'], 'target_entity_index': d['config']['index'], 'target_label': '' , 'entity_detail':{}, 'relations': []}
+    feature_info = {'target_entity': d['config'][0]['table_name'], 'target_entity_index': d['config'][0]['index'], 'target_label': '' , 'entity_detail':{}, 'relations': []}
     data['app']['feature_info'] = feature_info
 
-    relations = [{'type':'type', 'time_windows': ['10:0','100:0','1d,1000:0s'],'window_delay':''
-        ,'from_entity':'','from_entity_keys':[],'from_entity_time_col':'','to_entity':'',
-        'to_entity_keys':[],'to_entity_time_col':''}]
+    relations = [{'type':'1-1', 'time_windows': ['10:0','100:0','1d,1000:0s'],'window_delay':''
+        ,'from_entity':d['config'][0]['table_name'],'from_entity_keys':[''],'from_entity_time_col':'','to_entity':d['config'][1]['table_name'],
+        'to_entity_keys':[''],'to_entity_time_col':''}]
     data['app']['feature_info']['relations'] = relations
     
     # relations = []
     # data['app']['feature_info']['relations'] = relations
 
-    entity_detail = {'t1':{} }
+    entity_detail = {'t1':{},'t2':{}}
     data['app']['feature_info']['entity_detail'] = entity_detail
 
     t1 = {'features':[]}
     data['app']['feature_info']['entity_detail']['t1'] = t1
+
+    t2 = {'features':[]}
+    data['app']['feature_info']['entity_detail']['t2'] = t2
     
     lists = list()
-    for x in d['config']['column']:
-        if(x['datatype']=='String'):
-            dict = {'id': d['config']['table_name']+'.'+x['name'],'data_type':'SingleString','skip':'false', 'feature_type':x['datatype']}
-        elif(x['datatype']=='Timestamp'):
-            dict = {'id': d['config']['table_name']+'.'+x['name'],'data_type':'Timestamp','skip':'false', 'feature_type':x['datatype']}
-        elif(x['datatype']=='Int' or x['datatype']=='Double'):
-            dict = {'id': d['config']['table_name']+'.'+x['name'],'data_type':'ContinueNum','skip':'false', 'feature_type':x['datatype']}
-        lists.append(dict)
-    features = tuple(lists)
-    # features = {'id':a+'.'+c, 'data_type':'SingleString', 'skip':'false', 'feature_type':'String'},{'id':a+'.'+'eventTime', 'data_type':'Timestamp', 'skip':'false', 'feature_type':'Timestamp'},{'id':a+'.'+'f_index', 'data_type':'SingleString', 'skip':'false', 'feature_type':'String'}
-    data['app']['feature_info']['entity_detail']['t1']['features']= features
+    index=0
+    while(index<len(d['config'])):
+        for x in d['config'][index]['column']:
+            if(x['datatype']=='String'):
+                dict = {'id': d['config'][index]['table_name']+'.'+x['name'],'data_type':'SingleString','skip':'false', 'feature_type':x['datatype']}
+            elif(x['datatype']=='Timestamp'):
+                dict = {'id': d['config'][index]['table_name']+'.'+x['name'],'data_type':'Timestamp','skip':'false', 'feature_type':x['datatype']}
+            elif(x['datatype']=='Int' or x['datatype']=='Double'):
+                dict = {'id': d['config'][index]['table_name']+'.'+x['name'],'data_type':'ContinueNum','skip':'false', 'feature_type':x['datatype']}
+            
+            lists.append(dict)
+        features = tuple(lists)
+        # features = {'id':a+'.'+c, 'data_type':'SingleString', 'skip':'false', 'feature_type':'String'},{'id':a+'.'+'eventTime', 'data_type':'Timestamp', 'skip':'false', 'feature_type':'Timestamp'},{'id':a+'.'+'f_index', 'data_type':'SingleString', 'skip':'false', 'feature_type':'String'}
+        table_n=d['config'][index]['table_name']
+        data['app']['feature_info']['entity_detail'][table_n]['features']= features
+        lists.clear()
+        index=index+1
+
+    # for x in d['config'][index]['column']:
+    #     if(x['datatype']=='String'):
+    #         dict = {'id': d['config'][0]['table_name']+'.'+x['name'],'data_type':'SingleString','skip':'false', 'feature_type':x['datatype']}
+    #     elif(x['datatype']=='Timestamp'):
+    #         dict = {'id': d['config'][0]['table_name']+'.'+x['name'],'data_type':'Timestamp','skip':'false', 'feature_type':x['datatype']}
+    #     elif(x['datatype']=='Int' or x['datatype']=='Double'):
+    #         dict = {'id': d['config'][0]['table_name']+'.'+x['name'],'data_type':'ContinueNum','skip':'false', 'feature_type':x['datatype']}
+    #     lists.append(dict)
+    # features = tuple(lists)
+    # # features = {'id':a+'.'+c, 'data_type':'SingleString', 'skip':'false', 'feature_type':'String'},{'id':a+'.'+'eventTime', 'data_type':'Timestamp', 'skip':'false', 'feature_type':'Timestamp'},{'id':a+'.'+'f_index', 'data_type':'SingleString', 'skip':'false', 'feature_type':'String'}
+    # data['app']['feature_info']['entity_detail']['t1']['features']= features
 
     article = json.dumps(data)
     return article
@@ -159,8 +180,11 @@ def feql(op_file, config_file, cfg_is_info=False, debug=False):
 class TestConvert(unittest.TestCase):
     def test_window_union_new_key(self):
         data=case()
+        print(data)
+        print("**********#####1111####*********")
         article=conv(data)
         print(article)
+        print("**********#########*********")
         str='\n'.join(data['fz'])
         # s = data['fz']
         # s.replace("\n","ccccccc")
