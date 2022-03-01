@@ -10,7 +10,40 @@
         "batch100251_bo_items"
     ],
     "relations": [
-        
+        {
+            "to_entity": "batch100251_bo_items",
+            "from_entity": "batch100247_flatten_request",
+            "to_entity_keys": [
+                "itemId"
+            ],
+            "from_entity_keys": [
+                "itemId"
+            ],
+            "to_entity_time_col": "",
+            "from_entity_time_col": "",
+            "time_windows": [],
+            "window_delay": "0s",
+            "type": "1-1"
+        },
+        {
+            "to_entity": "batch100250_action",
+            "from_entity": "batch100247_flatten_request",
+            "to_entity_keys": [
+                "instanceKey"
+            ],
+            "from_entity_keys": [
+                "instanceKey"
+            ],
+            "to_entity_time_col": "",
+            "from_entity_time_col": "",
+            "time_windows": [
+                "10:0",
+                "100:0",
+                "1d,1000:0s"
+            ],
+            "window_delay": "0s",
+            "type": "1-1"
+        }
     ],
     "entity_detail": {
         "batch100251_bo_items": {

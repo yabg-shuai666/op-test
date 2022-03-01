@@ -48,8 +48,28 @@
                     ]
                    
                 }
-            }
-            
+            },
+            "relations": [
+                {
+                    "type": "1-1",
+                    "time_windows": [
+                        "10:0",
+                        "100:0",
+                        "1d,1000:0s"
+                    ],
+                    "window_delay": null,
+                    "from_entity": "batch102150_flatten_request",
+                    "from_entity_keys": [
+                        "reqId"
+                    ],
+                    "from_entity_time_col": "",
+                    "to_entity": "batch102153_action",
+                    "to_entity_keys": [
+                        "reqId"
+                    ],
+                    "to_entity_time_col": ""
+                }
+            ]
             
         }
         

@@ -1,8 +1,6 @@
 {
     "app": {
-        "lr": {
-            "link_function_for_label": "identity"
-        },
+       
         "feature_info": {
             "target_label": "batch110177_action.actionValue",
             "target_entity": "batch110174_flatten_request",

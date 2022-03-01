@@ -4,7 +4,7 @@
 from distutils.command.config import config
 from tkinter import N, Y
 import yaml
-
+import re
 # fmt:off
 
 # fmt:off
@@ -16,7 +16,6 @@ from feql import convert as feqlconvert
 
 import unittest
 import json
-
 
 resource_path = os.path.dirname(__file__)
 
@@ -33,7 +32,7 @@ def case():
     curPath = os.path.dirname(os.path.realpath(__file__))
     print(curPath)
     # 获取yaml文件路径
-    yamlPath = os.path.join(curPath, "data.yaml")
+    yamlPath = os.path.join(curPath, "op_convert_case/data.yaml")
  
     # open方法打开直接读出来
     f = open(yamlPath, 'r', encoding='utf-8')
@@ -49,7 +48,7 @@ def conv(d):
     app = {'feature_info': {}}
     data['app'] = app
     
-    feature_info = {'target_entity': d['config'][0]['table_name'], 'target_entity_index': d['config'][0]['index'], 'target_label': '' , 'entity_detail':{}, 'relations': []}
+    feature_info = {'target_entity': d['config'][0]['table_name'], 'target_entity_index': d['config'][0]['index'], 'target_label': 'c3' , 'target_pivot_timestamp':'c3','entity_detail':{}, 'relations': []}
     data['app']['feature_info'] = feature_info
 
     relations = [{'type':'1-1', 'time_windows': ['10:0','100:0','1d,1000:0s'],'window_delay':''
@@ -93,17 +92,11 @@ def conv(d):
 
 def save_file(path, item):
         # 先将字典对象转化为可写入文本的字符串
-        item = yaml.dump(item,default_flow_style=False,sort_keys=False)
-        print(item)
+        item_str = yaml.dump(item,default_flow_style=False,sort_keys=False)
+        print(item_str)
         try:
-            if not os.path.exists(path):
-                with open(path, "w", encoding='utf-8') as f:
-                    f.write(item + "\n")
-                    print("^_^ write success")
-                    
-            else:
-                with open(path, "a", encoding='utf-8') as f:
-                    f.write(item + "\n")
+             with open(path, "w", encoding='utf-8') as f:
+                    f.write(item_str + "\n")
                     print("^_^ write success")
         except Exception as e:
             print("write error==>", e)
@@ -178,13 +171,15 @@ class TestConvert(unittest.TestCase):
         sql, fe = fesql(str,article)
         column, sign = feql(str,article)
         print("Here"+"Start"+"\n\n\n\n\n")
-        print(sql.split('sql_table')[1])
+        # print(sql.split('sql_table')[1])
         print(column)
         print("Here"+"End")
-        out=sql.split("\n")
-        str="\n".join(out)
-        print(out)
-        data['sql']=str.split('sql_table')[1]
+        print(sql)
+       
+        sql_after = re.sub('\n'+' *', '\n', 'select' + sql.split('select',1)[1])
+        sql_after = re.sub(' *'+'\n', '\n', sql_after)
+
+        data['sql']=sql_after
  
         data['column']=column
         print('*********************************')
@@ -192,5 +187,6 @@ class TestConvert(unittest.TestCase):
 
         save_file(abs_path('result.yaml'),data)
      
+
 if __name__ == '__main__':
     unittest.main()
