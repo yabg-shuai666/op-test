@@ -21,7 +21,7 @@ config:
           datatype: Double
      index: c3
 
-desc: original 、multi_*、window、combine op
+desc: original | multi_* | window_* |combine op
 fz:   
     - window_count(t1.c1,t1.c2,604801s:100:0s,t1.c3)
     - window_avg(t2.c1,t2.c2,10:0,t2.c3)

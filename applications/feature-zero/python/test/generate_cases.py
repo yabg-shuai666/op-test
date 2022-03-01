@@ -192,6 +192,5 @@ class TestConvert(unittest.TestCase):
 
         save_file(abs_path('result.yaml'),data)
      
-   
 if __name__ == '__main__':
     unittest.main()
