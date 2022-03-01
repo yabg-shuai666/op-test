@@ -4,10 +4,11 @@
             "link_function_for_label": "identity"
         },
         "feature_info": {
-            "target_label": "",
+            "target_label": "feedbackTable.actionValue",
             "target_entity": "behaviourTable",
             "target_pivot_timestamp": "eventTime",
             "target_entity_index": "instanceKey",
+            "target_label_code": "Label(feedbackTable.actionValue)",
             "entity_names": [
                 "behaviourTable",
                 "feedbackTable",
@@ -30,6 +31,25 @@
                     ],
                     "window_delay": "0s",
                     "type": "SLICE"
+                },
+                {
+                    "to_entity": "feedbackTable",
+                    "from_entity": "behaviourTable",
+                    "to_entity_keys": [
+                        "instanceKey"
+                    ],
+                    "from_entity_keys": [
+                        "instanceKey"
+                    ],
+                    "to_entity_time_col": "",
+                    "from_entity_time_col": "",
+                    "time_windows": [
+                        "10:0",
+                        "100:0",
+                        "1d,1000:0s"
+                    ],
+                    "window_delay": "0s",
+                    "type": "1-1"
                 }
             ],
             "entity_detail": {
@@ -38,6 +58,468 @@
                         {
                             "skip": false,
                             "id": "behaviourTable.itemId",
+                            "data_type": "SingleString",
+                            "feature_type": "String"
+                        },
+                        {
+                            "skip": true,
+                            "id": "behaviourTable.reqId",
+                            "data_type": "SingleString",
+                            "feature_type": "String"
+                        },
+                        {
+                            "skip": true,
+                            "id": "behaviourTable.tags",
+                            "data_type": "ArrayString(,)",
+                            "feature_type": "String"
+                        },
+                        {
+                            "skip": false,
+                            "id": "behaviourTable.instanceKey",
+                            "data_type": "SingleString",
+                            "feature_type": "String"
+                        },
+                        {
+                            "skip": false,
+                            "id": "behaviourTable.eventTime",
+                            "data_type": "Timestamp",
+                            "feature_type": "Timestamp"
+                        },
+                        {
+                            "skip": false,
+                            "id": "behaviourTable.userId",
+                            "data_type": "SingleString",
+                            "feature_type": "String"
+                        },
+                        {
+                            "skip": false,
+                            "id": "behaviourTable.name",
+                            "data_type": "SingleString",
+                            "feature_type": "String"
+                        },
+                        {
+                            "skip": false,
+                            "id": "behaviourTable.age",
+                            "data_type": "ContinueNum",
+                            "feature_type": "Int"
+                        },
+                        {
+                            "skip": false,
+                            "id": "behaviourTable.gender",
+                            "data_type": "SingleString",
+                            "feature_type": "String"
+                        },
+                        {
+                            "skip": false,
+                            "id": "behaviourTable.province",
+                            "data_type": "SingleString",
+                            "feature_type": "String"
+                        },
+                        {
+                            "skip": false,
+                            "id": "behaviourTable.city",
+                            "data_type": "SingleString",
+                            "feature_type": "String"
+                        },
+                        {
+                            "skip": false,
+                            "id": "behaviourTable.maritalStatus",
+                            "data_type": "SingleString",
+                            "feature_type": "String"
+                        },
+                        {
+                            "skip": false,
+                            "id": "behaviourTable.education",
+                            "data_type": "SingleString",
+                            "feature_type": "String"
+                        },
+                        {
+                            "skip": false,
+                            "id": "behaviourTable.occupation",
+                            "data_type": "SingleString",
+                            "feature_type": "String"
+                        },
+                        {
+                            "skip": false,
+                            "id": "behaviourTable.registerTime",
+                            "data_type": "Timestamp",
+                            "feature_type": "Timestamp"
+                        },
+                        {
+                            "skip": false,
+                            "id": "behaviourTable.membershipLevel",
+                            "data_type": "SingleString",
+                            "feature_type": "String"
+                        },
+                        {
+                            "skip": false,
+                            "id": "behaviourTable.interest",
+                            "data_type": "SingleString",
+                            "feature_type": "String"
+                        },
+                        {
+                            "skip": false,
+                            "id": "behaviourTable.subscribe",
+                            "data_type": "SingleString",
+                            "feature_type": "String"
+                        },
+                        {
+                            "skip": false,
+                            "id": "behaviourTable.channel",
+                            "data_type": "SingleString",
+                            "feature_type": "String"
+                        },
+                        {
+                            "skip": false,
+                            "id": "behaviourTable.s_extra1String",
+                            "data_type": "SingleString",
+                            "feature_type": "String"
+                        },
+                        {
+                            "skip": false,
+                            "id": "behaviourTable.s_extra2String",
+                            "data_type": "SingleString",
+                            "feature_type": "String"
+                        },
+                        {
+                            "skip": false,
+                            "id": "behaviourTable.s_extra3String",
+                            "data_type": "SingleString",
+                            "feature_type": "String"
+                        },
+                        {
+                            "skip": false,
+                            "id": "behaviourTable.s_extra4String",
+                            "data_type": "SingleString",
+                            "feature_type": "String"
+                        },
+                        {
+                            "skip": false,
+                            "id": "behaviourTable.s_extra5String",
+                            "data_type": "SingleString",
+                            "feature_type": "String"
+                        },
+                        {
+                            "skip": false,
+                            "id": "behaviourTable.s_extra6String",
+                            "data_type": "SingleString",
+                            "feature_type": "String"
+                        },
+                        {
+                            "skip": false,
+                            "id": "behaviourTable.s_extra7String",
+                            "data_type": "SingleString",
+                            "feature_type": "String"
+                        },
+                        {
+                            "skip": false,
+                            "id": "behaviourTable.s_extra8String",
+                            "data_type": "SingleString",
+                            "feature_type": "String"
+                        },
+                        {
+                            "skip": false,
+                            "id": "behaviourTable.s_extra9String",
+                            "data_type": "SingleString",
+                            "feature_type": "String"
+                        },
+                        {
+                            "skip": false,
+                            "id": "behaviourTable.s_extra10String",
+                            "data_type": "SingleString",
+                            "feature_type": "String"
+                        },
+                        {
+                            "skip": false,
+                            "id": "behaviourTable.s_extra1Int",
+                            "data_type": "ContinueNum",
+                            "feature_type": "Int"
+                        },
+                        {
+                            "skip": false,
+                            "id": "behaviourTable.s_extra2Int",
+                            "data_type": "ContinueNum",
+                            "feature_type": "Int"
+                        },
+                        {
+                            "skip": false,
+                            "id": "behaviourTable.s_extra3Int",
+                            "data_type": "ContinueNum",
+                            "feature_type": "Int"
+                        },
+                        {
+                            "skip": false,
+                            "id": "behaviourTable.s_extra1Double",
+                            "data_type": "ContinueNum",
+                            "feature_type": "Double"
+                        },
+                        {
+                            "skip": false,
+                            "id": "behaviourTable.s_extra2Double",
+                            "data_type": "ContinueNum",
+                            "feature_type": "Double"
+                        },
+                        {
+                            "skip": false,
+                            "id": "behaviourTable.s_extra3Double",
+                            "data_type": "ContinueNum",
+                            "feature_type": "Double"
+                        },
+                        {
+                            "skip": false,
+                            "id": "behaviourTable.s_extra1Date",
+                            "data_type": "Timestamp",
+                            "feature_type": "Timestamp"
+                        },
+                        {
+                            "skip": false,
+                            "id": "behaviourTable.s_extra2Date",
+                            "data_type": "Timestamp",
+                            "feature_type": "Timestamp"
+                        },
+                        {
+                            "skip": false,
+                            "id": "behaviourTable.s_extra1Boolean",
+                            "data_type": "ContinueNum",
+                            "feature_type": "Int"
+                        },
+                        {
+                            "skip": false,
+                            "id": "behaviourTable.s_extra2Boolean",
+                            "data_type": "ContinueNum",
+                            "feature_type": "Int"
+                        },
+                        {
+                            "skip": false,
+                            "id": "behaviourTable.title1m",
+                            "data_type": "KVString(,)[:]",
+                            "feature_type": "String"
+                        },
+                        {
+                            "skip": false,
+                            "id": "behaviourTable.titleKw1m",
+                            "data_type": "KVString(,)[:]",
+                            "feature_type": "String"
+                        },
+                        {
+                            "skip": false,
+                            "id": "behaviourTable.contentKw1m",
+                            "data_type": "KVString(,)[:]",
+                            "feature_type": "String"
+                        },
+                        {
+                            "skip": false,
+                            "id": "behaviourTable.ner1m",
+                            "data_type": "KVString(,)[:]",
+                            "feature_type": "String"
+                        },
+                        {
+                            "skip": false,
+                            "id": "behaviourTable.tag1m",
+                            "data_type": "KVString(,)[:]",
+                            "feature_type": "String"
+                        },
+                        {
+                            "skip": false,
+                            "id": "behaviourTable.category1m",
+                            "data_type": "KVString(,)[:]",
+                            "feature_type": "String"
+                        },
+                        {
+                            "skip": false,
+                            "id": "behaviourTable.categoryLevel11m",
+                            "data_type": "KVString(,)[:]",
+                            "feature_type": "String"
+                        },
+                        {
+                            "skip": false,
+                            "id": "behaviourTable.categoryLevel21m",
+                            "data_type": "KVString(,)[:]",
+                            "feature_type": "String"
+                        },
+                        {
+                            "skip": false,
+                            "id": "behaviourTable.categoryLevel31m",
+                            "data_type": "KVString(,)[:]",
+                            "feature_type": "String"
+                        },
+                        {
+                            "skip": false,
+                            "id": "behaviourTable.categoryLevel41m",
+                            "data_type": "KVString(,)[:]",
+                            "feature_type": "String"
+                        },
+                        {
+                            "skip": false,
+                            "id": "behaviourTable.categoryLevel51m",
+                            "data_type": "KVString(,)[:]",
+                            "feature_type": "String"
+                        },
+                        {
+                            "skip": false,
+                            "id": "behaviourTable.publisherId1m",
+                            "data_type": "KVString(,)[:]",
+                            "feature_type": "String"
+                        },
+                        {
+                            "skip": false,
+                            "id": "behaviourTable.itemId1m",
+                            "data_type": "KVString(,)[:]",
+                            "feature_type": "String"
+                        },
+                        {
+                            "skip": false,
+                            "id": "behaviourTable.reqCntSession",
+                            "data_type": "ContinueNum",
+                            "feature_type": "Int"
+                        },
+                        {
+                            "skip": false,
+                            "id": "behaviourTable.reqDurationSession",
+                            "data_type": "ContinueNum",
+                            "feature_type": "Int"
+                        },
+                        {
+                            "skip": false,
+                            "id": "behaviourTable.title50",
+                            "data_type": "KVString(,)[:]",
+                            "feature_type": "String"
+                        },
+                        {
+                            "skip": false,
+                            "id": "behaviourTable.titleKw50",
+                            "data_type": "KVString(,)[:]",
+                            "feature_type": "String"
+                        },
+                        {
+                            "skip": false,
+                            "id": "behaviourTable.contentKw50",
+                            "data_type": "KVString(,)[:]",
+                            "feature_type": "String"
+                        },
+                        {
+                            "skip": false,
+                            "id": "behaviourTable.ner50",
+                            "data_type": "KVString(,)[:]",
+                            "feature_type": "String"
+                        },
+                        {
+                            "skip": false,
+                            "id": "behaviourTable.tag50",
+                            "data_type": "KVString(,)[:]",
+                            "feature_type": "String"
+                        },
+                        {
+                            "skip": false,
+                            "id": "behaviourTable.category50",
+                            "data_type": "KVString(,)[:]",
+                            "feature_type": "String"
+                        },
+                        {
+                            "skip": false,
+                            "id": "behaviourTable.categoryLevel150",
+                            "data_type": "KVString(,)[:]",
+                            "feature_type": "String"
+                        },
+                        {
+                            "skip": false,
+                            "id": "behaviourTable.categoryLevel250",
+                            "data_type": "KVString(,)[:]",
+                            "feature_type": "String"
+                        },
+                        {
+                            "skip": false,
+                            "id": "behaviourTable.categoryLevel350",
+                            "data_type": "KVString(,)[:]",
+                            "feature_type": "String"
+                        },
+                        {
+                            "skip": false,
+                            "id": "behaviourTable.categoryLevel450",
+                            "data_type": "KVString(,)[:]",
+                            "feature_type": "String"
+                        },
+                        {
+                            "skip": false,
+                            "id": "behaviourTable.categoryLevel550",
+                            "data_type": "KVString(,)[:]",
+                            "feature_type": "String"
+                        },
+                        {
+                            "skip": false,
+                            "id": "behaviourTable.publisherId50",
+                            "data_type": "KVString(,)[:]",
+                            "feature_type": "String"
+                        },
+                        {
+                            "skip": false,
+                            "id": "behaviourTable.itemId50",
+                            "data_type": "KVString(,)[:]",
+                            "feature_type": "String"
+                        },
+                        {
+                            "skip": false,
+                            "id": "behaviourTable.ip",
+                            "data_type": "SingleString",
+                            "feature_type": "String"
+                        },
+                        {
+                            "skip": false,
+                            "id": "behaviourTable.model",
+                            "data_type": "SingleString",
+                            "feature_type": "String"
+                        },
+                        {
+                            "skip": false,
+                            "id": "behaviourTable.os",
+                            "data_type": "SingleString",
+                            "feature_type": "String"
+                        },
+                        {
+                            "skip": false,
+                            "id": "behaviourTable.deviceId",
+                            "data_type": "SingleString",
+                            "feature_type": "String"
+                        },
+                        {
+                            "skip": false,
+                            "id": "behaviourTable.clickCount1h",
+                            "data_type": "ContinueNum",
+                            "feature_type": "Int"
+                        },
+                        {
+                            "skip": false,
+                            "id": "behaviourTable.clickCount1d",
+                            "data_type": "ContinueNum",
+                            "feature_type": "Int"
+                        },
+                        {
+                            "skip": false,
+                            "id": "behaviourTable.clickCount1w",
+                            "data_type": "ContinueNum",
+                            "feature_type": "Int"
+                        },
+                        {
+                            "skip": false,
+                            "id": "behaviourTable.ctr1h",
+                            "data_type": "ContinueNum",
+                            "feature_type": "Double"
+                        },
+                        {
+                            "skip": false,
+                            "id": "behaviourTable.ctr1d",
+                            "data_type": "ContinueNum",
+                            "feature_type": "Double"
+                        },
+                        {
+                            "skip": false,
+                            "id": "behaviourTable.ctr1w",
+                            "data_type": "ContinueNum",
+                            "feature_type": "Double"
+                        },
+                        {
+                            "skip": false,
+                            "id": "behaviourTable._i_position",
                             "data_type": "SingleString",
                             "feature_type": "String"
                         }
@@ -68,10 +550,319 @@
                             "id": "new_item_bo.itemSetId",
                             "data_type": "SingleString",
                             "feature_type": "String"
+                        },
+                        {
+                            "skip": false,
+                            "id": "new_item_bo.title",
+                            "data_type": "SingleString",
+                            "feature_type": "String"
+                        },
+                        {
+                            "skip": true,
+                            "id": "new_item_bo.content",
+                            "data_type": "SingleString",
+                            "feature_type": "String"
+                        },
+                        {
+                            "skip": false,
+                            "id": "new_item_bo.url",
+                            "data_type": "SingleString",
+                            "feature_type": "String"
+                        },
+                        {
+                            "skip": false,
+                            "id": "new_item_bo.categoryLevel1",
+                            "data_type": "ArrayString(,)",
+                            "feature_type": "String"
+                        },
+                        {
+                            "skip": false,
+                            "id": "new_item_bo.categoryLevel2",
+                            "data_type": "ArrayString(,)",
+                            "feature_type": "String"
+                        },
+                        {
+                            "skip": false,
+                            "id": "new_item_bo.categoryLevel3",
+                            "data_type": "ArrayString(,)",
+                            "feature_type": "String"
+                        },
+                        {
+                            "skip": false,
+                            "id": "new_item_bo.categoryLevel4",
+                            "data_type": "ArrayString(,)",
+                            "feature_type": "String"
+                        },
+                        {
+                            "skip": false,
+                            "id": "new_item_bo.categoryLevel5",
+                            "data_type": "ArrayString(,)",
+                            "feature_type": "String"
+                        },
+                        {
+                            "skip": false,
+                            "id": "new_item_bo.publishTime",
+                            "data_type": "Timestamp",
+                            "feature_type": "Timestamp"
+                        },
+                        {
+                            "skip": false,
+                            "id": "new_item_bo.publisherId",
+                            "data_type": "ArrayString(,)",
+                            "feature_type": "String"
+                        },
+                        {
+                            "skip": false,
+                            "id": "new_item_bo.tag",
+                            "data_type": "ArrayString(,)",
+                            "feature_type": "String"
+                        },
+                        {
+                            "skip": false,
+                            "id": "new_item_bo.coverUrl",
+                            "data_type": "SingleString",
+                            "feature_type": "String"
+                        },
+                        {
+                            "skip": false,
+                            "id": "new_item_bo.s_extra1String",
+                            "data_type": "SingleString",
+                            "feature_type": "String"
+                        },
+                        {
+                            "skip": false,
+                            "id": "new_item_bo.s_extra2String",
+                            "data_type": "SingleString",
+                            "feature_type": "String"
+                        },
+                        {
+                            "skip": false,
+                            "id": "new_item_bo.s_extra3String",
+                            "data_type": "SingleString",
+                            "feature_type": "String"
+                        },
+                        {
+                            "skip": false,
+                            "id": "new_item_bo.s_extra4String",
+                            "data_type": "SingleString",
+                            "feature_type": "String"
+                        },
+                        {
+                            "skip": false,
+                            "id": "new_item_bo.s_extra5String",
+                            "data_type": "SingleString",
+                            "feature_type": "String"
+                        },
+                        {
+                            "skip": false,
+                            "id": "new_item_bo.s_extra6String",
+                            "data_type": "SingleString",
+                            "feature_type": "String"
+                        },
+                        {
+                            "skip": false,
+                            "id": "new_item_bo.s_extra7String",
+                            "data_type": "SingleString",
+                            "feature_type": "String"
+                        },
+                        {
+                            "skip": false,
+                            "id": "new_item_bo.s_extra8String",
+                            "data_type": "SingleString",
+                            "feature_type": "String"
+                        },
+                        {
+                            "skip": false,
+                            "id": "new_item_bo.s_extra9String",
+                            "data_type": "SingleString",
+                            "feature_type": "String"
+                        },
+                        {
+                            "skip": false,
+                            "id": "new_item_bo.s_extra10String",
+                            "data_type": "SingleString",
+                            "feature_type": "String"
+                        },
+                        {
+                            "skip": false,
+                            "id": "new_item_bo.s_extra1Int",
+                            "data_type": "ContinueNum",
+                            "feature_type": "Int"
+                        },
+                        {
+                            "skip": false,
+                            "id": "new_item_bo.s_extra2Int",
+                            "data_type": "ContinueNum",
+                            "feature_type": "Int"
+                        },
+                        {
+                            "skip": false,
+                            "id": "new_item_bo.s_extra3Int",
+                            "data_type": "ContinueNum",
+                            "feature_type": "Int"
+                        },
+                        {
+                            "skip": false,
+                            "id": "new_item_bo.s_extra1Double",
+                            "data_type": "ContinueNum",
+                            "feature_type": "Double"
+                        },
+                        {
+                            "skip": false,
+                            "id": "new_item_bo.s_extra2Double",
+                            "data_type": "ContinueNum",
+                            "feature_type": "Double"
+                        },
+                        {
+                            "skip": false,
+                            "id": "new_item_bo.s_extra3Double",
+                            "data_type": "ContinueNum",
+                            "feature_type": "Double"
+                        },
+                        {
+                            "skip": false,
+                            "id": "new_item_bo.s_extra1Date",
+                            "data_type": "Timestamp",
+                            "feature_type": "Timestamp"
+                        },
+                        {
+                            "skip": false,
+                            "id": "new_item_bo.s_extra2Date",
+                            "data_type": "Timestamp",
+                            "feature_type": "Timestamp"
+                        },
+                        {
+                            "skip": false,
+                            "id": "new_item_bo.s_extra1Boolean",
+                            "data_type": "ContinueNum",
+                            "feature_type": "Int"
+                        },
+                        {
+                            "skip": false,
+                            "id": "new_item_bo.s_extra2Boolean",
+                            "data_type": "ContinueNum",
+                            "feature_type": "Int"
+                        },
+                        {
+                            "skip": false,
+                            "id": "new_item_bo.s_itemCategoryKv",
+                            "data_type": "KVString(,)[:]",
+                            "feature_type": "String"
+                        },
+                        {
+                            "skip": false,
+                            "id": "new_item_bo.s_itemTitleKwKv",
+                            "data_type": "KVString(,)[:]",
+                            "feature_type": "String"
+                        },
+                        {
+                            "skip": false,
+                            "id": "new_item_bo.s_itemContentKwKv",
+                            "data_type": "KVString(,)[:]",
+                            "feature_type": "String"
+                        },
+                        {
+                            "skip": false,
+                            "id": "new_item_bo.s_itemNerKv",
+                            "data_type": "KVString(,)[:]",
+                            "feature_type": "String"
+                        },
+                        {
+                            "skip": false,
+                            "id": "new_item_bo.gener",
+                            "data_type": "ArrayString(,)",
+                            "feature_type": "String"
+                        },
+                        {
+                            "skip": false,
+                            "id": "new_item_bo.tags",
+                            "data_type": "ArrayString(,)",
+                            "feature_type": "String"
+                        },
+                        {
+                            "skip": false,
+                            "id": "new_item_bo.licensingwindowstart",
+                            "data_type": "SingleString",
+                            "feature_type": "String"
+                        },
+                        {
+                            "skip": false,
+                            "id": "new_item_bo.directors",
+                            "data_type": "ArrayString(,)",
+                            "feature_type": "String"
+                        },
+                        {
+                            "skip": false,
+                            "id": "new_item_bo.casts",
+                            "data_type": "ArrayString(,)",
+                            "feature_type": "String"
+                        },
+                        {
+                            "skip": false,
+                            "id": "new_item_bo.seriestype",
+                            "data_type": "ArrayString(,)",
+                            "feature_type": "String"
+                        },
+                        {
+                            "skip": false,
+                            "id": "new_item_bo.pgmsndclass",
+                            "data_type": "ArrayString(,)",
+                            "feature_type": "String"
+                        },
+                        {
+                            "skip": false,
+                            "id": "new_item_bo.scriptwriter",
+                            "data_type": "SingleString",
+                            "feature_type": "String"
+                        },
+                        {
+                            "skip": false,
+                            "id": "new_item_bo.originalname",
+                            "data_type": "SingleString",
+                            "feature_type": "String"
+                        }
+                    ]
+                },
+                "feedbackTable": {
+                    "features": [
+                        {
+                            "skip": true,
+                            "id": "feedbackTable.itemId",
+                            "data_type": "SingleString",
+                            "feature_type": "String"
+                        },
+                        {
+                            "skip": true,
+                            "id": "feedbackTable.reqId",
+                            "data_type": "SingleString",
+                            "feature_type": "String"
+                        },
+                        {
+                            "skip": false,
+                            "id": "feedbackTable.instanceKey",
+                            "data_type": "SingleString",
+                            "feature_type": "String"
+                        },
+                        {
+                            "skip": true,
+                            "id": "feedbackTable.eventTime",
+                            "data_type": "Timestamp",
+                            "feature_type": "Timestamp"
+                        },
+                        {
+                            "skip": true,
+                            "id": "feedbackTable.ingestionTime",
+                            "data_type": "Timestamp",
+                            "feature_type": "Timestamp"
+                        },
+                        {
+                            "skip": false,
+                            "id": "feedbackTable.actionValue",
+                            "data_type": "DiscreteLabel",
+                            "feature_type": "Int"
                         }
                     ]
                 }
-                
             }
         }
     }

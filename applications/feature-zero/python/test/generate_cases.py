@@ -62,9 +62,6 @@ def conv(d):
         'from_entity_time_col':'','to_entity_time_col':'','time_windows':['2147483645:0']}
         ]
     data['app']['feature_info']['relations'] = relations
-    
-    # relations = []
-    # data['app']['feature_info']['relations'] = relations
 
     entity_detail = {'t1':{},'t2':{}}
     data['app']['feature_info']['entity_detail'] = entity_detail
@@ -204,10 +201,8 @@ class TestConvert(unittest.TestCase):
         out=sql.split("\n")
         str="\n".join(out)
         print(out)
-
         data['sql']=str.split('sql_table')[1]
  
-      
         data['column']=column
         print('*********************************')
         print(data['sql'])
