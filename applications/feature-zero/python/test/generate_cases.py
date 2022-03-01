@@ -1,8 +1,6 @@
 #!/usr/bin/python
 # -*- coding: UTF-8 -*-
 
-
-
 from distutils.command.config import config
 from tkinter import N, Y
 import yaml
@@ -21,7 +19,6 @@ import json
 
 
 resource_path = os.path.dirname(__file__)
-
 
 def abs_path(param):
     return resource_path + "/" + param
@@ -63,14 +60,14 @@ def conv(d):
         ]
     data['app']['feature_info']['relations'] = relations
 
-    entity_detail = {'t1':{},'t2':{}}
+    entity_detail = {d['config'][0]['table_name']:{},d['config'][1]['table_name']:{}}
     data['app']['feature_info']['entity_detail'] = entity_detail
 
     t1 = {'features':[]}
-    data['app']['feature_info']['entity_detail']['t1'] = t1
+    data['app']['feature_info']['entity_detail'][d['config'][0]['table_name']] = t1
 
     t2 = {'features':[]}
-    data['app']['feature_info']['entity_detail']['t2'] = t2
+    data['app']['feature_info']['entity_detail'][d['config'][1]['table_name']] = t2
     
     lists = list()
     index=0
@@ -181,7 +178,6 @@ class TestConvert(unittest.TestCase):
     def test_window_union_new_key(self):
         data=case()
         print(data)
-        print("**********#####1111####*********")
         article=conv(data)
         print(article)
         print("**********#########*********")
@@ -195,7 +191,6 @@ class TestConvert(unittest.TestCase):
         column, sign = feql(str,article)
         print("Here"+"Start"+"\n\n\n\n\n")
         print(sql.split('sql_table')[1])
-        print("Here"+"Start"+"\n\n\n\n\n")
         print(column)
         print("Here"+"End")
         out=sql.split("\n")
@@ -209,48 +204,6 @@ class TestConvert(unittest.TestCase):
 
         save_file(abs_path('result.yaml'),data)
      
-    #     # union_selected_ops has ops like `dayofweek(multi_direct())`, convert(fesql convert use feql convert too) can't handle this, so remove it
-    #     fesql("union_selected_ops.bk", "union_pyconf.json")
-    #     feql("union_selected_ops.bk", "union_pyconf.json")
-    #     print("test_window_union_new_keytest_window_union_new_keytest_window_union_new_key")
-
-
-
-    # def test_split_key(self):
-    #     fesql("split.ops", "split.json", cfg_is_info=True)
-    #     feql("split.ops", "split.json", cfg_is_info=True)
-    #     print("test_split_key test_split_keyt est_split_key")
-
-    # def test_myhug_sql_window_count(self):
-    #     sql, _ = fesql("myhug_selected_ops_window_count.bk",
-    #                    "myhug_pyconf.json")
-    #     assert sql.find("count_where") != -1
-        # feql("myhug_selected_ops_window_count.bk", "myhug_pyconf.json")
-    #     print("test_myhug_sql_window_count test_myhug_sql_window_count test_myhug_sql_window_count")
-
-    # def test_myhug_total(self):
-    #     fesql("myhug_selected_ops copy.bk", "myhug_pyconf.json")
-    #     feql("myhug_selected_ops copy.bk", "myhug_pyconf.json")
-
-    # def test_last_value(self):
-    #     feql("last_value_selected_ops.bk", "last_value_pyconf.json")
-    #     fesql("last_value_selected_ops.bk", "last_value_pyconf.json")
-
-    # def test_join_condition(self):
-    #     feql("join_selected_ops_one.bk", "join_pyconf.json")
-    #     fesql("join_selected_ops_one.bk", "join_pyconf.json")
-        # assert sql == """# start sql code
-# # output table name: sql_table
-
-# select
-#     `batch110174_flatten_request`.`reqId` as reqId_1,
-#     `batch110062_gf_bianjieceshi_biaozhun_sag_f5_PRD_CODE__eventTime_0_2147483645`.`amt2` as batch110062_gf_bianjieceshi_biaozhun_sag_f5_amt2_multi_last_value_0
-# from
-#     `batch110174_flatten_request`
-#     last join `batch110062_gf_bianjieceshi_biaozhun_sag_f5` as `batch110062_gf_bianjieceshi_biaozhun_sag_f5_PRD_CODE__eventTime_0_2147483645` order by batch110062_gf_bianjieceshi_biaozhun_sag_f5_PRD_CODE__eventTime_0_2147483645.`ingestionTime` on `batch110174_flatten_request`.`PRD_CODE` = `batch110062_gf_bianjieceshi_biaozhun_sag_f5_PRD_CODE__eventTime_0_2147483645`.`PRD_CODE` and `batch110062_gf_bianjieceshi_biaozhun_sag_f5_PRD_CODE__eventTime_0_2147483645`.`ingestionTime` < `batch110174_flatten_request`.`eventTime`;"""
-
-#         sql, _ = fesql("join_selected_ops.bk", "join_pyconf.json")
-
-
+   
 if __name__ == '__main__':
     unittest.main()
