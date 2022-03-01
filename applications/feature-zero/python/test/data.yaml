@@ -1,6 +1,6 @@
 config:
-   - table_name : t1
-     column :   #  列名、类型、主键为必须，可以增加任意列、任意类型
+   - table_name : t1  #表名自取
+     column :   #  列名、类型、主键为必须，可以增加任意多列、任意类型
         - name: c1
           datatype: String
         - name: c2 
@@ -11,8 +11,8 @@ config:
           datatype: String
      index: c1  
 
-   - table_name : t2
-     column :   #  列名、类型、主键为必须，可以增加任意列、任意类型
+   - table_name : t2  #表名自取
+     column :   #  列名、类型、主键为必须，可以增加任意多列、任意类型
         - name: c1
           datatype: String
         - name: c2 
@@ -21,10 +21,12 @@ config:
           datatype: Double
      index: c3
 
-desc: original op
+desc: original 、multi_*、window、combine op
 fz:   
     - window_count(t1.c1,t1.c2,604801s:100:0s,t1.c3)
     - window_avg(t2.c1,t2.c2,10:0,t2.c3)
+    - window_min(t2.c1,t2.c2,10:0,t2.c3)
+    - window_max(t2.c1,t2.c2,10:0,t2.c3)
     - original(t1.c1)
     - combine(t1.c1,t1.c2,t1.c3)
     - combine(t1.c2,t1.c3,t1.c4)

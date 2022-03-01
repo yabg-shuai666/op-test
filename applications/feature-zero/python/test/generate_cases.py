@@ -88,18 +88,6 @@ def conv(d):
         lists.clear()
         index=index+1
 
-    # for x in d['config'][index]['column']:
-    #     if(x['datatype']=='String'):
-    #         dict = {'id': d['config'][0]['table_name']+'.'+x['name'],'data_type':'SingleString','skip':'false', 'feature_type':x['datatype']}
-    #     elif(x['datatype']=='Timestamp'):
-    #         dict = {'id': d['config'][0]['table_name']+'.'+x['name'],'data_type':'Timestamp','skip':'false', 'feature_type':x['datatype']}
-    #     elif(x['datatype']=='Int' or x['datatype']=='Double'):
-    #         dict = {'id': d['config'][0]['table_name']+'.'+x['name'],'data_type':'ContinueNum','skip':'false', 'feature_type':x['datatype']}
-    #     lists.append(dict)
-    # features = tuple(lists)
-    # # features = {'id':a+'.'+c, 'data_type':'SingleString', 'skip':'false', 'feature_type':'String'},{'id':a+'.'+'eventTime', 'data_type':'Timestamp', 'skip':'false', 'feature_type':'Timestamp'},{'id':a+'.'+'f_index', 'data_type':'SingleString', 'skip':'false', 'feature_type':'String'}
-    # data['app']['feature_info']['entity_detail']['t1']['features']= features
-
     article = json.dumps(data)
     return article
 
