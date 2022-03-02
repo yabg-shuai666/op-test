@@ -1,1 +1,1 @@
-window_count(batch102150_flatten_request.eventTime,batch102150_flatten_request.f_1,604801s:100:0s,batch102150_flatten_request.f_0)
+window_min(batch102150_flatten_request.eventTime,batch102150_flatten_request.reqId,10:0,batch102150_flatten_request.f_3)

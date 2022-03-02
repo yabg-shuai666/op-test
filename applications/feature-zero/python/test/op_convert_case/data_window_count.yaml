@@ -1,0 +1,71 @@
+config:
+   - table_name : t1 
+     column :   
+        - name: c1
+          datatype: String
+        - name: c2 
+          datatype: Timestamp
+        - name: c3
+          datatype: Double
+     index: c1  
+   - table_name : t2  
+     column :   
+        - name: c1
+          datatype: String
+        - name: c2
+          datatype: Double
+        - name: c3
+          datatype: Timestamp
+     index: c1
+
+desc: multi_* op
+
+fz:   
+    - window_count(t1.c2,t1.c1,604801s:100:0s,t1.c3)
+    # - window_avg(t1.c2,t1.c1,10:0,t1.c3)
+    # - window_min(t1.c2,t1.c1,10:0,t2.c3)
+    # - window_max(t2.c1,t2.c2,10:0,t2.c3)
+    # - window_top1_ratio(t2.c1,t2.c2,10:0,t2.c3)
+    # - original(t1.c1)
+    # - combine(t1.c1,t1.c2,t1.c3)
+    # - multi_direct(t1,t2.c2)
+    # - multi_last_value(t1,t2.c2,2147483645:0)
+    # - combine(multi_last_value(t1,t2.c1,2147483645:0),multi_last_value(t1,t2.c2,2147483645:0),t1.c3)
+    
+input:
+   - name: t1
+     schema: c1:string, c2:timestamp, c3:double
+     index: c1
+     data: 
+         1,1949-10-1 10:00:00,6666.0
+         1,1970-01-1 10:00:00,6666.0
+         1,1970-01-1 23:00:00,6666.0
+         1,2022-03-1 23:28:55,1246.0
+         2,2021-03-1 17:00:00,4044.0
+         2,2021-03-1 20:02:33,2022.0
+         2,2021-03-1 23:00:00,3033.0
+         3,2021-03-3 08:08:08,3032.0
+         3,2021-03-3 17:09:11,3032.0
+         
+
+   - name: t2
+     schema: c1:string, c2:double, c3:timestamp
+     index: c1
+     data: 
+         1,1246.0,2022-03-1 23:28:55
+         2,2022.0,2022-03-2 20:02:33
+         3,3032.0,2022-03-3 17:09:11
+         4,9999.0,2021-03-3 11:24:11
+expected:
+      schema: c1_1:string   t2_c2_multi_last_value_0:double
+      data: 
+          1,6666.000000
+          2,2022.000000
+          3,3032.000000
+
+# create table t1 (c1 string, c2 timestamp, c3 double);
+# load data infile 'file:///Users/4paradigm/Desktop/s1.csv' into table t1 options(format='csv', foo='bar', header=false, mode='append');
+
+
+# create table t2 (c1 string, c2 double, c3 timestamp);
+# load data infile 'file:///Users/4paradigm/Desktop/s2.csv' into table t2 options(format='csv', foo='bar', header=false, mode='append');

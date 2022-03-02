@@ -13,12 +13,12 @@ config:
         - name: c1
           datatype: String
         - name: c2
-          datatype: Double
-        - name: c3
           datatype: Timestamp
-     index: c3
+        - name: c3
+          datatype: Double
+     index: c1
 
-desc: original | multi_* | window_* |combine op
+desc: original op
 
 fz:   
     # - window_count(t1.c1,t1.c2,604801s:100:0s,t1.c3)
@@ -34,11 +34,18 @@ fz:
     # - combine(multi_last_value(t1,t2.c1,2147483645:0),multi_last_value(t1,t2.c2,2147483645:0),t1.c3)
     
 input:
-   - 1, 15.0, 2020-05-20
-   - 2, 23.0, 2020-05-21
-   - 3, 66.0, 2020-05-22
+   - name: t1
+     schema: c1:string, c2:timestamp, c3:double
+     index: c1
+     data: |
+         1, 2020-05-20, 15.0
+         2, 2020-05-21, 23.0
+         3, 2020-05-22, 66.0
 
 expected:
+     1
+     2
+     3
 
 
 

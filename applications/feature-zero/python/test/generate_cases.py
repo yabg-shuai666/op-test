@@ -2,6 +2,7 @@
 # -*- coding: UTF-8 -*-
 
 from distutils.command.config import config
+import sqlite3
 from tkinter import N, Y
 import yaml
 import re
@@ -32,7 +33,7 @@ def case():
     curPath = os.path.dirname(os.path.realpath(__file__))
     print(curPath)
     # 获取yaml文件路径
-    yamlPath = os.path.join(curPath, "op_convert_case/data.yaml")
+    yamlPath = os.path.join(curPath, "op_convert_case/data_window_min.yaml")
  
     # open方法打开直接读出来
     f = open(yamlPath, 'r', encoding='utf-8')
@@ -48,7 +49,7 @@ def conv(d):
     app = {'feature_info': {}}
     data['app'] = app
     
-    feature_info = {'target_entity': d['config'][0]['table_name'], 'target_entity_index': d['config'][0]['index'], 'target_label': 'c3' , 'target_pivot_timestamp':'c3','entity_detail':{}, 'relations': []}
+    feature_info = {'target_entity': d['config'][0]['table_name'], 'target_entity_index': d['config'][0]['index'], 'target_label': 'c3' , 'target_pivot_timestamp':'c2','entity_detail':{}, 'relations': []}
     data['app']['feature_info'] = feature_info
 
     relations = [{'type':'1-1', 'time_windows': ['10:0','100:0','1d,1000:0s'],'window_delay':''

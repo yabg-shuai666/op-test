@@ -16,29 +16,45 @@ config:
     datatype: Double
   - name: c3
     datatype: Timestamp
-  index: c3
-desc: original | multi_* | window_* |combine op
+  index: c1
+desc: multi_* op
 fz:
-- original(t1.c1)
+- window_min(t1.c2,t1.c1,10:0,t1.c3)
 input:
-- 1, 15.0, 2020-05-20
-- 2, 23.0, 2020-05-21
-- 3, 66.0, 2020-05-22
-expected: null
+- name: t1
+  schema: c1:string, c2:timestamp, c3:double
+  index: c1
+  data: 1,1949-10-1 10:00:00,6666.0 1,1970-01-1 10:00:00,6666.0 1,1970-01-1 23:00:00,6666.0
+    1,2022-03-1 23:28:55,1246.0 2,2021-03-1 17:00:00,4044.0 2,2021-03-1 20:02:33,2022.0
+    2,2021-03-1 23:00:00,3033.0 3,2021-03-3 08:08:08,3032.0 3,2021-03-3 17:09:11,3032.0
+- name: t2
+  schema: c1:string, c2:double, c3:timestamp
+  index: c1
+  data: 1,1246.0,2022-03-1 23:28:55 1,6666.0,1949-10-1 10:00:00 1,6666.0,1970-01-1
+    10:00:00 1,6666.0,1970-01-1 23:00:00 2,2022.0,2021-03-1 20:02:33 2,4044.0,2021-03-1
+    17:00:00 3,3032.0,2021-03-3 17:09:11 4,9999.0,2021-03-3 11:24:11
+expected:
+  schema: c1_1:string    t1_c3_window_avg_0:double
+  data: 3      3032.000000 3      3032.000000 2      4044.000000 2      3033.000000
+    2      3033.000000 1      6666.000000 1      6666.000000 1      4859.333333 1      5311.000000
 sql: 'select
 
   `c1` as c1_1,
 
-  `c1` as t1_c1_original_0
+  min(`c3`) over t1_c1_c2_0_10_ as t1_c3_window_min_0
 
   from
 
   `t1`
 
-  ;'
+  window t1_c1_c2_0_10_ as (partition by `c1` order by `c2` rows between 10 preceding
+  and 0 preceding);'
 column: 'key_t1_c1_1 = window(table=t1, output="t1_output")
 
   t1_outputkey_t1_c1 = output(key_t1_c1_1.c1[0])
 
-  f_original_c1_0 = column(key_t1_c1_1.c1[0])'
+  t1_c2_c1 = window(table=t1, keys=[c1], order=c2, max_size=11, at_least=10, offset=0s,
+  output="t1_output")
+
+  f_t1_window_min_c3_0 = column(min(t1_c2_c1.c3[0:10]))'
 
