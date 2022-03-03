@@ -22,8 +22,9 @@ desc: multi_* op
 
 fz:   
     # - window_count(t1.c2,t1.c1,604801s:100:0s,t1.c3)
+    - window_unique_count(t1.c2,t1.c1,604801s:100:0s,t1.c3)
     # - window_avg(t1.c2,t1.c1,10:0,t1.c3)
-    - window_min(t1.c2,t1.c1,10:0,t1.c3)
+    # - window_min(t1.c2,t1.c1,10:0,t2.c3)
     # - window_max(t2.c1,t2.c2,10:0,t2.c3)
     # - window_top1_ratio(t2.c1,t2.c2,10:0,t2.c3)
     # - original(t1.c1)
@@ -45,34 +46,24 @@ input:
           2,2021-03-1 20:02:33,3333.0
           2,2021-03-1 23:00:00,3333.0
           3,2021-03-3 08:08:08,3032.0
-          3,2021-03-3 17:09:11,3032.0
-      
+          3,2021-03-3 17:09:11,3032.0     
    - name: t2
      schema: c1:string, c2:double, c3:timestamp
      index: c1
      data: 
-         1,1246.0,2022-03-1 23:28:55
-         1,6666.0,1949-10-1 10:00:00
-         1,6666.0,1970-01-1 10:00:00
-         1,6666.0,1970-01-1 23:00:00
-         2,2022.0,2021-03-1 20:02:33
-         2,4044.0,2021-03-1 17:00:00
-         3,3032.0,2021-03-3 17:09:11
-         4,9999.0,2021-03-3 11:24:11
-expected:
-      schema: c1_1:string    t1_c3_window_min_0:double
-      data: 
-          3      3032.000000
-          3      3032.000000
-          2      5555.000000
-          2      3333.000000
-          2      3333.000000
-          1      6666.000000
-          1      6666.000000
-          1      6666.000000
-          1      1246.000000
-      
 
+expected:
+      schema: c1_1:string   t1_c3_window_unique_count_0:double
+      data: 
+            3      1
+            3      1
+            2      1
+            2      2
+            2      2
+            1      1
+            1      1
+            1      1
+            1      1
 # create table t1 (c1 string, c2 timestamp, c3 double);
 # load data infile 'file:///Users/4paradigm/Desktop/s1.csv' into table t1 options(format='csv', foo='bar', header=false, mode='append');
 
