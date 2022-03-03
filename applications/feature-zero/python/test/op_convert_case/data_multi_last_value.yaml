@@ -62,15 +62,15 @@ input:
 expected:
       schema: c1_1:string   t2_c2_multi_last_value_0:double
       data: 
-            3      3033.000000
-            3      3033.000000
-            1      8888.000000
-            1      8888.000000
-            1      8888.000000
-            1      8888.000000
-            2      4044.000000
-            2      4044.000000
-            2      4044.000000
+          3      NULL
+          3      NULL
+          1      6666.000000
+          1      6666.000000
+          1      6666.000000
+          1      3333.000000
+          2      2022.000000
+          2      4044.000000
+          2      NULL
 
 # create table t1 (c1 string, c2 timestamp, c3 double);
 # load data infile 'file:///Users/4paradigm/Desktop/s1.csv' into table t1 options(format='csv', foo='bar', header=false, mode='append');

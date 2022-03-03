@@ -91,12 +91,12 @@ class TestConvert(unittest.TestCase):
     #     feql("split.ops", "split.json", cfg_is_info=True)
     #     print("test_split_key test_split_keyt est_split_key")
 
-    def test_myhug_sql_window_count(self):
-        sql, _ = fesql("myhug_selected_ops_window_count.bk",
-                       "myhug_pyconf.json")
-        # assert sql.find("count_where") != -1
-        feql("myhug_selected_ops_window_count.bk", "myhug_pyconf.json")
-        print("test_myhug_sql_window_count test_myhug_sql_window_count test_myhug_sql_window_count")
+    # def test_myhug_sql_window_count(self):
+    #     sql, _ = fesql("myhug_selected_ops_window_count.bk",
+    #                    "myhug_pyconf.json")
+    #     # assert sql.find("count_where") != -1
+    #     feql("myhug_selected_ops_window_count.bk", "myhug_pyconf.json")
+    #     print("test_myhug_sql_window_count test_myhug_sql_window_count test_myhug_sql_window_count")
 
     # def test_myhug_total(self):
     #     fesql("myhug_selected_ops.bk", "myhug_pyconf.json")
@@ -106,13 +106,13 @@ class TestConvert(unittest.TestCase):
     #     feql("last_value_selected_ops.bk", "last_value_pyconf.json")
     #     fesql("last_value_selected_ops.bk", "last_value_pyconf.json")
 
-    # def test_join_condition(self):
-    #     feql("join_selected_ops_one.bk", "join_pyconf.json")
-    #     sql, sign = fesql("join_selected_ops_one.bk", "join_pyconf.json")
-    #     print("HERE")
-    #     print(sql, "\n\n", sign)
+    def test_join_condition(self):
+        feql("join_selected_ops_one.bk", "join_pyconf.json")
+        sql, sign = fesql("join_selected_ops_one.bk", "join_pyconf.json")
+        print("HERE")
+        print(sql, "\n\n", sign)
         # assert sql == """# start sql code
-# # output table name: sql_table
+# output table name: sql_table
 
 # select
 #     `batch110174_flatten_request`.`reqId` as reqId_1,

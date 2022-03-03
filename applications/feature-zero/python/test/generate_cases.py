@@ -55,8 +55,8 @@ def conv(d):
     relations = [{'type':'1-1', 'time_windows': ['10:0','100:0','1d,1000:0s'],'window_delay':''
         ,'from_entity':d['config'][0]['table_name'],'from_entity_keys':[d['config'][0]['index']],'from_entity_time_col':'','to_entity':d['config'][1]['table_name'],
         'to_entity_keys':[d['config'][1]['index']],'to_entity_time_col':''},
-        {'type':'SLICE','to_entity':d['config'][1]['table_name'], 'from_entity':d['config'][0]['table_name'],'from_entity_keys':[d['config'][0]['index']],'to_entity_keys':[d['config'][1]['index']],
-        'from_entity_time_col':'','to_entity_time_col':'','time_windows':['2147483645:0']}
+        {'type':'SLICE','window_delay':'0s','to_entity':d['config'][1]['table_name'], 'from_entity':d['config'][0]['table_name'],'from_entity_keys':[d['config'][0]['index']],'to_entity_keys':[d['config'][1]['index']],
+        'from_entity_time_col':'c2','to_entity_time_col':'c3','time_windows':['2147483645:0']}
         ]
     data['app']['feature_info']['relations'] = relations
 
