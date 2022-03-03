@@ -2,13 +2,9 @@
 # -*- coding: UTF-8 -*-
 
 from distutils.command.config import config
-import sqlite3
-from tkinter import N, Y
+
 import yaml
 import re
-# fmt:off
-
-# fmt:off
 import sys
 import os
 sys.path.append(os.path.dirname(__file__) + "/..")
@@ -26,7 +22,6 @@ def abs_path(param):
 # fmt:on
 
 # TODO: add test case easier, maybe yaml case?
-
 
 def case():
     # 获取当前脚本所在文件夹路径
@@ -102,8 +97,6 @@ def save_file(path, item):
         except Exception as e:
             print("write error==>", e)
 
-
-
 def fesql(op_file, config_file, cfg_is_info=False, debug=False):
     config_all = json.loads(config_file)   #加载配置文件
     if debug:
@@ -129,7 +122,6 @@ def fesql(op_file, config_file, cfg_is_info=False, debug=False):
     print("--------------------fe fe fe fe fe fe fe fe fe fe fe --------------------")
     return sql, fe
 
-
 def feql(op_file, config_file, cfg_is_info=False, debug=False):
     config_all = json.loads(config_file)
     real_config = config_all if cfg_is_info else config_all['app']['feature_info']
@@ -145,7 +137,6 @@ def feql(op_file, config_file, cfg_is_info=False, debug=False):
     result_cnt = len(sign.splitlines())
     print("convert ", good, " ops to feql sign, result ",
             result_cnt, " line(if !=0, include 1 more lines)")
-    print(sign+'^^^^^^^^^^^^^^^')
     assert result_cnt - 1 == good or (result_cnt == 0 and good == 0)
     print("--------------------column column column column column column column column--------------------")
     print(column)
@@ -164,15 +155,14 @@ class TestConvert(unittest.TestCase):
         print(article)
         print("**********#########*********")
         str='\n'.join(data['fz'])
-        # s = data['fz']
-        # s.replace("\n","ccccccc")
+
         print(str)
         # print(type(data['fz']))
         print("读取原数据")
         sql, fe = fesql(str,article)
         column, sign = feql(str,article)
         print("Here"+"Start"+"\n\n\n\n\n")
-        # print(sql.split('sql_table')[1])
+
         print(column)
         print("Here"+"End")
         print(sql)
@@ -188,6 +178,5 @@ class TestConvert(unittest.TestCase):
 
         save_file(abs_path('result.yaml'),data)
      
-
 if __name__ == '__main__':
     unittest.main()
