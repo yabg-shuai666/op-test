@@ -73,9 +73,3 @@ expected:
           2      4044.000000
           2      4044.000000
           2      4044.000000
-# create table t1 (c1 string, c2 timestamp, c3 double);
-# load data infile 'file:///Users/4paradigm/Desktop/s1.csv' into table t1 options(format='csv', foo='bar', header=false, mode='append');
-
-
-# create table t2 (c1 string, c2 double, c3 timestamp);
-# load data infile 'file:///Users/4paradigm/Desktop/s2.csv' into table t2 options(format='csv', foo='bar', header=false, mode='append');
