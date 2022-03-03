@@ -23,9 +23,9 @@ desc: multi_* op
 fz:   
     # - window_count(t1.c2,t1.c1,604801s:100:0s,t1.c3)
     # - window_avg(t1.c2,t1.c1,10:0,t1.c3)
-    - window_min(t1.c2,t1.c1,10:0,t1.c3)
-    # - window_max(t2.c1,t2.c2,10:0,t2.c3)
-    # - window_top1_ratio(t2.c1,t2.c2,10:0,t2.c3)
+    # - window_min(t1.c2,t1.c1,10:0,t1.c3)
+      # - window_sum(t1.c2,t1.c1,10:0,t1.c3)
+    - window_top1_ratio(t1.c2,t1.c1,10:0,t1.c3)
     # - original(t1.c1)
     # - combine(t1.c1,t1.c2,t1.c3)
     # - multi_direct(t1,t2.c2)
@@ -51,28 +51,27 @@ input:
      schema: c1:string, c2:double, c3:timestamp
      index: c1
      data: 
-          1,1246.0,2022-03-1 23:28:55
-          1,6666.0,1949-10-1 10:00:00
-          1,6666.0,1970-01-1 10:00:00
-          1,6666.0,1970-01-1 23:00:00
-          2,2022.0,2021-03-1 20:02:33
-          2,4044.0,2021-03-1 17:00:00
-          3,3032.0,2021-03-3 17:09:11
-          4,9999.0,2021-03-3 11:24:11
+         1,1246.0,2022-03-1 23:28:55
+         1,6666.0,1949-10-1 10:00:00
+         1,6666.0,1970-01-1 10:00:00
+         1,6666.0,1970-01-1 23:00:00
+         2,2022.0,2021-03-1 20:02:33
+         2,4044.0,2021-03-1 17:00:00
+         3,3032.0,2021-03-3 17:09:11
+         4,9999.0,2021-03-3 11:24:11
 expected:
-      schema: c1_1:string    t1_c3_window_min_0:double
+      schema: c1_1:string    t1_c3_window_top1_ratio_0:double
       data: 
-          3      3032.000000
-          3      3032.000000
-          2      5555.000000
-          2      3333.000000
-          2      3333.000000
-          1      6666.000000
-          1      6666.000000
-          1      6666.000000
-          1      1246.000000
+          3      1.000000
+          3      1.000000
+          2      1.000000
+          2      0.500000
+          2      0.666667
+          1      1.000000
+          1      0.500000
+          1      0.666667
+          1      0.500000
       
-
 # create table t1 (c1 string, c2 timestamp, c3 double);
 # load data infile 'file:///Users/4paradigm/Desktop/s1.csv' into table t1 options(format='csv', foo='bar', header=false, mode='append');
 

@@ -107,10 +107,11 @@ class TestConvert(unittest.TestCase):
     #     fesql("last_value_selected_ops.bk", "last_value_pyconf.json")
 
     def test_join_condition(self):
-        feql("join_selected_ops_one.bk", "join_pyconf.json")
+        column, sign=feql("join_selected_ops_one.bk", "join_pyconf.json")
         sql, sign = fesql("join_selected_ops_one.bk", "join_pyconf.json")
         print("HERE")
         print(sql, "\n\n", sign)
+        print(column)
         # assert sql == """# start sql code
 # output table name: sql_table
 

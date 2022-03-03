@@ -29,6 +29,7 @@ fz:
     # - original(t1.c1)
     # - combine(t1.c1,t1.c2,t1.c3)
     - multi_direct(t1,t2.c2)
+    # - binary_label((multi_direct(t1,t2.c2))
     # - multi_last_value(t1,t2.c3,2147483645:0)
     # - combine(multi_last_value(t1,t2.c1,2147483645:0),multi_last_value(t1,t2.c2,2147483645:0),t1.c3)
     
@@ -59,7 +60,7 @@ input:
           2,2022.0,2021-03-1 20:02:33
           2,4044.0,2021-03-1 17:00:00
           3,3033.0,2021-03-3 17:09:11
-4,9999.0,2021-03-3 11:24:11
+          4,9999.0,2021-03-3 11:24:11
 expected:
       schema: c1_1:string   t2_c2_multi_direct_0:double
       data: 
