@@ -19,42 +19,48 @@ config:
   index: c1
 desc: multi_* op
 fz:
-- window_min(t1.c2,t1.c1,10:0,t1.c3)
+- multi_last_value(t1,t2.c2,2147483645:0)
 input:
 - name: t1
   schema: c1:string, c2:timestamp, c3:double
   index: c1
-  data: 1,1949-10-1 10:00:00,6666.0 1,1970-01-1 10:00:00,6666.0 1,1970-01-1 23:00:00,6666.0
-    1,2022-03-1 23:28:55,1246.0 2,2021-03-1 17:00:00,4044.0 2,2021-03-1 20:02:33,2022.0
-    2,2021-03-1 23:00:00,3033.0 3,2021-03-3 08:08:08,3032.0 3,2021-03-3 17:09:11,3032.0
+  data: 1, 2020-05-20, 15.0 2, 2020-05-21, 23.0 3, 2020-05-22, 66.0
 - name: t2
   schema: c1:string, c2:double, c3:timestamp
   index: c1
-  data: 1,1246.0,2022-03-1 23:28:55 1,6666.0,1949-10-1 10:00:00 1,6666.0,1970-01-1
-    10:00:00 1,6666.0,1970-01-1 23:00:00 2,2022.0,2021-03-1 20:02:33 2,4044.0,2021-03-1
-    17:00:00 3,3032.0,2021-03-3 17:09:11 4,9999.0,2021-03-3 11:24:11
+  data: 1,1246.0,2022-03-1 23:28:55 2,2022.0,2022-03-2 20:02:33 3,3032.0,2022-03-3
+    17:09:11 4,9999.0,2021-03-3 11:24:11
 expected:
-  schema: c1_1:string    t1_c3_window_avg_0:double
-  data: 3      3032.000000 3      3032.000000 2      4044.000000 2      3033.000000
-    2      3033.000000 1      6666.000000 1      6666.000000 1      4859.333333 1      5311.000000
+  schema: c1_1:string   t2_c2_multi_last_value_0:double
+  data: 1,6666.000000 2,2022.000000 3,3032.000000
 sql: 'select
 
-  `c1` as c1_1,
+  `t1`.`c1` as c1_1,
 
-  min(`c3`) over t1_c1_c2_0_10_ as t1_c3_window_min_0
+  `t2_c1`.`c2` as t2_c2_multi_last_value_0
 
   from
 
   `t1`
 
-  window t1_c1_c2_0_10_ as (partition by `c1` order by `c2` rows between 10 preceding
-  and 0 preceding);'
+  last join `t2` as `t2_c1` on `t1`.`c1` = `t2_c1`.`c1`;'
 column: 'key_t1_c1_1 = window(table=t1, output="t1_output")
 
   t1_outputkey_t1_c1 = output(key_t1_c1_1.c1[0])
 
-  t1_c2_c1 = window(table=t1, keys=[c1], order=c2, max_size=11, at_least=10, offset=0s,
-  output="t1_output")
+  join_t1 = select(t1, c1 as t1_c1, c2 as t1_c2, c3 as t1_c3)
 
-  f_t1_window_min_c3_0 = column(min(t1_c2_c1.c3[0:10]))'
+  join_t2 = select(t2, c1 as t2_c1, c2 as t2_c2, c3 as t2_c3)
+
+  join_t1_join_t2_last = lastjoin(join_t1, join_t2, join_t1.t1_c1 == join_t2.t2_c1,
+  join_t2.t2_ between (unbound, join_t1.t1_))
+
+  join_t1_join_t2_last_window = window(join_t1_join_t2_last, "join_t1_join_t2_last_join_output")
+
+  f_t1_t2_c2_lastvalue_0 = column(join_t1_join_t2_last_window.t2_c2[0])
+
+  lastjoinkey_t1_c1 = output(join_t1_join_t2_last_window.t1_c1[0])
+
+  join_t1_join_t2_last_join_output_t1_output = leftjoin(join_t1_join_t2_last_join_output,
+  t1_output, "join_t1_join_t2_last_join_output.lastjoinkey_t1_c1 = t1_output.t1_outputkey_t1_c1")'
 
