@@ -18,7 +18,7 @@ config:
           datatype: Timestamp
      index: c1
 
-desc: multi_* op
+desc: window_top1_ratio op
 
 fz:   
     # - window_count(t1.c2,t1.c1,604801s:100:0s,t1.c3)

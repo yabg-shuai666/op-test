@@ -18,7 +18,7 @@ config:
           datatype: Timestamp
      index: c1
 
-desc: multi_* op
+desc: multi_last_value op
 
 fz:   
     # - window_count(t2.c3,t2.c1,604801s:100:0s,t2.c2)

@@ -18,7 +18,7 @@ config:
           datatype: Timestamp
      index: c1
 
-desc: original | multi_* | window_* |combine op
+desc: combine op
 
 fz:   
     # - window_count(t1.c1,t1.c2,604801s:100:0s,t1.c3)
