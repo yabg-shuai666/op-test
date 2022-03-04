@@ -30,7 +30,7 @@ fz:
     - combine(t1.c1,t1.c2,t1.c3)
     # - multi_direct(t1,t2.c2)
     # - multi_last_value(t1,t2.c3,2147483645:0)
-    # - combine(multi_last_value(t1,t2.c1,2147483645:0),multi_last_value(t1,t2.c2,2147483645:0),t1.c3)
+    - combine(multi_last_value(t1,t2.c3,2147483645:0),multi_last_value(t1,t2.c3,2147483645:0),t1.c3)
     
 input:
    - name: t1
