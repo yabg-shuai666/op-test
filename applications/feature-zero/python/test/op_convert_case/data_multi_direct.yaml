@@ -21,18 +21,7 @@ config:
 desc: multi_direct op
 
 fz:   
-    # - window_count(t1.c1,t1.c2,604801s:100:0s,t1.c3)
-    # - window_avg(t2.c1,t2.c2,10:0,t2.c3)
-    # - window_min(t2.c1,t2.c2,10:0,t2.c3)
-    # - window_max(t2.c1,t2.c2,10:0,t2.c3)
-    # - window_top1_ratio(t2.c1,t2.c2,10:0,t2.c3)
-    # - original(t1.c1)
-    # - combine(t1.c1,t1.c2,t1.c3)
-    - multi_direct(t1,t2.c2)
-    # - binary_label((multi_direct(t1,t2.c2))
-    # - multi_last_value(t1,t2.c3,2147483645:0)
-    # - combine(multi_last_value(t1,t2.c1,2147483645:0),multi_last_value(t1,t2.c2,2147483645:0),t1.c3)
-    
+    - multi_direct(t1,t2.c2) 
 input:
    - name: t1
      schema: c1:string, c2:timestamp, c3:double
