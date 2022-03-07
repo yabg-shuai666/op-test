@@ -21,7 +21,7 @@ config:
 desc: binary_label op
 
 fz:
-  - binary_label(multi_direct(t1,t2.c2))
+  - regression_label(multi_direct(t1,t2.c2))
 input:
   - name: t1
     schema: c1:string, c2:timestamp, c3:double
