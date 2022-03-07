@@ -1,0 +1,71 @@
+config:
+   - table_name : t1 
+     column :   
+        - name: c1
+          datatype: String
+        - name: c2 
+          datatype: Timestamp
+        - name: c3
+          datatype: Double
+     index: c1  
+   - table_name : t2  
+     column :   
+        - name: c1
+          datatype: String
+        - name: c2
+          datatype: Double
+        - name: c3
+          datatype: Timestamp
+     index: c1
+
+desc: isin op
+
+fz:   
+    - isin(t1.c1,t1.c2,t1.c3)
+    # - isin(t1.c1,multi_direct(t1,t2.c3))
+input:
+   - name: t1
+     schema: c1:string, c2:timestamp, c3:double
+     index: c1
+     data: 
+         1, 2020-05-20, 15.0
+         2, 2020-05-21, 23.0
+         3, 2020-05-22, 66.0
+   - name: t2
+     schema: c1:string, c2:double, c3:timestamp
+     index: c1
+     data: 
+         1,1246.0,2022-03-1 23:28:55
+         1,6666.0,1996-10-1 10:00:00
+         2,2022.0,2022-03-2 20:02:33
+         3,3032.0,2022-03-3 17:09:11
+         4,9999.0,2021-03-3 11:24:11
+
+expected:
+      schema: c1_1:string   t1_c1_isin_0:string   t1_c2isin_0:timestamp   t1_c3_isin_0:double
+      data: 
+          1, 1, 2020-05-20, 15.0
+          2, 2, 2020-05-21, 23.0
+          3, 3, 2020-05-22, 66.0
+sql: select
+
+  `c1` as c1_1,
+
+  `c1` as t1_c1_isin_0,
+
+  `c2` as t1_c2_isin_0,
+
+  `c3` as t1_c3_isin_0
+
+  from
+
+  `t1`;
+fzql: key_t1_c1_1 = window(table=t1, output="t1_output")
+
+  t1_outputkey_t1_c1 = output(key_t1_c1_1.c1[0])
+
+  f_combine_0_2 = column(key_t1_c1_1.c1[0])
+
+  f_combine_0_3 = column(key_t1_c1_1.c2[0])
+
+  f_combine_0_4 = column(key_t1_c1_1.c3[0]);
