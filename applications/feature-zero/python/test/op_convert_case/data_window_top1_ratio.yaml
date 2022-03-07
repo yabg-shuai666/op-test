@@ -62,3 +62,28 @@ expected:
           1      0.500000
           1      0.666667
           1      0.500000
+sql: select
+
+  `c1` as c1_1,
+
+  fz_top1_ratio(`c3`) over t1_c1_c2_0_10_ as t1_c3_window_top1_ratio_0
+
+  from
+
+  `t1`
+
+  window t1_c1_c2_0_10_ as (partition by `c1` order by `c2` rows between 10 preceding
+  and 0 preceding);
+feql: key_t1_c1_1 = window(table=t1, output="t1_output")
+
+  t1_outputkey_t1_c1 = output(key_t1_c1_1.c1[0])
+
+  t1_c2_c1 = window(table=t1, keys=[c1], order=c2, max_size=11, at_least=10, offset=0s,
+  output="t1_output")
+
+  f_t1_window_top1_ratio_c3_0_where = where(t1_c2_c1[0:10], x -> x.c3 != null)
+
+  f_t1_window_top1_ratio_c3_0_group = group_by(t1_c2_c1[0:10], "c3")
+
+  f_t1_window_top1_ratio_c3_0 = column(first(top(get_values(map(f_t1_window_top1_ratio_c3_0_group,
+  x -> double(count(x))/count(f_t1_window_top1_ratio_c3_0_where))), 1)));

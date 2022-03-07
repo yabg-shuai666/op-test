@@ -32,9 +32,22 @@ input:
          3, 2020-05-22, 66.0
 
 expected:
-     1
-     2
-     3
+      schema: c1_1:string   t1_c1_original_0:double
+      data: 
+          1
+          2
+          3
+sql: select
 
+  `c1` as c1_1,
 
+  `c1` as t1_c1_original_0
 
+  from
+
+  `t1`;
+feql:  key_t1_c1_1 = window(table=t1, output="t1_output")
+
+  t1_outputkey_t1_c1 = output(key_t1_c1_1.c1[0])
+
+  f_original_c1_0 = column(key_t1_c1_1.c1[0]);

@@ -37,5 +37,19 @@ expected:
            1  15.0
            2  25.0
            3  66.0
-           
+sql: select
+
+  `c1` as c1_1,
+
+  `c3` as t1_c3_0
+
+  from
+
+  `t1`;
+feql: key_t1_c1_1 = window(table=t1, output="t1_output")
+
+  t1_outputkey_t1_c1 = output(key_t1_c1_1.c1[0])
+
+  f_split_key_0 = column(key_t1_c1_1.c3[0]);
+
 

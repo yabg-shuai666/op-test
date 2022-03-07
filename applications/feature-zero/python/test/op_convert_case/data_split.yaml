@@ -62,16 +62,20 @@ expected:
           2      4044.000000
           2      4044.000000
           2      4044.000000
+sql: select
 
-sql: 
-    select `t1`.`c1` as c1_1,
-        `t2_c1`.`c2` as t2_c2_multi_direct_0
-         from `t1`
-         last join `t2` as `t2_c1` on `t1`.`c1` = `t2_c1`.`c1`;'
-column: 
-   'key_t1_c1_1 = window(table=t1, output="t1_output")
+  `t1`.`c1` as c1_1,
 
-   t1_outputkey_t1_c1 = output(key_t1_c1_1.c1[0])
+  `t2_c1`.`c2` as t2_c2_multi_direct_0
+
+  from
+
+  `t1`
+
+  last join `t2` as `t2_c1` on `t1`.`c1` = `t2_c1`.`c1`;
+column: key_t1_c1_1 = window(table=t1, output="t1_output")
+
+  t1_outputkey_t1_c1 = output(key_t1_c1_1.c1[0])
 
   join_t1 = select(t1, c1 as t1_c1, c2 as t1_c2, c3 as t1_c3)
 
@@ -84,5 +88,4 @@ column:
   leftjoinkey_t1_c1 = output(join_t1_join_t2_left_window.t1_c1[0])
 
   join_t1_join_t2_left_join_output_t1_output = leftjoin(join_t1_join_t2_left_join_output,
-  t1_output, "join_t1_join_t2_left_join_output.leftjoinkey_t1_c1 = t1_output.t1_outputkey_t1_c1")'
-
+  t1_output, "join_t1_join_t2_left_join_output.leftjoinkey_t1_c1 = t1_output.t1_outputkey_t1_c1");

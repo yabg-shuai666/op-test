@@ -48,3 +48,25 @@ expected:
           1, 1, 2020-05-20, 15.0
           2, 2, 2020-05-21, 23.0
           3, 3, 2020-05-22, 66.0
+sql: select
+
+  `c1` as c1_1,
+
+  `c1` as t1_c1_combine_0,
+
+  `c2` as t1_c2_combine_0,
+
+  `c3` as t1_c3_combine_0
+
+  from
+
+  `t1`;
+fzql: key_t1_c1_1 = window(table=t1, output="t1_output")
+
+  t1_outputkey_t1_c1 = output(key_t1_c1_1.c1[0])
+
+  f_combine_0_2 = column(key_t1_c1_1.c1[0])
+
+  f_combine_0_3 = column(key_t1_c1_1.c2[0])
+
+  f_combine_0_4 = column(key_t1_c1_1.c3[0]);

@@ -53,6 +53,25 @@ expected:
             1      1
             1      1
             1      1
+sql: select
+
+  `c1` as c1_1,
+
+  distinct_count(`c3`) over t1_c1_c2_0s_604801s_100 as t1_c3_window_unique_count_0
+
+  from
+
+  `t1`
+
+  window t1_c1_c2_0s_604801s_100 as (partition by `c1` order by `c2` rows_range between
+  604801s preceding and 0s preceding MAXSIZE 100);
+feql: key_t1_c1_1 = window(table=t1, output="t1_output")
+
+  t1_outputkey_t1_c1 = output(key_t1_c1_1.c1[0])
+
+  t1_c2_c1 = window(table=t1, keys=[c1], order=c2, max_size=100, offset=604801s, output="t1_output")
+
+  f_t1_window_unique_count_c3_0 = column(distinct_count(t1_c2_c1.c3[0s:604801s]));
 # create table t1 (c1 string, c2 timestamp, c3 double);
 # load data infile 'file:///Users/4paradigm/Desktop/s1.csv' into table t1 options(format='csv', foo='bar', header=false, mode='append');
 

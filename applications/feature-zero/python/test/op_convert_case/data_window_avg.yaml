@@ -54,3 +54,23 @@ expected:
            1      7777.000000
            1      8147.333333
            1      6422.000000
+sql: select
+
+  `c1` as c1_1,
+
+  avg(`c3`) over t1_c1_c2_0_10_ as t1_c3_window_avg_0
+
+  from
+
+  `t1`
+
+  window t1_c1_c2_0_10_ as (partition by `c1` order by `c2` rows between 10 preceding
+  and 0 preceding);
+feql: key_t1_c1_1 = window(table=t1, output="t1_output")
+
+  t1_outputkey_t1_c1 = output(key_t1_c1_1.c1[0])
+
+  t1_c2_c1 = window(table=t1, keys=[c1], order=c2, max_size=11, at_least=10, offset=0s,
+  output="t1_output")
+
+  f_t1_window_avg_c3_0 = column(avg(t1_c2_c1.c3[0:10]));
