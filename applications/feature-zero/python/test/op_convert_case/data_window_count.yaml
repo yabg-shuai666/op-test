@@ -74,7 +74,7 @@ sql: select
 
   window t1_c1_c2_0s_604801s_100 as (partition by `c1` order by `c2` rows_range between
   604801s preceding and 0s preceding MAXSIZE 100);
-column: key_t1_c1_1 = window(table=t1, output="t1_output")
+feql: key_t1_c1_1 = window(table=t1, output="t1_output")
 
   t1_outputkey_t1_c1 = output(key_t1_c1_1.c1[0])
 

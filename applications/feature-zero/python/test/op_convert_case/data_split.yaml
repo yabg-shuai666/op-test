@@ -19,7 +19,6 @@ config:
      index: c1
 
 desc: split op
-
 fz:   
     - split(multi_direct(t1,t2.c2),44)    
 input:
