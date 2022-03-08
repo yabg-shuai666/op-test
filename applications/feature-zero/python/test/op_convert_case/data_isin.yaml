@@ -17,9 +17,7 @@ config:
         - name: c3
           datatype: Timestamp
      index: c1
-
 desc: isin op
-
 fz:   
     - isin(t1.c1,t1.c2,t1.c3)
     # - isin(t1.c1,multi_direct(t1,t2.c3))
@@ -60,7 +58,7 @@ sql: select
   from
 
   `t1`;
-fzql: key_t1_c1_1 = window(table=t1, output="t1_output")
+feql: key_t1_c1_1 = window(table=t1, output="t1_output")
 
   t1_outputkey_t1_c1 = output(key_t1_c1_1.c1[0])
 

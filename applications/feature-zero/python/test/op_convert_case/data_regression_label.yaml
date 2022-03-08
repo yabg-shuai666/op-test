@@ -17,9 +17,7 @@ config:
       - name: c3
         datatype: Timestamp
     index: c1
-
 desc: regression_label op
-
 fz:
   - regression_label(multi_direct(t1,t2.c2))
 input:

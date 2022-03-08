@@ -17,9 +17,7 @@ config:
         - name: c3
           datatype: Timestamp
      index: c1
-
 desc: window_min op
-
 fz:   
     - window_min(t1.c2,t1.c1,10:0,t1.c3) 
 input:

@@ -17,9 +17,7 @@ config:
         - name: c3
           datatype: Timestamp
      index: c1
-
 desc: window_avg op
-
 fz:   
     - window_avg(t1.c2,t1.c1,10:0,t1.c3)
 input:
@@ -41,7 +39,6 @@ input:
      schema: c1:string, c2:double, c3:timestamp
      index: c1
      data: 
-
 expected:
       schema: c1_1:string    t1_c3_window_avg_0:double
       data: 

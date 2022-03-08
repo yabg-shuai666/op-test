@@ -17,13 +17,10 @@ config:
         - name: c3
           datatype: Timestamp
      index: c1
-
 desc: combine op
-
 fz:   
     - combine(t1.c1,t1.c2,t1.c3)
     # - combine(multi_last_value(t1,t2.c3,2147483645:0),multi_last_value(t1,t2.c3,2147483645:0),t1.c3)
-    
 input:
    - name: t1
      schema: c1:string, c2:timestamp, c3:double
@@ -61,7 +58,7 @@ sql: select
   from
 
   `t1`;
-fzql: key_t1_c1_1 = window(table=t1, output="t1_output")
+feql: key_t1_c1_1 = window(table=t1, output="t1_output")
 
   t1_outputkey_t1_c1 = output(key_t1_c1_1.c1[0])
 

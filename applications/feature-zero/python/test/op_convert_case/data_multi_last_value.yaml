@@ -17,9 +17,7 @@ config:
         - name: c3
           datatype: Timestamp
      index: c1
-
 desc: multi_last_value op
-
 fz:   
     - multi_last_value(t1,t2.c2,2147483645:0)
 input:

@@ -18,14 +18,12 @@ config:
           datatype: Timestamp
      index: c1
 
-desc: multi_last_value op
-
+desc: binary_* op
 fz:   
     - add(multi_last_value(t1,t2.c2,2147483645:0),multi_last_value(t1,t2.c2,2147483645:0))
     - divide(multi_last_value(t1,t2.c2,2147483645:0),multi_last_value(t1,t2.c2,2147483645:0))
     - multiply(multi_last_value(t1,t2.c2,2147483645:0),multi_last_value(t1,t2.c2,2147483645:0))
     - subtract(multi_last_value(t1,t2.c2,2147483645:0),multi_last_value(t1,t2.c2,2147483645:0))
-  
 input:
    - name: t1
      schema: c1:string, c2:timestamp, c3:double

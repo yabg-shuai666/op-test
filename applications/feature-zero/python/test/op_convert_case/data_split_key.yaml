@@ -17,9 +17,7 @@ config:
         - name: c3
           datatype: Double
      index: c1
-
 desc: split_key op
-
 fz:   
     - split_key(multi_last_value(t1,t2.c2,2147483645:0),44,58)
 input:
@@ -30,7 +28,6 @@ input:
          1, 2020-05-20, 15.0
          2, 2020-05-21, 23.0
          3, 2020-05-22, 66.0
-
 expected:
       schema: c1_1:string    t1_c3_0:double
       data: 
