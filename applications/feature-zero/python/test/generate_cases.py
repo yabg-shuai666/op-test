@@ -19,10 +19,6 @@ resource_path = os.path.dirname(__file__)
 def abs_path(param):
     return resource_path + "/" + param
 
-# fmt:on
-
-# TODO: add test case easier, maybe yaml case?
-
 def case():
     # 获取当前脚本所在文件夹路径
     curPath = os.path.dirname(os.path.realpath(__file__))
@@ -35,7 +31,6 @@ def case():
     cfg = f.read()
     data = yaml.load(cfg,Loader=yaml.FullLoader)  # 用load方法转字典
     return data
-
 
 def conv(d):
     article_info = {}

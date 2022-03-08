@@ -17,7 +17,6 @@ config:
         - name: c3
           datatype: Timestamp
      index: c1
-
 desc: binary_* op
 fz:   
     - add(multi_last_value(t1,t2.c2,2147483645:0),multi_last_value(t1,t2.c2,2147483645:0))
