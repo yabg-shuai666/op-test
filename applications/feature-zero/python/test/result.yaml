@@ -56,18 +56,7 @@ feql: 'key_t1_c1_1 = window(table=t1, output="t1_output")
 
   t1_outputkey_t1_c1 = output(key_t1_c1_1.c1[0])
 
-  select_t2 = select(t1, c1 as c1,0.0D as c2,c2 as c3)
-
-  t2_union_window = window(table=select_t2, other_table=[t2], keys=[c1], order=c3,
-  at_least=112, max_size=1000, offset=32d, instance_is_window=false, output="t1_output")
-
-  f_t1_t2_c2_distinct_count_0 = column(distinct_count(t2_union_window.c2[0s:32d]))'
-column: 'key_t1_c1_1 = window(table=t1, output="t1_output")
-
-  t1_outputkey_t1_c1 = output(key_t1_c1_1.c1[0])
-
-  select_t2 = select(t1, c1 as c1,0.0D as c2,c2 as c3)
-
+  select_t2 = select
   t2_union_window = window(table=select_t2, other_table=[t2], keys=[c1], order=c3,
   at_least=112, max_size=1000, offset=32d, instance_is_window=false, output="t1_output")
 
