@@ -72,7 +72,6 @@ sql: select
   `t1`
 
   last join `t2` as `t2_c1` on `t1`.`c1` = `t2_c1`.`c1`;
-
 feql: key_t1_c1_1 = window(table=t1, output="t1_output")
 
   t1_outputkey_t1_c1 = output(key_t1_c1_1.c1[0])

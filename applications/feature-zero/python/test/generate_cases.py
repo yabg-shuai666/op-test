@@ -28,7 +28,7 @@ def case():
     curPath = os.path.dirname(os.path.realpath(__file__))
     print(curPath)
     # 获取yaml文件路径
-    yamlPath = os.path.join(curPath, "op_convert_case/data_split_value.yaml")
+    yamlPath = os.path.join(curPath, "op_convert_case/data_multi_unique_count.yaml")
  
     # open方法打开直接读出来
     f = open(yamlPath, 'r', encoding='utf-8')
@@ -51,7 +51,9 @@ def conv(d):
         ,'from_entity':d['config'][0]['table_name'],'from_entity_keys':[d['config'][0]['index']],'from_entity_time_col':'','to_entity':d['config'][1]['table_name'],
         'to_entity_keys':[d['config'][1]['index']],'to_entity_time_col':''},
         {'type':'SLICE','window_delay':'0s','to_entity':d['config'][1]['table_name'], 'from_entity':d['config'][0]['table_name'],'from_entity_keys':[d['config'][0]['index']],'to_entity_keys':[d['config'][1]['index']],
-        'from_entity_time_col':'c2','to_entity_time_col':'c3','time_windows':['2147483645:0']}
+        'from_entity_time_col':'c2','to_entity_time_col':'c3','time_windows':['2147483645:0']},
+        {'type':'1-M','window_delay':'2s','to_entity':d['config'][1]['table_name'], 'from_entity':d['config'][0]['table_name'],'from_entity_keys':[d['config'][0]['index']],'to_entity_keys':[d['config'][1]['index']],
+        'from_entity_time_col':'c2','to_entity_time_col':'c3','time_windows':['10:0','112:0','1d,1000:0s','32d,100:0s']}
         ]
     data['app']['feature_info']['relations'] = relations
 
