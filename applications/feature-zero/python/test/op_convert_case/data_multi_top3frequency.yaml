@@ -17,9 +17,8 @@ config:
         - name: c3
           datatype: Timestamp
      index: c1
-desc: multi_unique_count op
+desc: multi_top3frequency op
 fz:   
-    # - multi_count(t1,t2.c2,32d:100:0s) 
     - multi_top3frequency(t1,t2.c2,32d:1000:0s)
 input:
    - name: t1
@@ -50,33 +49,32 @@ input:
           3,3033.0,2021-03-3 17:09:11
           4,9999.0,2021-03-3 11:24:11
 expected:
-      schema: c1_1:string   t2_c2_multi_count_0:double
+      schema: c1_1:string   t2_c2_multi_top3frequency_0:double
       data: 
-            3      NULL
-            3      NULL
-            2      NULL
-            2      2
-            2      3
-            1      NULL
-            1      NULL
-            1      NULL
-            1      NULL
-sql: select
+            3      0.000000,NULL,NULL
+            3      0.000000,NULL,NULL
+            2      0.000000,NULL,NULL
+            2      0.000000,4044.000000,NULL
+            2      0.000000,2022.000000,4044.000000
+            1      0.000000,NULL,NULL
+            1      0.000000,NULL,NULL
+            1      0.000000,NULL,NULL
+            1      0.000000,NULL,NULL
+sql: 'select
 
   `c1` as c1_1,
 
-  case when !isnull(at(`c2`, 1)) over t2_c1_c3_0s_32d_100 then count(`c2`) over t2_c1_c3_0s_32d_100
-  else null end as t2_c2_multi_count_0
+  fz_topn_frequency(`c2`, 3) over t2_c1_c3_0s_32d_1000 as t2_c2_multi_top3frequency_0
 
   from
 
   (select `c1` as `c1`, double(0) as `c2`, `c2` as `c3` from `t1`)
 
-  window t2_c1_c3_0s_32d_100 as (
+  window t2_c1_c3_0s_32d_1000 as (
 
   UNION `t2` partition by `c1` order by `c3` rows_range between 32d preceding and
-  0s preceding MAXSIZE 100 INSTANCE_NOT_IN_WINDOW);
-feql: key_t1_c1_1 = window(table=t1, output="t1_output")
+  0s preceding MAXSIZE 1000 INSTANCE_NOT_IN_WINDOW);'
+feql: 'key_t1_c1_1 = window(table=t1, output="t1_output")
 
   t1_outputkey_t1_c1 = output(key_t1_c1_1.c1[0])
 
@@ -85,5 +83,5 @@ feql: key_t1_c1_1 = window(table=t1, output="t1_output")
   t2_union_window = window(table=select_t2, other_table=[t2], keys=[c1], order=c3,
   at_least=112, max_size=1000, offset=32d, instance_is_window=false, output="t1_output")
 
-  f_t1_t2_c2_count_of_window_0 = column(if(t2_union_window.c2[1] != null, count_of_window(t2_union_window.c2[1],
-  t2_union_window.c2[0s:32d]), null))
+  f_t1_t2_c2_top3frequency_0 = column(join(",", "NULL", range(get_keys(sort_by_value(map(group_by(t2_union_window[0s:32d],
+  "c2"), x->count_of_window(x)))), 0, 3)))'
