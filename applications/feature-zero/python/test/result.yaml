@@ -1,25 +1,19 @@
 config:
 - table_name: t1
   column:
-  - name: c1
-    datatype: String
-  - name: c2
-    datatype: Timestamp
-  - name: c3
-    datatype: Double
+  - c1 String
+  - c2 Timestamp
+  - c3 Double
   index: c1
 - table_name: t2
   column:
-  - name: c1
-    datatype: String
-  - name: c2
-    datatype: Timestamp
-  - name: c3
-    datatype: Double
+  - c1 String
+  - c2 Double
+  - c3 Timestamp
   index: c1
-desc: split_value op
+desc: original op
 fz:
-- split_value(t1.c3,1,2)
+- original(t1.c1)
 input:
 - name: t1
   schema: c1:string, c2:timestamp, c3:double
@@ -32,13 +26,16 @@ input:
 
     '
 expected:
-  schema: c1_1:string    t1_c3_0:double
-  data: 1  15.0 2  25.0 3  66.0
+  schema: c1_1:string   t1_c1_original_0:double
+  data:
+  - 1
+  - 2
+  - 3
 sql: 'select
 
   `c1` as c1_1,
 
-  `c3` as t1_c3_0
+  `c1` as t1_c1_original_0
 
   from
 
@@ -49,10 +46,10 @@ feql: 'key_t1_c1_1 = window(table=t1, output="t1_output")
 
   t1_outputkey_t1_c1 = output(key_t1_c1_1.c1[0])
 
-  f_split_key_0 = column(key_t1_c1_1.c3[0]);'
+  f_original_c1_0 = column(key_t1_c1_1.c1[0]);'
 column: 'key_t1_c1_1 = window(table=t1, output="t1_output")
 
   t1_outputkey_t1_c1 = output(key_t1_c1_1.c1[0])
 
-  f_split_value_0 = column(key_t1_c1_1.c3[0])'
+  f_original_c1_0 = column(key_t1_c1_1.c1[0])'
 
