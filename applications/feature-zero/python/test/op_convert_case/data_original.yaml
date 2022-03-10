@@ -17,7 +17,7 @@ config:
         - name: c3
           datatype: Double
      index: c1
-desc: original op
+desc: original op         #select 出所选择的列
 fz:   
     - original(t1.c1)  
 input:

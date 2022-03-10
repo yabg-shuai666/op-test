@@ -17,7 +17,8 @@ config:
         - name: c3
           datatype: Timestamp
      index: c1
-desc: multi_top3frequency op
+desc: multi_top3frequency op  #出现次数排名前三的频率
+
 fz:   
     - multi_top3frequency(t1,t2.c2,32d:1000:0s)
 input:
