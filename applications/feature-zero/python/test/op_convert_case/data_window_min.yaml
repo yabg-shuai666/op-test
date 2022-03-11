@@ -45,5 +45,5 @@ feql:
   key_t1_c1_1 = window(table=t1, output="t1_output")
   t1_outputkey_t1_c1 = output(key_t1_c1_1.c1[0])
   t1_c2_c1 = window(table=t1, keys=[c1], order=c2, max_size=11, at_least=10, offset=0s, output="t1_output")
-  f_t1_window_min_c3_0 = column(min(t1_c2_c1.c3[0:10]));
+  f_t1_window_min_c3_0 = column(min(t1_c2_c1.c3[0:10]))
       

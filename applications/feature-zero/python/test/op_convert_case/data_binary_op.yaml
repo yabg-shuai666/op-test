@@ -63,4 +63,4 @@ feql:
    join_t2.t2_c3 between (unbound, join_t1.t1_c2))
    join_t1_join_t2_last_window = window(join_t1_join_t2_last, "join_t1_join_t2_last_join_output")
    lastjoinkey_t1_c1 = output(join_t1_join_t2_last_window.t1_c1[0])
-   join_t1_join_t2_last_join_output_t1_output = leftjoin(join_t1_join_t2_last_join_output,t1_output, "join_t1_join_t2_last_join_output.lastjoinkey_t1_c1 = t1_output.t1_outputkey_t1_c1");
+   join_t1_join_t2_last_join_output_t1_output = leftjoin(join_t1_join_t2_last_join_output,t1_output, "join_t1_join_t2_last_join_output.lastjoinkey_t1_c1 = t1_output.t1_outputkey_t1_c1")
