@@ -58,4 +58,4 @@ feql:
   join_t1_join_t2_left = leftjoin(join_t1, join_t2, "join_t1.t1_c1 = join_t2.t2_c1") 
   join_t1_join_t2_left_window = window(join_t1_join_t2_left, "join_t1_join_t2_left_join_output")
   leftjoinkey_t1_c1 = output(join_t1_join_t2_left_window.t1_c1[0])
-  join_t1_join_t2_left_join_output_t1_output = leftjoin(join_t1_join_t2_left_join_output, t1_output, "join_t1_join_t2_left_join_output.leftjoinkey_t1_c1 = t1_output.t1_outputkey_t1_c1");
+  join_t1_join_t2_left_join_output_t1_output = leftjoin(join_t1_join_t2_left_join_output, t1_output, "join_t1_join_t2_left_join_output.leftjoinkey_t1_c1 = t1_output.t1_outputkey_t1_c1")
