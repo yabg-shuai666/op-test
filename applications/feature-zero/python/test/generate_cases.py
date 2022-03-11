@@ -24,7 +24,7 @@ def case():
     curPath = os.path.dirname(os.path.realpath(__file__))
     print(curPath)
     # 获取yaml文件路径
-    yamlPath = os.path.join(curPath, "op_convert_case/data_regression_label.yaml")
+    yamlPath = os.path.join(curPath, "op_convert_case/data_multi_top3frequency.yaml")
  
     # open方法打开直接读出来
     f = open(yamlPath, 'r', encoding='utf-8')
@@ -65,12 +65,14 @@ def conv(d):
     index=0
     while(index<len(d['config'])):
         for x in d['config'][index]['column']:
-            if(x['datatype']=='String'):
-                dict = {'id': d['config'][index]['table_name']+'.'+x['name'],'data_type':'SingleString','skip':'false', 'feature_type':x['datatype']}
-            elif(x['datatype']=='Timestamp'):
-                dict = {'id': d['config'][index]['table_name']+'.'+x['name'],'data_type':'Timestamp','skip':'false', 'feature_type':x['datatype']}
-            elif(x['datatype']=='Int' or x['datatype']=='Double'):
-                dict = {'id': d['config'][index]['table_name']+'.'+x['name'],'data_type':'ContinueNum','skip':'false', 'feature_type':x['datatype']}
+            name_type = x.split(' ')
+            print(name_type)
+            if(name_type[1]=='String'):
+                dict = {'id': d['config'][index]['table_name']+'.'+name_type[0],'data_type':'SingleString','skip':'false', 'feature_type':name_type[1]}
+            elif(name_type[1]=='Timestamp'):
+                dict = {'id': d['config'][index]['table_name']+'.'+name_type[0],'data_type':'Timestamp','skip':'false', 'feature_type':name_type[1]}
+            elif(name_type[1]=='Int' or name_type[1]=='Double'):
+                dict = {'id': d['config'][index]['table_name']+'.'+name_type[0],'data_type':'ContinueNum','skip':'false', 'feature_type':name_type[1]}
             
             lists.append(dict)
         features = tuple(lists)
@@ -147,6 +149,7 @@ def feql(op_file, config_file, cfg_is_info=False, debug=False):
 class TestConvert(unittest.TestCase):
     def test_window_union_new_key(self):
         data=case()
+        print("**********#########*********")
         print(data)
         article=conv(data)
         print(article)

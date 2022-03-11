@@ -1,21 +1,9 @@
 config:
    - table_name : t1 
-     column :   
-        - name: c1
-          datatype: String
-        - name: c2 
-          datatype: Timestamp
-        - name: c3
-          datatype: Double
+     column : [c1 String, c2 Timestamp, c3 Double]
      index: c1  
    - table_name : t2  
-     column :   
-        - name: c1
-          datatype: String
-        - name: c2
-          datatype: Timestamp
-        - name: c3
-          datatype: Double
+     column : [c1 String, c2 Double, c3 Timestamp]
      index: c1
 desc: split_key op
 fz:   
