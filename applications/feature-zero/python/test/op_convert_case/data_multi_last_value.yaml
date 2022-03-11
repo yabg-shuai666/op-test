@@ -47,35 +47,19 @@ expected:
           2      2022.000000
           2      4044.000000
           2      NULL
-sql: select
-
-  `t1`.`c1` as c1_1,
-
-  `t2_c1__c2_0_2147483645`.`c2` as t2_c2_multi_last_value_0
-
-  from
-
-  `t1`
-
-  last join `t2` as `t2_c1__c2_0_2147483645` order by t2_c1__c2_0_2147483645.`c3`
-  on `t1`.`c1` = `t2_c1__c2_0_2147483645`.`c1` and `t2_c1__c2_0_2147483645`.`c3` <
-  `t1`.`c2`;
-feql: key_t1_c1_1 = window(table=t1, output="t1_output")
-
+sql: 
+  select `t1`.`c1` as c1_1, `t2_c1__c2_0_2147483645`.`c2` as t2_c2_multi_last_value_0
+  from `t1` last join `t2` as `t2_c1__c2_0_2147483645` order by t2_c1__c2_0_2147483645.`c3`
+  on `t1`.`c1` = `t2_c1__c2_0_2147483645`.`c1` and `t2_c1__c2_0_2147483645`.`c3` < `t1`.`c2`;
+feql: 
+  key_t1_c1_1 = window(table=t1, output="t1_output")
   t1_outputkey_t1_c1 = output(key_t1_c1_1.c1[0])
-
   join_t1 = select(t1, c1 as t1_c1, c2 as t1_c2, c3 as t1_c3)
-
   join_t2 = select(t2, c1 as t2_c1, c2 as t2_c2, c3 as t2_c3)
-
   join_t1_join_t2_last = lastjoin(join_t1, join_t2, join_t1.t1_c1 == join_t2.t2_c1,
   join_t2.t2_c3 between (unbound, join_t1.t1_c2))
-
   join_t1_join_t2_last_window = window(join_t1_join_t2_last, "join_t1_join_t2_last_join_output")
-
   f_t1_t2_c2_lastvalue_0 = column(join_t1_join_t2_last_window.t2_c2[0])
-
   lastjoinkey_t1_c1 = output(join_t1_join_t2_last_window.t1_c1[0])
-
   join_t1_join_t2_last_join_output_t1_output = leftjoin(join_t1_join_t2_last_join_output,
-  t1_output, "join_t1_join_t2_last_join_output.lastjoinkey_t1_c1 = t1_output.t1_outputkey_t1_c1");
+  t1_output, "join_t1_join_t2_last_join_output.lastjoinkey_t1_c1 = t1_output.t1_outputkey_t1_c1")
