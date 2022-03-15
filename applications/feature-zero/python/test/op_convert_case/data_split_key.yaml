@@ -7,7 +7,7 @@ config:
      index: c1
 desc: split_key op
 fz:   
-    - split_key(multi_last_value(t1,t2.c2,2147483645:0),44,58)
+    - split_key(t1.c3,44,58)
 input:
    - name: t1
      schema: c1:string, c2:timestamp, c3:double

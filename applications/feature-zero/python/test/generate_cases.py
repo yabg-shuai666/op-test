@@ -1,6 +1,5 @@
 #!/usr/bin/python
 # -*- coding: UTF-8 -*-
-
 from distutils.command.config import config
 
 import yaml
@@ -10,7 +9,6 @@ import os
 sys.path.append(os.path.dirname(__file__) + "/..")
 from fesql import convert
 from feql import convert as feqlconvert
-
 import unittest
 import json
 
@@ -24,7 +22,7 @@ def case():
     curPath = os.path.dirname(os.path.realpath(__file__))
     print(curPath)
     # 获取yaml文件路径
-    yamlPath = os.path.join(curPath, "op_convert_case/data_window_avg.yaml")
+    yamlPath = os.path.join(curPath, "op_convert_case/data_multi_op.yaml")
  
     # open方法打开直接读出来
     f = open(yamlPath, 'r', encoding='utf-8')
@@ -35,7 +33,6 @@ def case():
 def conv(d):
     article_info = {}
     data = json.loads(json.dumps(article_info))
-
     app = {'feature_info': {}}
     data['app'] = app
     
@@ -97,12 +94,12 @@ def save_file(path, item):
             print("write error==>", e)
 
 def fesql(op_file, config_file, cfg_is_info=False, debug=False):
-    config_all = json.loads(config_file)   #加载配置文件
+    config_all = json.loads(config_file)  
     if debug:
         print(config_all)
     real_config = config_all if cfg_is_info else config_all['app']['feature_info']
         
-    ok, sql, sql_config, fe = convert.to_sql(op_file, real_config)   #true sql语句  sql结构  sql特征
+    ok, sql, sql_config, fe = convert.to_sql(op_file, real_config) 
     assert ok   #断言
     # sign(fe) has 2 more lines:
     # # start fe code
@@ -144,7 +141,6 @@ def feql(op_file, config_file, cfg_is_info=False, debug=False):
     print(sign)
     print("--------------------sign sign sign sign sign sign sign sign sign sign--------------------")
     return column, sign
-
 
 class TestConvert(unittest.TestCase):
     def test_window_union_new_key(self):
