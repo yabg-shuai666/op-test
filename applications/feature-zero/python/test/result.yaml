@@ -11,9 +11,9 @@ config:
   - c2 Double
   - c3 Timestamp
   index: c1
-desc: multi_avg op
+desc: window_avg op
 fz:
-- multi_std(t1,t2.c2,32d:100:0s)
+- window_avg(t1.c2,t1.c1,10:0,t1.c3)
 input:
 - name: t1
   schema: c1:string, c2:timestamp, c3:double
@@ -31,46 +31,32 @@ input:
 - name: t2
   schema: c1:string, c2:double, c3:timestamp
   index: c1
-  data:
-  - 1,1111.0,1970-01-1 10:00:00
-  - 1,3333.0,1970-01-1 23:00:00
-  - 1,6666.0,1996-11-7 10:00:00
-  - 1,1246.0,2022-03-1 23:28:55
-  - 1,8888.0,2022-03-1 23:28:55
-  - 2,2022.0,2021-03-1 20:02:33
-  - 2,4044.0,2021-03-1 17:00:00
-  - 3,3033.0,2021-03-3 17:09:11
-  - 4,9999.0,2021-03-3 11:24:11
+  data: null
 expected:
-  schema: c1_1:string   t2_c2_multi_avg_0:double
-  data: 3      0.000000 3      0.000000 2      0.000000 2      2022.000000 2      2022.000000
-    1      0.000000 1      0.000000 1      0.000000 1      0.000000
+  schema: c1_1:string    t1_c3_window_avg_0:double
+  data: 3      3032.000000 3      3032.000000 2      5555.000000 2      4444.000000
+    2      4073.666667 1      6666.000000 1      7777.000000 1      8147.333333 1      6422.000000
 sql: 'select
 
   `c1` as c1_1,
 
-  std(`c2`) over t2_c1_c3_0s_32d_100 as t2_c2_multi_std_0
+  avg(`c3`) over t1_c1_c2_0_10_ as t1_c3_window_avg_0
 
   from
 
-  (select `c1` as `c1`, double(0) as `c2`, `c2` as `c3` from `t1`)
+  `t1`
 
-  window t2_c1_c3_0s_32d_100 as (
-
-  UNION `t2` partition by `c1` order by `c3` rows_range between 32d preceding and
-  0s preceding MAXSIZE 100 INSTANCE_NOT_IN_WINDOW);'
+  window t1_c1_c2_0_10_ as (partition by `c1` order by `c2` rows between 10 preceding
+  and 0 preceding);'
 feql: key_t1_c1_1 = window(table=t1, output="t1_output") t1_outputkey_t1_c1 = output(key_t1_c1_1.c1[0])
-  select_t2 = select(t1, c1 as c1,0.0D as c2,c2 as c3) t2_union_window = window(table=select_t2,
-  other_table=[t2], keys=[c1], order=c3,at_least=112, max_size=1000, offset=32d, instance_is_window=false,
-  output="t1_output") f_t1_t2_c2_avg_0 = column(avg(t2_union_window.c2[0s:32d]))
+  t1_c2_c1 = window(table=t1, keys=[c1], order=c2, max_size=11, at_least=10, offset=0s,
+  output="t1_output") f_t1_window_avg_c3_0 = column(avg(t1_c2_c1.c3[0:10]))
 column: 'key_t1_c1_1 = window(table=t1, output="t1_output")
 
   t1_outputkey_t1_c1 = output(key_t1_c1_1.c1[0])
 
-  select_t2 = select(t1, c1 as c1,0.0D as c2,c2 as c3)
+  t1_c2_c1 = window(table=t1, keys=[c1], order=c2, max_size=11, at_least=10, offset=0s,
+  output="t1_output")
 
-  t2_union_window = window(table=select_t2, other_table=[t2], keys=[c1], order=c3,
-  at_least=112, max_size=1000, offset=32d, instance_is_window=false, output="t1_output")
-
-  f_t1_t2_c2_std_0 = column(std(t2_union_window.c2[0s:32d]))'
+  f_t1_window_avg_c3_0 = column(avg(t1_c2_c1.c3[0:10]))'
 
