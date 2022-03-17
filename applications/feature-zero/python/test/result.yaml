@@ -11,11 +11,9 @@ config:
   - c2 Double
   - c3 Timestamp
   index: c1
-desc: combine - multi_last_value op
+desc: multi_avg op
 fz:
-- window_ratio(t1.c2,t1.c1,10:0,t1.c3)
-- multi_top3frequency(t1,split_key(t2.c2,44,58),1d:1000:0s)
-- multi_unique_count(t1,split_key(t2.c2,44,58),1d:1000:0s)
+- multi_std(t1,t2.c2,32d:100:0s)
 input:
 - name: t1
   schema: c1:string, c2:timestamp, c3:double
@@ -44,34 +42,27 @@ input:
   - 3,3033.0,2021-03-3 17:09:11
   - 4,9999.0,2021-03-3 11:24:11
 expected:
-  schema: c1_1:string   t2_c2_multi_last_value_0:double   c1_2:string   t1_c3_combine_0:double  c1_3:string   t2_c2_combine_0:double
-  data: 3      NULL                       3      3032.000000       3      3033.000000
-    3      NULL                       3      3032.000000       3      3033.000000
-    1      6666.000000                1      1246.000000       1      8888.000000
-    1      6666.000000                1      1246.000000       1      8888.000000
-    1      6666.000000                1      1246.000000       1      8888.000000
-    1      3333.000000                1      1246.000000       1      8888.000000
-    2      2022.000000                2      3333.000000       2      4044.000000
-    2      4044.000000                2      3333.000000       2      4044.000000
-    2      NULL                       2      3333.000000       2      4044.000000
+  schema: c1_1:string   t2_c2_multi_avg_0:double
+  data: 3      0.000000 3      0.000000 2      0.000000 2      2022.000000 2      2022.000000
+    1      0.000000 1      0.000000 1      0.000000 1      0.000000
 sql: 'select
 
   `c1` as c1_1,
 
-  fz_topn_frequency(fz_window_split_by_key(c2,  ",",  ":"), 3) over t2_c1_c3_0s_1d_1000
-  as t2_c2_multi_top3frequency_0,
-
-  distinct_count(fz_window_split_by_key(c2,  ",",  ":")) over t2_c1_c3_0s_1d_1000
-  as t2_c2_multi_unique_count_1
+  std(`c2`) over t2_c1_c3_0s_32d_100 as t2_c2_multi_std_0
 
   from
 
   (select `c1` as `c1`, double(0) as `c2`, `c2` as `c3` from `t1`)
 
-  window t2_c1_c3_0s_1d_1000 as (
+  window t2_c1_c3_0s_32d_100 as (
 
-  UNION `t2` partition by `c1` order by `c3` rows_range between 1d preceding and 0s
-  preceding MAXSIZE 1000 INSTANCE_NOT_IN_WINDOW);'
+  UNION `t2` partition by `c1` order by `c3` rows_range between 32d preceding and
+  0s preceding MAXSIZE 100 INSTANCE_NOT_IN_WINDOW);'
+feql: key_t1_c1_1 = window(table=t1, output="t1_output") t1_outputkey_t1_c1 = output(key_t1_c1_1.c1[0])
+  select_t2 = select(t1, c1 as c1,0.0D as c2,c2 as c3) t2_union_window = window(table=select_t2,
+  other_table=[t2], keys=[c1], order=c3,at_least=112, max_size=1000, offset=32d, instance_is_window=false,
+  output="t1_output") f_t1_t2_c2_avg_0 = column(avg(t2_union_window.c2[0s:32d]))
 column: 'key_t1_c1_1 = window(table=t1, output="t1_output")
 
   t1_outputkey_t1_c1 = output(key_t1_c1_1.c1[0])
@@ -81,21 +72,5 @@ column: 'key_t1_c1_1 = window(table=t1, output="t1_output")
   t2_union_window = window(table=select_t2, other_table=[t2], keys=[c1], order=c3,
   at_least=112, max_size=1000, offset=32d, instance_is_window=false, output="t1_output")
 
-  f_t1_t2_c2_top3frequency_1 = column(join(",", "NULL", range(get_keys(sort_by_value(map(group_by(split(join(",",
-  "NULL", t2_union_window.c2[0s:1d]), ","), x -> first(split(x, ":"))), x -> count(x)))),
-  0, 3)))
-
-  f_t1_t2_c2_distinct_count_2 = column(distinct_count(get_keys(splitbykey(join(",",
-  "NULL", t2_union_window.c2[0s:1d]), ",", ":"))))
-
-  t1_c2_c1 = window(table=t1, keys=[c1], order=c2, max_size=11, at_least=10, offset=0s,
-  output="t1_output")
-
-  f_t1_window_ratio_c3_0_where = where(t1_c2_c1[0:10], x -> x.c3 != null)
-
-  f_t1_window_ratio_c3_0_group = group_by(t1_c2_c1[0:10], "c3")
-
-  f_t1_window_ratio_c3_0 = column(if(t1_c2_c1.c3[0] != null, first(get_values(map(where(f_t1_window_ratio_c3_0_group,
-  x -> x.c3[0] == t1_c2_c1.c3[0]), x -> double(count(x))/count(f_t1_window_ratio_c3_0_where)))),
-  null))'
+  f_t1_t2_c2_std_0 = column(std(t2_union_window.c2[0s:32d]))'
 

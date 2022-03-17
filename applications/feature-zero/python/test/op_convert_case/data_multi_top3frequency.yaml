@@ -38,6 +38,7 @@ input:
 expected:
       schema: c1_1:string   t2_c2_multi_top3frequency_0:double
       data: 
+       ------ ---------------------------------- 
           3      0.000000,NULL,NULL
           3      0.000000,NULL,NULL
           2      0.000000,NULL,NULL
@@ -47,6 +48,7 @@ expected:
           1      0.000000,NULL,NULL
           1      0.000000,NULL,NULL
           1      0.000000,NULL,NULL
+        ------ ----------------------------------
 sql: 
    select `c1` as c1_1, fz_topn_frequency(`c2`, 3) over t2_c1_c3_0s_32d_1000 as t2_c2_multi_top3frequency_0
    from (select `c1` as `c1`, double(0) as `c2`, `c2` as `c3` from `t1`)

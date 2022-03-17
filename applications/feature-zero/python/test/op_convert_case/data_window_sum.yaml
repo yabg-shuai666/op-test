@@ -25,6 +25,7 @@ input:
 expected:
       schema: c1_1:string    t1_c3_window_sum_0:double
       data: 
+        ------ --------------------
           3      3032.000000
           3      6064.000000
           2      5555.000000
@@ -33,6 +34,7 @@ expected:
           1      6666.000000
           1      15554.000000
           1      24442.000000
+        ------ --------------------
 sql: 
   select `c1` as c1_1, sum(`c3`) over t1_c1_c2_0_10_ as t1_c3_window_sum_0
   from `t1`

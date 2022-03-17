@@ -39,6 +39,7 @@ input:
 expected:
       schema: c1_1:string   t2_c2_multi_sum_0:double
       data: 
+         ------ -------------------
           3      0.000000
           3      0.000000
           2      0.000000
@@ -48,6 +49,7 @@ expected:
           1      0.000000
           1      0.000000
           1      0.000000
+         ------ -------------------
 sql: 
    select `c1` as c1_1, sum(`c2`) over t2_c1_c3_0s_32d_100 as t2_c2_multi_sum_0 
    from (select `c1` as `c1`, double(0) as `c2`, `c2` as `c3` from `t1`) 

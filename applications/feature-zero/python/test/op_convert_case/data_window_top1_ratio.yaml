@@ -25,6 +25,7 @@ input:
 expected:
       schema: c1_1:string    t1_c3_window_top1_ratio_0:double
       data: 
+        ------ ---------------------------
           3      1.000000
           3      1.000000
           2      1.000000
@@ -34,6 +35,7 @@ expected:
           1      0.500000
           1      0.666667
           1      0.500000
+        ------ ---------------------------
 sql: 
   select `c1` as c1_1, fz_top1_ratio(`c3`) over t1_c1_c2_0_10_ as t1_c3_window_top1_ratio_0
   from `t1`

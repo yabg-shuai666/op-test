@@ -29,6 +29,7 @@ input:
 expected:
       schema: c1_1:string    t1_c3_window_avg_0:double
       data: 
+       ------ --------------------
            3      3032.000000
            3      3032.000000
            2      5555.000000
@@ -38,6 +39,7 @@ expected:
            1      7777.000000
            1      8147.333333
            1      6422.000000
+       ------ --------------------
 sql: 
   select `c1` as c1_1, avg(`c3`) over t1_c1_c2_0_10_ as t1_c3_window_avg_0
   from `t1` 
