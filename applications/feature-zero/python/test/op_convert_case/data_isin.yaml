@@ -20,9 +20,11 @@ input:
 expected:
       schema: c1_1:string   t1_c1_isin_0:string   t1_c2isin_0:timestamp   t1_c3_isin_0:double
       data: 
-          1, 1, 2020-05-20, 15.0
-          2, 2, 2020-05-21, 23.0
-          3, 3, 2020-05-22, 66.0
+        ----- -----  ------------  -----
+          1     1      2020-05-20    15.0
+          2     2      2020-05-21    23.0
+          3     3      2020-05-22    66.0
+        ----- -----  ------------  -----
 sql: 
   select `c1` as c1_1, `c1` as t1_c1_isin_0, `c2` as t1_c2_isin_0, `c3` as t1_c3_isin_0
   from `t1`;

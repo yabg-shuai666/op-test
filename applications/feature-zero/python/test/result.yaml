@@ -13,9 +13,9 @@ config:
   index: c1
 desc: combine - multi_last_value op
 fz:
-- split_key(t1.c3,44,58)
-- combine(split_key(t1.c3,44,58),split_key(multi_direct(t1,t2.c2),44,58))
-- combine(multi_last_value(t1,t2.c2,2147483645:0),t1.c3,t2.c2)
+- window_ratio(t1.c2,t1.c1,10:0,t1.c3)
+- multi_top3frequency(t1,split_key(t2.c2,44,58),1d:1000:0s)
+- multi_unique_count(t1,split_key(t2.c2,44,58),1d:1000:0s)
 input:
 - name: t1
   schema: c1:string, c2:timestamp, c3:double
@@ -54,103 +54,48 @@ expected:
     2      2022.000000                2      3333.000000       2      4044.000000
     2      4044.000000                2      3333.000000       2      4044.000000
     2      NULL                       2      3333.000000       2      4044.000000
-sql: 'select * from
-
-  (
-
-  select
+sql: 'select
 
   `c1` as c1_1,
 
-  `c3` as t1_c3_0,
+  fz_topn_frequency(fz_window_split_by_key(c2,  ",",  ":"), 3) over t2_c1_c3_0s_1d_1000
+  as t2_c2_multi_top3frequency_0,
 
-  `c3` as t1_c3_combine_2
-
-  from
-
-  `t1`
-
-  )
-
-  as out0
-
-  last join
-
-  (
-
-  select
-
-  `t1`.`c1` as c1_2,
-
-  `t2_c1`.`c2` as t2_c2_multi_direct_1,
-
-  `t2_c1__c2_0_2147483645`.`c2` as t2_c2_multi_last_value_2
+  distinct_count(fz_window_split_by_key(c2,  ",",  ":")) over t2_c1_c3_0s_1d_1000
+  as t2_c2_multi_unique_count_1
 
   from
 
-  `t1`
+  (select `c1` as `c1`, double(0) as `c2`, `c2` as `c3` from `t1`)
 
-  last join `t2` as `t2_c1` on `t1`.`c1` = `t2_c1`.`c1`
+  window t2_c1_c3_0s_1d_1000 as (
 
-  last join `t2` as `t2_c1__c2_0_2147483645` order by t2_c1__c2_0_2147483645.`c3`
-  on `t1`.`c1` = `t2_c1__c2_0_2147483645`.`c1` and `t2_c1__c2_0_2147483645`.`c3` <
-  `t1`.`c2`)
-
-  as out1
-
-  on out0.c1_1 = out1.c1_2
-
-  last join
-
-  (
-
-  select
-
-  `c1` as c1_5,
-
-  `c2` as t2_c2_combine_2
-
-  from
-
-  `t2`
-
-  )
-
-  as out2
-
-  on out0.c1_1 = out2.c1_5
-
-  ;'
+  UNION `t2` partition by `c1` order by `c3` rows_range between 1d preceding and 0s
+  preceding MAXSIZE 1000 INSTANCE_NOT_IN_WINDOW);'
 column: 'key_t1_c1_1 = window(table=t1, output="t1_output")
 
   t1_outputkey_t1_c1 = output(key_t1_c1_1.c1[0])
 
-  f_split_key_0 = column(key_t1_c1_1.c3[0])
+  select_t2 = select(t1, c1 as c1,0.0D as c2,c2 as c3)
 
-  f_combine_2_6 = column(key_t1_c1_1.c3[0])
+  t2_union_window = window(table=select_t2, other_table=[t2], keys=[c1], order=c3,
+  at_least=112, max_size=1000, offset=32d, instance_is_window=false, output="t1_output")
 
-  join_t1 = select(t1, c1 as t1_c1, c2 as t1_c2, c3 as t1_c3)
+  f_t1_t2_c2_top3frequency_1 = column(join(",", "NULL", range(get_keys(sort_by_value(map(group_by(split(join(",",
+  "NULL", t2_union_window.c2[0s:1d]), ","), x -> first(split(x, ":"))), x -> count(x)))),
+  0, 3)))
 
-  join_t2 = select(t2, c1 as t2_c1, c2 as t2_c2, c3 as t2_c3)
+  f_t1_t2_c2_distinct_count_2 = column(distinct_count(get_keys(splitbykey(join(",",
+  "NULL", t2_union_window.c2[0s:1d]), ",", ":"))))
 
-  join_t1_join_t2_last = lastjoin(join_t1, join_t2, join_t1.t1_c1 == join_t2.t2_c1,
-  join_t2.t2_c3 between (unbound, join_t1.t1_c2))
+  t1_c2_c1 = window(table=t1, keys=[c1], order=c2, max_size=11, at_least=10, offset=0s,
+  output="t1_output")
 
-  join_t1_join_t2_last_window = window(join_t1_join_t2_last, "join_t1_join_t2_last_join_output")
+  f_t1_window_ratio_c3_0_where = where(t1_c2_c1[0:10], x -> x.c3 != null)
 
-  lastjoinkey_t1_c1 = output(join_t1_join_t2_last_window.t1_c1[0])
+  f_t1_window_ratio_c3_0_group = group_by(t1_c2_c1[0:10], "c3")
 
-  join_t1_join_t2_left = leftjoin(join_t1, join_t2, "join_t1.t1_c1 = join_t2.t2_c1")
-
-  join_t1_join_t2_left_window = window(join_t1_join_t2_left, "join_t1_join_t2_left_join_output")
-
-  leftjoinkey_t1_c1 = output(join_t1_join_t2_left_window.t1_c1[0])
-
-  join_t1_join_t2_left_join_output_join_t1_join_t2_last_join_output = leftjoin(join_t1_join_t2_left_join_output,
-  join_t1_join_t2_last_join_output, "join_t1_join_t2_left_join_output.leftjoinkey_t1_c1
-  = join_t1_join_t2_last_join_output.lastjoinkey_t1_c1")
-
-  join_t1_join_t2_left_join_output_join_t1_join_t2_last_join_output_t1_output = leftjoin(join_t1_join_t2_left_join_output_join_t1_join_t2_last_join_output,
-  t1_output, "join_t1_join_t2_left_join_output_join_t1_join_t2_last_join_output.leftjoinkey_t1_c1
-  = t1_output.t1_outputkey_t1_c1")'
+  f_t1_window_ratio_c3_0 = column(if(t1_c2_c1.c3[0] != null, first(get_values(map(where(f_t1_window_ratio_c3_0_group,
+  x -> x.c3[0] == t1_c2_c1.c3[0]), x -> double(count(x))/count(f_t1_window_ratio_c3_0_where)))),
+  null))'
 

@@ -38,6 +38,7 @@ input:
 expected:
   schema: c1_1:string   t2_c2_multi_direct_0:double
   data: 
+    ------ -------------------------- 
       3      3033.000000
       3      3033.000000
       1      8888.000000
@@ -47,6 +48,7 @@ expected:
       2      4044.000000
       2      4044.000000
       2      4044.000000
+    ------ -------------------------- 
 sql: 
   select `t1`.`c1` as c1_1, `t2_c1`.`c2` as t2_c2_multi_direct_0
   from `t1` last join `t2` as `t2_c1` on `t1`.`c1` = `t2_c1`.`c1`;

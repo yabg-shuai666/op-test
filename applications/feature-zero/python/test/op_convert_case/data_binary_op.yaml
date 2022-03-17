@@ -41,6 +41,7 @@ input:
 expected:
       schema: c1_1:string   t2_c2_multi_last_value_0:double
       data: 
+        ------ -------------------------- 
           3      NULL
           3      NULL
           1      6666.000000
@@ -50,6 +51,7 @@ expected:
           2      2022.000000
           2      4044.000000
           2      NULL
+        ------ -------------------------- 
 sql: 
   select `t1`.`c1` as c1_1, `t2_c1__c2_0_2147483645`.`c2` as t2_c2_multi_last_value_0
   from `t1` last join `t2` as `t2_c1__c2_0_2147483645` order by t2_c1__c2_0_2147483645.`c3`
