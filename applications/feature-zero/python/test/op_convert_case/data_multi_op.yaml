@@ -7,21 +7,9 @@ config:
      index: c1
 desc: combine - multi_last_value/multi_direct op
 fz:   
-   # - split_key(t1.c3,44,58)
-   # - multi_top3frequency(t1,t2.c2,32d:1000:0s)
-   # - isin(t1.c1,t1.c2,t1.c3)
-   # - combine(split_key(t1.c3,44,58),split_key(multi_direct(t1,t2.c2),44,58))
    - combine(multi_last_value(t1,t2.c2,2147483645:0),t1.c3)
    - combine(multi_direct(t1,t2.c2),t2.c2)
-   # - combine(multi_top3frequency(t1,t2.c2,32d:1000:0s),t1.c3,t2.c2)
-   # - multi_top3frequency(t1,split_key(t2.c2,44,58),1d:1000:0s)  
-   # - multi_unique_count(t1,split_key(t2.c2,44,58),1d:1000:0s)
-   # - multi_top3frequency(t1,split_key(t2.c2,44,58),1d:1000:0s)
-   #  split_key(main.ks,44,58)
-   #  split(multi_direct(t1,t2.c2),44)
-   # - split_key(t2.c2,44,58)
-   #  - multi_top3frequency(t1,split_key(t2.c2,44,58),1d:1000:0s)
-   #   - multi_top3frequency(t1,t2.c2,32d:1000:0s)
+   - combine(multi_direct(t1,t2.c2),multi_last_value(t1,t2.c2,2147483645:0))
 input:
    - name: t1
      schema: c1:string, c2:timestamp, c3:double

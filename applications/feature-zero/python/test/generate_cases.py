@@ -22,11 +22,11 @@ def case():
     curPath = os.path.dirname(os.path.realpath(__file__))
     print(curPath)
     # 获取yaml文件路径
-    yamlPath = os.path.join(curPath, "op_convert_case/data_multi_std.yaml")
+    yamlPath = os.path.join(curPath, "op_convert_case/data_binary_label.yaml")
  
     # open方法打开直接读出来
     f = open(yamlPath, 'r', encoding='utf-8')
-    cfg = f.read()
+    cfg = f.read() 
     data = yaml.load(cfg,Loader=yaml.FullLoader)  # 用load方法转字典
     return data
 

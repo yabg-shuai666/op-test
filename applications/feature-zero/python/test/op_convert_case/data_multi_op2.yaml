@@ -5,10 +5,10 @@ config:
    - table_name : t2  
      column : [c1 String, c2 Double, c3 Timestamp]
      index: c1
-desc: combine - multi_last_value op
+desc: split_* 、multi_* op
 fz:   
-   - multi_top3frequency(t1,split_key(t2.c2,44,58),1d:1000:0s)  
-   - multi_unique_count(t1,split_key(t2.c2,44,58),1d:1000:0s)
+    - split_key(multi_last_value(t1,t2.c2,2147483645:0),97,100)
+    - split_key(multi_direct(t1,t2.c2),97,100) 
 input:
    - name: t1
      schema: c1:string, c2:timestamp, c3:double
@@ -37,3 +37,16 @@ input:
         - 3,3033.0,2021-03-3 17:09:11
         - 4,9999.0,2021-03-3 11:24:11
 expected:
+      schema: c1_1:string   t2_c2_multi_last_value_0:double t2_c2_multi_direct_1:double
+      data: 
+          ------ -------------------------- ----------------------
+          3      NULL                       3033.000000
+          3      NULL                       3033.000000
+          1      6666.000000                8888.000000
+          1      6666.000000                8888.000000
+          1      6666.000000                8888.000000
+          1      3333.000000                8888.000000
+          2      2022.000000                4044.000000
+          2      4044.000000                4044.000000
+          2      NULL                       4044.000000
+          ------ -------------------------- ----------------------

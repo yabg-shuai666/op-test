@@ -9,6 +9,8 @@ desc: combine - split_key op
 fz:   
    - split_key(t1.c3,44,58)
    - combine(split_key(t1.c3,44,58),split_key(multi_direct(t1,t2.c2),44,58))
+  #  - combine(split_key(t1.c3,97,100),split_key(multi_direct(t1,t2.c2),44,58))
+   - combine(t2.c3,split(multi_last_value(t1,t2.c2,2147483645:0),44))
 
    # - combine(multi_last_value(t1,t2.c2,2147483645:0),t1.c3,t2.c2)
    # - multi_top3frequency(t1,t2.c2,32d:1000:0s)
