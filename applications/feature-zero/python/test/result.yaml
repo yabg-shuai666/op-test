@@ -11,9 +11,9 @@ config:
   - c2 Double
   - c3 Timestamp
   index: c1
-desc: binary_label op
+desc: combine - multi_last_value op
 fz:
-- binary_label(multi_direct(t1,t2.c3))
+- multiply(multi_last_value(t1,t2.c2,2147483645:0),multi_direct(t1,t2.c2))
 input:
 - name: t1
   schema: c1:string, c2:timestamp, c3:double
@@ -42,29 +42,33 @@ input:
   - 3,3033.0,2021-03-3 17:09:11
   - 4,9999.0,2021-03-3 11:24:11
 expected:
-  schema: c1_1:string   t2_c2_multi_direct_0:double
-  data: '------ -------------------------- 3      3033.000000 3      3033.000000 1      8888.000000
-    1      8888.000000 1      8888.000000 1      8888.000000 2      4044.000000 2      4044.000000
-    2      4044.000000 ------ --------------------------'
+  schema: c1_1:string   t2_c2_multi_last_value_0:double   c1_2:string   t1_c3_combine_0:double  c1_3:string   t2_c2_combine_0:double
+  data: 3      NULL                       3      3032.000000       3      3033.000000
+    3      NULL                       3      3032.000000       3      3033.000000
+    1      6666.000000                1      1246.000000       1      8888.000000
+    1      6666.000000                1      1246.000000       1      8888.000000
+    1      6666.000000                1      1246.000000       1      8888.000000
+    1      3333.000000                1      1246.000000       1      8888.000000
+    2      2022.000000                2      3333.000000       2      4044.000000
+    2      4044.000000                2      3333.000000       2      4044.000000
+    2      NULL                       2      3333.000000       2      4044.000000
 sql: 'select
 
   `t1`.`c1` as c1_1,
 
-  `t2_c1`.`c3` as t2_c3_multi_direct_0
+  `t2_c1__c2_0_2147483645`.`c2` as t2_c2_multi_last_value_0,
+
+  `t2_c1`.`c2` as t2_c2_multi_direct_0
 
   from
 
   `t1`
 
+  last join `t2` as `t2_c1__c2_0_2147483645` order by t2_c1__c2_0_2147483645.`c3`
+  on `t1`.`c1` = `t2_c1__c2_0_2147483645`.`c1` and `t2_c1__c2_0_2147483645`.`c3` <
+  `t1`.`c2`
+
   last join `t2` as `t2_c1` on `t1`.`c1` = `t2_c1`.`c1`;'
-feql: key_t1_c1_1 = window(table=t1, output="t1_output") t1_outputkey_t1_c1 = output(key_t1_c1_1.c1[0])
-  join_t1 = select(t1, c1 as t1_c1, c2 as t1_c2, c3 as t1_c3) join_t2 = select(t2,
-  c1 as t2_c1, c2 as t2_c2, c3 as t2_c3) join_t1_join_t2_left = leftjoin(join_t1,
-  join_t2, "join_t1.t1_c1 = join_t2.t2_c1") join_t1_join_t2_left_window = window(join_t1_join_t2_left,
-  "join_t1_join_t2_left_join_output") f_t1_t2_c2_direct_0 = column(join_t1_join_t2_left_window.t2_c2[0])
-  leftjoinkey_t1_c1 = output(join_t1_join_t2_left_window.t1_c1[0]) join_t1_join_t2_left_join_output_t1_output
-  = leftjoin(join_t1_join_t2_left_join_output, t1_output, "join_t1_join_t2_left_join_output.leftjoinkey_t1_c1
-  = t1_output.t1_outputkey_t1_c1")
 column: 'key_t1_c1_1 = window(table=t1, output="t1_output")
 
   t1_outputkey_t1_c1 = output(key_t1_c1_1.c1[0])
@@ -73,14 +77,24 @@ column: 'key_t1_c1_1 = window(table=t1, output="t1_output")
 
   join_t2 = select(t2, c1 as t2_c1, c2 as t2_c2, c3 as t2_c3)
 
+  join_t1_join_t2_last = lastjoin(join_t1, join_t2, join_t1.t1_c1 == join_t2.t2_c1,
+  join_t2.t2_c3 between (unbound, join_t1.t1_c2))
+
+  join_t1_join_t2_last_window = window(join_t1_join_t2_last, "join_t1_join_t2_last_join_output")
+
+  lastjoinkey_t1_c1 = output(join_t1_join_t2_last_window.t1_c1[0])
+
   join_t1_join_t2_left = leftjoin(join_t1, join_t2, "join_t1.t1_c1 = join_t2.t2_c1")
 
   join_t1_join_t2_left_window = window(join_t1_join_t2_left, "join_t1_join_t2_left_join_output")
 
-  f_t1_t2_c3_direct_0 = column(join_t1_join_t2_left_window.t2_c3[0])
-
   leftjoinkey_t1_c1 = output(join_t1_join_t2_left_window.t1_c1[0])
 
-  join_t1_join_t2_left_join_output_t1_output = leftjoin(join_t1_join_t2_left_join_output,
-  t1_output, "join_t1_join_t2_left_join_output.leftjoinkey_t1_c1 = t1_output.t1_outputkey_t1_c1")'
+  join_t1_join_t2_left_join_output_join_t1_join_t2_last_join_output = leftjoin(join_t1_join_t2_left_join_output,
+  join_t1_join_t2_last_join_output, "join_t1_join_t2_left_join_output.leftjoinkey_t1_c1
+  = join_t1_join_t2_last_join_output.lastjoinkey_t1_c1")
+
+  join_t1_join_t2_left_join_output_join_t1_join_t2_last_join_output_t1_output = leftjoin(join_t1_join_t2_left_join_output_join_t1_join_t2_last_join_output,
+  t1_output, "join_t1_join_t2_left_join_output_join_t1_join_t2_last_join_output.leftjoinkey_t1_c1
+  = t1_output.t1_outputkey_t1_c1")'
 

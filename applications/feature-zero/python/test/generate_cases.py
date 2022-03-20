@@ -22,8 +22,7 @@ def case():
     curPath = os.path.dirname(os.path.realpath(__file__))
     print(curPath)
     # 获取yaml文件路径
-    yamlPath = os.path.join(curPath, "op_convert_case/data_binary_label.yaml")
- 
+    yamlPath = os.path.join(curPath, "op_convert_case/data_various_3.yaml")
     # open方法打开直接读出来
     f = open(yamlPath, 'r', encoding='utf-8')
     cfg = f.read() 
@@ -162,7 +161,6 @@ class TestConvert(unittest.TestCase):
         print(column)
         print("Here"+"End")
         print(sql)
-       
         sql_after = re.sub('\n'+' *', '\n', 'select' + sql.split('select',1)[1])
         sql_after = re.sub(' *'+'\n', '\n', sql_after)
 
