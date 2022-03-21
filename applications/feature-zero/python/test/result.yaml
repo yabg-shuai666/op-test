@@ -11,9 +11,9 @@ config:
   - c2 Double
   - c3 Timestamp
   index: c1
-desc: combine - multi_last_value op
+desc: multi_avg op
 fz:
-- multiply(multi_last_value(t1,t2.c2,2147483645:0),multi_direct(t1,t2.c2))
+- multi_std(t1,t2.c2,32d:100:0s)
 input:
 - name: t1
   schema: c1:string, c2:timestamp, c3:double
@@ -42,59 +42,35 @@ input:
   - 3,3033.0,2021-03-3 17:09:11
   - 4,9999.0,2021-03-3 11:24:11
 expected:
-  schema: c1_1:string   t2_c2_multi_last_value_0:double   c1_2:string   t1_c3_combine_0:double  c1_3:string   t2_c2_combine_0:double
-  data: 3      NULL                       3      3032.000000       3      3033.000000
-    3      NULL                       3      3032.000000       3      3033.000000
-    1      6666.000000                1      1246.000000       1      8888.000000
-    1      6666.000000                1      1246.000000       1      8888.000000
-    1      6666.000000                1      1246.000000       1      8888.000000
-    1      3333.000000                1      1246.000000       1      8888.000000
-    2      2022.000000                2      3333.000000       2      4044.000000
-    2      4044.000000                2      3333.000000       2      4044.000000
-    2      NULL                       2      3333.000000       2      4044.000000
+  schema: c1_1:string   t2_c2_multi_avg_0:double
+  data: 3      0.000000 3      0.000000 2      0.000000 2      2022.000000 2      2022.000000
+    1      0.000000 1      0.000000 1      0.000000 1      0.000000
 sql: 'select
 
-  `t1`.`c1` as c1_1,
+  `c1` as c1_1,
 
-  `t2_c1__c2_0_2147483645`.`c2` as t2_c2_multi_last_value_0,
-
-  `t2_c1`.`c2` as t2_c2_multi_direct_0
+  std(`c2`) over t2_c1_c3_0s_32d_100 as t2_c2_multi_std_0
 
   from
 
-  `t1`
+  (select `c1` as `c1`, double(0) as `c2`, `c2` as `c3` from `t1`)
 
-  last join `t2` as `t2_c1__c2_0_2147483645` order by t2_c1__c2_0_2147483645.`c3`
-  on `t1`.`c1` = `t2_c1__c2_0_2147483645`.`c1` and `t2_c1__c2_0_2147483645`.`c3` <
-  `t1`.`c2`
+  window t2_c1_c3_0s_32d_100 as (
 
-  last join `t2` as `t2_c1` on `t1`.`c1` = `t2_c1`.`c1`;'
+  UNION `t2` partition by `c1` order by `c3` rows_range between 32d preceding and
+  0s preceding MAXSIZE 100 INSTANCE_NOT_IN_WINDOW);'
+feql: key_t1_c1_1 = window(table=t1, output="t1_output") t1_outputkey_t1_c1 = output(key_t1_c1_1.c1[0])
+  select_t2 = select(t1, c1 as c1,0.0D as c2,c2 as c3) t2_union_window = window(table=select_t2,
+  other_table=[t2], keys=[c1], order=c3,at_least=112, max_size=1000, offset=32d, instance_is_window=false,
+  output="t1_output") f_t1_t2_c2_avg_0 = column(avg(t2_union_window.c2[0s:32d]))
 column: 'key_t1_c1_1 = window(table=t1, output="t1_output")
 
   t1_outputkey_t1_c1 = output(key_t1_c1_1.c1[0])
 
-  join_t1 = select(t1, c1 as t1_c1, c2 as t1_c2, c3 as t1_c3)
+  select_t2 = select(t1, c1 as c1,0.0D as c2,c2 as c3)
 
-  join_t2 = select(t2, c1 as t2_c1, c2 as t2_c2, c3 as t2_c3)
+  t2_union_window = window(table=select_t2, other_table=[t2], keys=[c1], order=c3,
+  at_least=112, max_size=1000, offset=32d, instance_is_window=false, output="t1_output")
 
-  join_t1_join_t2_last = lastjoin(join_t1, join_t2, join_t1.t1_c1 == join_t2.t2_c1,
-  join_t2.t2_c3 between (unbound, join_t1.t1_c2))
-
-  join_t1_join_t2_last_window = window(join_t1_join_t2_last, "join_t1_join_t2_last_join_output")
-
-  lastjoinkey_t1_c1 = output(join_t1_join_t2_last_window.t1_c1[0])
-
-  join_t1_join_t2_left = leftjoin(join_t1, join_t2, "join_t1.t1_c1 = join_t2.t2_c1")
-
-  join_t1_join_t2_left_window = window(join_t1_join_t2_left, "join_t1_join_t2_left_join_output")
-
-  leftjoinkey_t1_c1 = output(join_t1_join_t2_left_window.t1_c1[0])
-
-  join_t1_join_t2_left_join_output_join_t1_join_t2_last_join_output = leftjoin(join_t1_join_t2_left_join_output,
-  join_t1_join_t2_last_join_output, "join_t1_join_t2_left_join_output.leftjoinkey_t1_c1
-  = join_t1_join_t2_last_join_output.lastjoinkey_t1_c1")
-
-  join_t1_join_t2_left_join_output_join_t1_join_t2_last_join_output_t1_output = leftjoin(join_t1_join_t2_left_join_output_join_t1_join_t2_last_join_output,
-  t1_output, "join_t1_join_t2_left_join_output_join_t1_join_t2_last_join_output.leftjoinkey_t1_c1
-  = t1_output.t1_outputkey_t1_c1")'
+  f_t1_t2_c2_std_0 = column(std(t2_union_window.c2[0s:32d]))'
 

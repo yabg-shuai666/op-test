@@ -43,7 +43,7 @@ sql_join = "fz_join"
 SQL_KEYS = {}
 
 # 直接把相关op拉入黑名单，目前sql不支持的op
-BLACK_LIST_OP = {"window_ratio"}
+BLACK_LIST_OP = {"window_ratio","multi_std"}
 
 
 def debug_info():
