@@ -22,7 +22,7 @@ def case():
     curPath = os.path.dirname(os.path.realpath(__file__))
     print(curPath)
     # 获取yaml文件路径
-    yamlPath = os.path.join(curPath, "op_convert_case/data_various_3.yaml")
+    yamlPath = os.path.join(curPath, "op_convert_case/data_multi_std.yaml")
     # open方法打开直接读出来
     f = open(yamlPath, 'r', encoding='utf-8')
     cfg = f.read() 
@@ -69,7 +69,6 @@ def conv(d):
                 dict = {'id': d['config'][index]['table_name']+'.'+name_type[0],'data_type':'Timestamp','skip':'false', 'feature_type':name_type[1]}
             elif(name_type[1]=='Int' or name_type[1]=='Double'):
                 dict = {'id': d['config'][index]['table_name']+'.'+name_type[0],'data_type':'ContinueNum','skip':'false', 'feature_type':name_type[1]}
-            
             lists.append(dict)
         features = tuple(lists)
         # features = {'id':a+'.'+c, 'data_type':'SingleString', 'skip':'false', 'feature_type':'String'},{'id':a+'.'+'eventTime', 'data_type':'Timestamp', 'skip':'false', 'feature_type':'Timestamp'},{'id':a+'.'+'f_index', 'data_type':'SingleString', 'skip':'false', 'feature_type':'String'}
@@ -168,6 +167,5 @@ class TestConvert(unittest.TestCase):
         data['column']=column
         print(data['sql'])
         save_file(abs_path('result.yaml'),data)
-     
 if __name__ == '__main__':
     unittest.main()
