@@ -11,7 +11,6 @@ fz:
 input:
   - name: t1
     schema: c1:string, c2:timestamp, c3:double
-    index: c1
     data: 
        - 1,1970-10-1 11:00:00,6666.0
        - 1,1999-01-1 16:00:00,8888.0
@@ -25,7 +24,6 @@ input:
 
   - name: t2
     schema: c1:string, c2:double, c3:timestamp
-    index: c1
     data: 
       - 1,1111.0,1970-01-1 10:00:00
       - 1,3333.0,1970-01-1 23:00:00

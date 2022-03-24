@@ -54,10 +54,7 @@ expected:
 
 sql: 
    select * from
-  (select
-  `t1`.`c1` as c1_1,
-  `t2_c1__c2_0_2147483645`.`c2` as t2_c2_multi_last_value_0,
-  `t2_c1`.`c2` as t2_c2_multi_direct_1
+  (select `t1`.`c1` as c1_1, `t2_c1__c2_0_2147483645`.`c2` as t2_c2_multi_last_value_0, `t2_c1`.`c2` as t2_c2_multi_direct_1
   from `t1`
   last join 
   `t2` as `t2_c1__c2_0_2147483645` order by t2_c1__c2_0_2147483645.`c3`
@@ -65,16 +62,10 @@ sql:
   last join 
   `t2` as `t2_c1` on `t1`.`c1` = `t2_c1`.`c1`) as out0
   last join
-  (select
-  `c1` as c1_2,
-  `c3` as t1_c3_combine_0
-  from `t1`) as out1
+  (select `c1` as c1_2, `c3` as t1_c3_combine_0 from `t1`) as out1
   on out0.c1_1 = out1.c1_2
   last join
-  (select
-  `c1` as c1_4,
-  `c2` as t2_c2_combine_1
-  from `t2`) as out2
+  (select `c1` as c1_4, `c2` as t2_c2_combine_1 from `t2`) as out2
   on out0.c1_1 = out2.c1_4;
 feql: 
   key_t1_c1_1 = window(table=t1, output="t1_output")

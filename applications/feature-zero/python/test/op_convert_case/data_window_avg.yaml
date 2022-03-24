@@ -11,7 +11,6 @@ fz:
 input:
    - name: t1
      schema: c1:string, c2:timestamp, c3:double
-     index: c1
      data:   
         - 1,1970-10-1 11:00:00,6666.0
         - 1,1999-01-1 16:00:00,8888.0
@@ -24,7 +23,6 @@ input:
         - 3,2021-03-3 17:09:11,3032.0
    - name: t2
      schema: c1:string, c2:double, c3:timestamp
-     index: c1
      data: 
 expected:
       schema: c1_1:string    t1_c3_window_avg_0:double
