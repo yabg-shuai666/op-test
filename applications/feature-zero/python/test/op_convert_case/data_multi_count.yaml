@@ -8,7 +8,6 @@ config:
 desc: multi_unique_count op
 fz:   
     - multi_count(t1,t2.c2,32d:100:0s) 
-    # MULTI_OP = {"multi_sum", "multi_max", "multi_min", "multi_avg", "multi_std", "multi_unique_count", "multi_count"}
 input:
    - name: t1
      schema: c1:string, c2:timestamp, c3:double

@@ -8,7 +8,6 @@ config:
 desc: combine op
 fz:   
     - combine(t1.c1,t1.c2,t1.c3)
-   
 input:
    - name: t1
      schema: c1:string, c2:timestamp, c3:double
